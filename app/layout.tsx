@@ -20,7 +20,7 @@ export default function RootLayout({
           >
             <div className="min-h-screen">
               <Header />
-              <main className="container px-14 py-4">
+              <main className="h-screen pt-16">
                 {children}
               </main>
             </div>

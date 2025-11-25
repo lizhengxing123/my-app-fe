@@ -7,8 +7,8 @@ import SearchToggle from "../search/search-toggle";
 
 export function Header() {
   return (
-    <header className="top-0 z-50 w-full border-b">
-      <div className="flex h-14 items-center px-14">
+    <header className="fixed left-0 top-0 z-50 w-full border-b bg-background">
+      <div className="flex h-16 items-center px-14">
         <div className="flex items-center gap-4">
           <Logo />
           <MainNav />
