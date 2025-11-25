@@ -85,7 +85,7 @@ export default function MainNav() {
             <ul className="grid w-[300px] gap-4">
               <li>
                 <NavigationMenuLink asChild>
-                  <Link href="#">
+                  <Link href="/chart">
                     <div className="font-medium">基础图表</div>
                     <div className="text-muted-foreground">
                       使用 Echarts 实现的各种精美图表，包括折线图、柱状图、饼图、散点图等。
@@ -93,7 +93,7 @@ export default function MainNav() {
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
-                  <Link href="#">
+                  <Link href="/chart">
                     <div className="font-medium">地图</div>
                     <div className="text-muted-foreground">
                       使用 Echarts 实现的地图图表，包括地图下钻、地图区域图表展示等。
@@ -101,7 +101,7 @@ export default function MainNav() {
                   </Link>
                 </NavigationMenuLink>
                 <NavigationMenuLink asChild>
-                  <Link href="#">
+                  <Link href="/chart">
                     <div className="font-medium">其他图表</div>
                     <div className="text-muted-foreground">
                       其他图表，包括大屏表格、数据旋转等。

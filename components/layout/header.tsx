@@ -3,7 +3,7 @@
 import ModeToggle from "@/components/theme/mode-toggle";
 import MainNav from "./main-nav";
 import Logo from "./logo";
-import SearchToggle from "./search-toggle"; 
+import SearchToggle from "../search/search-toggle"; 
 
 export function Header() {
   return (
