@@ -1,7 +1,7 @@
 import { ChartColumn, ChartLine } from "lucide-react";
 
 export const chartMenus = {
-  Echarts: [
+  "基础图表": [
     {
       title: "柱状图",
       herf: "/chart/column",

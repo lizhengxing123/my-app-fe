@@ -6,8 +6,12 @@ export default async function Page() {
       <CodeBlock lang="ts" title="componets/code-block.tsx">
         {[
           "console.log('hewwo') // [!code --]", 
-          "console.log('hello') // [!code ++]", 
-          "console.log('goodbye') // [!code highlight]"
+          "console.log('hello')", 
+          "console.log('goodbye') // [!code highlight]",
+          "",
+          "function hello() {",
+          "  console.log('hello') // [!code ++]",
+          "}"
         ].join("\n")}
       </CodeBlock>
     </div>

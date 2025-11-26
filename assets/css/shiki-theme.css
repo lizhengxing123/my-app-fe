@@ -25,7 +25,7 @@ html.dark .shiki {
 .shiki code .line::before {
   content: counter(step);
   counter-increment: step;
-  @apply inline-block w-4 py-0 pr-6 pl-4 mr-6 border-r text-right text-ring;
+  @apply inline-block w-4 py-0 pr-6 pl-4 mr-6 border-r border-border text-right text-ring;
 }
 
 /* 行高亮 */
