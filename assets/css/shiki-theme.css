@@ -1,0 +1,54 @@
+@reference "../../app/globals.css";
+
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+html .shiki,
+html.dark .shiki {
+  background-color: transparent !important;
+}
+
+/* 行宽 */
+.shiki .line {
+  display: inline-block;
+  width: 100%;
+}
+
+/* 行号 */
+.shiki code {
+  counter-reset: step;
+  counter-increment: step 0;
+}
+
+.shiki code .line::before {
+  content: counter(step);
+  counter-increment: step;
+  @apply inline-block w-4 py-0 pr-6 pl-4 mr-6 border-r text-right text-ring;
+}
+
+/* 行高亮 */
+.shiki.has-highlighted .line.highlighted {
+  @apply bg-code-highlight;
+}
+
+/* 新增的行 */
+.shiki.has-highlighted .line.diff.add {
+  @apply bg-chart-2/10 relative;
+}
+
+.shiki.has-highlighted .line.diff.add::after {
+  content: "+";
+  @apply text-chart-2 absolute left-12 top-0;
+}
+
+/* 移除的行 */
+.shiki.has-highlighted .line.diff.remove {
+  @apply bg-destructive/10 relative;
+}
+
+.shiki.has-highlighted .line.diff.remove::after {
+  content: "-";
+  @apply text-destructive absolute left-12 top-0;
+}

@@ -1,12 +1,15 @@
-import { Button } from "@/components/ui/button";
-import { ChartAreaIcon } from "lucide-react";
-export default function ChartPage() {
+import CodeBlock from "@/components/common/code-block";
+
+export default async function Page() {
   return (
-    <div className="w-full">
-      <Button>
-        <ChartAreaIcon className="mr-0.5 h-4 w-4" />
-        所有图表
-      </Button>
+    <div className="w-3/5 mx-auto py-4">
+      <CodeBlock lang="ts" title="componets/code-block.tsx">
+        {[
+          "console.log('hewwo') // [!code --]", 
+          "console.log('hello') // [!code ++]", 
+          "console.log('goodbye') // [!code highlight]"
+        ].join("\n")}
+      </CodeBlock>
     </div>
   );
 }

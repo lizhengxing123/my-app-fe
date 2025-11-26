@@ -37,6 +37,10 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  /* 自定义颜色-代码块盒背景 */
+  --color-code-block: var(--code-block-bg);
+  /* 自定义颜色-代码行高亮背景 */
+  --color-code-highlight: var(--code-highlight-bg);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -76,6 +80,10 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
+  /* 自定义颜色-代码块盒背景 */
+  --code-block-bg: oklch(0.985 0 0);
+  /* 自定义颜色-代码行高亮背景 */
+  --code-highlight-bg: oklch(94.912% 0.00011 271.152);
 }
 
 .dark {
@@ -110,6 +118,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
+  /* 自定义颜色-代码块盒背景 */
+  --code-block-bg: oklab(23.503% 0 -0.00003);
+  /* 自定义颜色-代码行高亮背景 */
+  --code-highlight-bg: oklch(28.823% 0.02214 277.506);
 }
 
 @layer base {
