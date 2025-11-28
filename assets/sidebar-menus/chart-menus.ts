@@ -1,7 +1,12 @@
-import { ChartColumn, ChartLine } from "lucide-react";
+import { SquareChartGantt, ChartColumn, ChartLine } from "lucide-react";
 
 export const chartMenus = {
-  "基础图表": [
+  基础图表: [
+    {
+      title: "基础图表配置",
+      herf: "/chart/base-option",
+      icon: SquareChartGantt,
+    },
     {
       title: "柱状图",
       herf: "/chart/column",
@@ -38,15 +43,15 @@ export const chartMenus = {
       ],
     },
     {
-        title: "折线图",
-        herf: "/chart/line",
-        icon: ChartLine,
-        items: [
-          {
-            title: "堆叠折线图",
-            herf: "/chart/line/1",
-          },
-        ]
-    }
+      title: "折线图",
+      herf: "/chart/line",
+      icon: ChartLine,
+      items: [
+        {
+          title: "堆叠折线图",
+          herf: "/chart/line/1",
+        },
+      ],
+    },
   ],
 };

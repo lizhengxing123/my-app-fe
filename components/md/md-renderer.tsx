@@ -1,0 +1,99 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { createRoot, Root } from "react-dom/client"; // React 19 导入 createRoot
+import { createMarkdownIt } from "@/lib/markdown-it-plugin";
+import { componentMap } from "./md-components";
+import PageSkeleton from "../skeleton/page-skeleton";
+
+const md = createMarkdownIt();
+
+interface MarkdownRendererProps {
+  content: string;
+}
+
+const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
+  const mdRef = useRef<HTMLDivElement>(null);
+  const [parsedHtml, setParsedHtml] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  // 缓存每个占位符的 Root 实例，用于卸载时调用 unmount()
+  const rootMap = useRef<Map<HTMLElement, Root>>(new Map());
+
+  // 异步解析 MD 内容（含代码块高亮）- 逻辑不变
+  useEffect(() => {
+    const parseMd = async () => {
+      setIsLoading(true);
+      try {
+        const html = await md.render(content);
+        setParsedHtml(html);
+      } catch (err) {
+        console.error("MD 解析失败：", err);
+        setParsedHtml("<div>解析失败</div>");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    parseMd();
+  }, [content]);
+
+  // 替换自定义组件占位符（React 19 适配核心）
+  useEffect(() => {
+    if (!mdRef.current || isLoading) return;
+
+    // 清空之前的 Root 实例（避免重复渲染）
+    rootMap.current.forEach((root) => root.unmount());
+    rootMap.current.clear();
+
+    const placeholders = mdRef.current.querySelectorAll(
+      "[data-md-component]"
+    ) as NodeListOf<HTMLElement>;
+
+    placeholders.forEach((placeholder) => {
+      const componentName = placeholder.getAttribute("data-md-component");
+
+      if (
+        !componentName ||
+        !componentMap[componentName as keyof typeof componentMap]
+      ) {
+        placeholder.textContent = `未知组件：${componentName}`;
+        return;
+      }
+
+      // 获取所有 data-props-* 属性
+      const props = {};
+      Object.entries(placeholder.dataset).forEach(([key, value]) => {
+        if (key.startsWith("props")) {
+          const propsKey = key.replace("props", "").toLowerCase();
+          props[propsKey] = decodeURIComponent(value || "");
+        }
+      });
+
+      const Component =
+        componentMap[componentName as keyof typeof componentMap];
+      // React 19：使用 createRoot 创建根节点，渲染组件
+      const root = createRoot(placeholder);
+      root.render(<Component {...props} />);
+      // 缓存 Root 实例，便于后续卸载
+      rootMap.current.set(placeholder as HTMLElement, root);
+    });
+
+    // 清理副作用：组件卸载时卸载所有 React 组件
+    return () => {
+      rootMap.current.forEach((root) => root.unmount());
+      rootMap.current.clear();
+    };
+  }, [parsedHtml, isLoading]);
+
+  if (isLoading) return <PageSkeleton />;
+
+  return (
+    <div
+      ref={mdRef}
+      dangerouslySetInnerHTML={{ __html: parsedHtml }}
+      className="markdown-content"
+    />
+  );
+};
+
+export default MarkdownRenderer;

@@ -16,19 +16,20 @@ import {
 import { CardSkeleton } from "@/components/skeleton/card-skeleton";
 
 interface Props {
-  children: string;
+  content: string;
   lang: BundledLanguage;
   title?: string;
 }
 
 function CodeBlock(props: Props) {
+  console.log("props:", props);
   const [isCopied, setIsCopied] = useState(false);
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(true);
 
   const handleCodeToHtml = async () => {
     setLoading(true);
-    const out = await codeToHtml(props.children, {
+    const out = await codeToHtml(props.content, {
       lang: props.lang,
       themes: {
         light: "github-light-high-contrast",
@@ -42,11 +43,11 @@ function CodeBlock(props: Props) {
 
   useEffect(() => {
     handleCodeToHtml();
-  }, [props.children, props.lang]);
+  }, [props.content, props.lang]);
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(props.children);
+      await navigator.clipboard.writeText(props.content);
       setIsCopied(true);
       // 2秒后重置状态
       //   setTimeout(() => setIsCopied(false), 2000);
