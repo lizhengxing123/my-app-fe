@@ -22,7 +22,6 @@ interface Props {
 }
 
 function CodeBlock(props: Props) {
-  console.log("props:", props);
   const [isCopied, setIsCopied] = useState(false);
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(true);

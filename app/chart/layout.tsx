@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import {
   SidebarMenuItem,
@@ -16,13 +18,21 @@ import {
 } from "@/components/ui/sidebar";
 import { LayoutDashboard } from "lucide-react";
 import { chartMenus as menus } from "@/assets/sidebar-menus/chart-menus";
+import { usePathname } from "next/navigation"; // 导入usePathname钩子
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const activePath = "/chart";
+  const pathname = usePathname(); // 获取当前路径
   const firstMenu = {
     title: "所有图表",
     herf: "/chart",
   };
+  
+  // 判断路径是否匹配的辅助函数
+  const isPathActive = (path: string) => {
+    // 完全匹配或子路径匹配（例如：/chart 匹配 /chart 和 /chart/subpath）
+    return pathname === path
+  };
+  
   return (
     <div className="flex w-full h-full">
       <div className="w-72 h-full overflow-y-auto overflow-x-hidden">
@@ -36,7 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <SidebarContent className="bg-background">
               <SidebarMenu className="pl-2 pt-4">
                 <SidebarMenuItem>
-                  <SidebarMenuButton isActive={true} asChild>
+                  <SidebarMenuButton isActive={isPathActive(firstMenu.herf)} asChild>
                     <a href={firstMenu.herf} className="py-0">
                       <LayoutDashboard />
                       <span>{firstMenu.title}</span>
@@ -51,7 +61,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <SidebarMenu>
                       {items.map((item) => (
                         <SidebarMenuItem key={item.herf}>
-                          <SidebarMenuButton asChild>
+                          <SidebarMenuButton isActive={isPathActive(item.herf)} asChild>
                             <a href={item.herf}>
                               <item.icon />
                               <span>{item.title}</span>
