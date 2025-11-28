@@ -35,7 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   
   return (
     <div className="flex w-full h-full">
-      <div className="w-72 h-full overflow-y-auto overflow-x-hidden">
+      <div className="w-72 h-full fixed top-16">
         <SidebarProvider
           style={{
             "--sidebar-width": "18rem",
@@ -95,7 +95,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Sidebar>
         </SidebarProvider>
       </div>
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 pl-72">{children}</div>
     </div>
   );
 }

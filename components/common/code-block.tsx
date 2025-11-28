@@ -14,6 +14,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { CardSkeleton } from "@/components/skeleton/card-skeleton";
+import { cn } from "@/lib/utils";
 
 interface Props {
   content: string;
@@ -56,7 +57,7 @@ function CodeBlock(props: Props) {
   };
 
   return (
-    <div className="w-full rounded-md bg-code-block relative">
+    <div className="w-full rounded-md bg-code-block relative my-3">
       {props.title && (
         <div className="text-sm text-foreground/60 border-b pl-3 py-2 flex items-center">
           <FileCode className="w-4 h-4 mr-2" />
@@ -64,7 +65,7 @@ function CodeBlock(props: Props) {
         </div>
       )}
       {/* 在右上角展示粘贴按钮和语言类型 */}
-      <span className="absolute right-4 top-9 text-ring">{props.lang}</span>
+      <span className={cn("absolute text-ring text-sm", props.title ? "right-4 top-9" : "right-11 top-1.5")}>{props.lang}</span>
       <Tooltip>
         <TooltipTrigger asChild>
           <span

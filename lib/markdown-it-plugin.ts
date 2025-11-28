@@ -1,4 +1,6 @@
 import MarkdownIt from "markdown-it";
+import markdownItAnchor from "markdown-it-anchor";
+import markdownItTocDoneRight from "markdown-it-toc-done-right";
 
 // 自定义插件：解析 【【【组件名】】】 语法
 // 用来渲染项目中的自定义组件
@@ -127,14 +129,14 @@ const codeBlockPlugin = (md: MarkdownIt) => {
       // 解析新增行标记，如 +{1,3-5}
       if (match[4]) {
         // 只移除开头的加号和大括号，保留范围中的连字符
-        const rangeStr = match[4].replace(/^\+|{|}/g, '');
+        const rangeStr = match[4].replace(/^\+|{|}/g, "");
         addedLines = parseLineRanges(rangeStr);
       }
 
       // 解析删除行标记，如 -{1,3-5}
-       if (match[5]) {
+      if (match[5]) {
         // 只移除开头的负号和大括号，保留范围中的连字符
-        const rangeStr = match[5].replace(/^-|{|}/g, '');
+        const rangeStr = match[5].replace(/^-|{|}/g, "");
         deletedLines = parseLineRanges(rangeStr);
       }
     }
@@ -149,7 +151,6 @@ const codeBlockPlugin = (md: MarkdownIt) => {
       addedLines,
       deletedLines
     );
-
 
     // 生成带数据属性的占位符，后续React会替换这个div
     // 将语言、标题和代码内容作为data属性传递
@@ -170,5 +171,12 @@ export const createMarkdownIt = () => {
     linkify: true,
   })
     .use(componentPlugin)
-    .use(codeBlockPlugin); // 注册代码块插件
+    .use(codeBlockPlugin) // 注册代码块插件
+    .use(markdownItAnchor, {
+      slugify: (str: string) => str,
+      permalink: true,
+      permalinkSymbol: "¶",
+      permalinkBefore: true,
+    })
+    // .use(markdownItTocDoneRight);
 };

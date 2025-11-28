@@ -5,8 +5,8 @@ import { createRoot, Root } from "react-dom/client"; // React 19 导入 createRo
 import { createMarkdownIt } from "@/lib/markdown-it-plugin";
 import { componentMap } from "./md-components";
 import PageSkeleton from "../skeleton/page-skeleton";
-
-const md = createMarkdownIt();
+import MdAnchor from "./md-anchor";
+import markdownItTocDoneRight from "markdown-it-toc-done-right";
 
 interface MarkdownRendererProps {
   content: string;
@@ -16,6 +16,18 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
   const mdRef = useRef<HTMLDivElement>(null);
   const [parsedHtml, setParsedHtml] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [tocHtml, setTocHtml] = useState("");
+
+  const md = createMarkdownIt();
+
+  md.use(markdownItTocDoneRight, {
+    level: 2, // 从第二级开始
+    slugify: (str: string) => str.trim(), // 原样输出，不进行其他操作
+    callback: (tocHtml) => {
+      setTocHtml(tocHtml);
+    },
+  });
+
   // 缓存每个占位符的 Root 实例，用于卸载时调用 unmount()
   const rootMap = useRef<Map<HTMLElement, Root>>(new Map());
 
@@ -88,11 +100,14 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
   if (isLoading) return <PageSkeleton />;
 
   return (
-    <div
-      ref={mdRef}
-      dangerouslySetInnerHTML={{ __html: parsedHtml }}
-      className="markdown-content"
-    />
+    <div className="flex space-x-4">
+      <div
+        ref={mdRef}
+        dangerouslySetInnerHTML={{ __html: parsedHtml }}
+        className="w-3/5"
+      />
+      <MdAnchor anchorHtml={tocHtml} />
+    </div>
   );
 };
 
