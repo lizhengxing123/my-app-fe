@@ -1,0 +1,21 @@
+@reference "../../app/globals.css";
+
+body {
+  scroll-behavior: smooth !important;
+}
+
+.md-content h1 {
+  @apply mt-2 text-2xl font-medium;
+}
+
+.md-content h2 {
+  @apply mt-8 text-xl font-medium border-b pb-2;
+}
+
+.md-content h3 {
+  @apply mt-6 text-base font-semibold;
+}
+
+.md-content p {
+  @apply mt-6 text-sm;
+}

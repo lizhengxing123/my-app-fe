@@ -131,4 +131,8 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* 添加这一行来解决锚点被Header遮挡的问题 */
+  [id] {
+    scroll-margin-top: 80px; /* 比Header高度稍大，确保有足够的空间 */
+  }
 }

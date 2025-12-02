@@ -175,7 +175,7 @@ export const createMarkdownIt = () => {
     .use(markdownItAnchor, {
       slugify: (str: string) => str,
       permalink: true,
-      permalinkSymbol: "¶",
+      permalinkSymbol: "",
       permalinkBefore: true,
     })
     // .use(markdownItTocDoneRight);

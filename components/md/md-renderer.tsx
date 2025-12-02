@@ -7,6 +7,7 @@ import { componentMap } from "./md-components";
 import PageSkeleton from "../skeleton/page-skeleton";
 import MdAnchor from "./md-anchor";
 import markdownItTocDoneRight from "markdown-it-toc-done-right";
+import "@/assets/css/md-content.css";
 
 interface MarkdownRendererProps {
   content: string;
@@ -22,8 +23,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
 
   md.use(markdownItTocDoneRight, {
     level: 2, // 从第二级开始
+    linkClass: "md-anchor", // 自定义锚点类名
     slugify: (str: string) => str.trim(), // 原样输出，不进行其他操作
-    callback: (tocHtml) => {
+    callback: (tocHtml: string) => {
       setTocHtml(tocHtml);
     },
   });
@@ -100,12 +102,14 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
   if (isLoading) return <PageSkeleton />;
 
   return (
-    <div className="flex space-x-4">
-      <div
-        ref={mdRef}
-        dangerouslySetInnerHTML={{ __html: parsedHtml }}
-        className="w-3/5"
-      />
+    <div className="flex">
+      {/* 文档内容 */}
+      <div className="md-content w-4/5" ref={mdRef}>
+        <div
+          className="w-4/5 mx-auto"
+          dangerouslySetInnerHTML={{ __html: parsedHtml }}
+        ></div>
+      </div>
       <MdAnchor anchorHtml={tocHtml} />
     </div>
   );
