@@ -5,15 +5,15 @@ body {
 }
 
 .md-content h1 {
-  @apply mt-2 text-2xl font-medium;
+  @apply mt-2 text-3xl font-semibold;
 }
 
 .md-content h2 {
-  @apply mt-8 text-xl font-medium border-b pb-2;
+  @apply mt-8 text-2xl font-medium border-b pb-2;
 }
 
 .md-content h3 {
-  @apply mt-6 text-base font-semibold;
+  @apply mt-6 text-xl font-medium;
 }
 
 .md-content p {
