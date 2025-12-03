@@ -38,6 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div className="w-72 h-full fixed top-16">
         <SidebarProvider
           style={{
+            // @ts-ignore
             "--sidebar-width": "18rem",
             "--sidebar-width-mobile": "20rem",
           }}

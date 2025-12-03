@@ -9,11 +9,16 @@ import MdAnchor from "./md-anchor";
 import markdownItTocDoneRight from "markdown-it-toc-done-right";
 import "@/assets/css/md-content.css";
 
-interface MarkdownRendererProps {
+interface MarkdownRendererProps extends React.HTMLAttributes<HTMLDivElement> {
   content: string;
+  showAnchor?: boolean;
 }
 
-const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
+const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
+  className,
+  content,
+  showAnchor = true,
+}) => {
   const mdRef = useRef<HTMLDivElement>(null);
   const [parsedHtml, setParsedHtml] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -79,6 +84,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
       Object.entries(placeholder.dataset).forEach(([key, value]) => {
         if (key.startsWith("props")) {
           const propsKey = key.replace("props", "").toLowerCase();
+          // @ts-ignore
           props[propsKey] = decodeURIComponent(value || "");
         }
       });
@@ -87,6 +93,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
         componentMap[componentName as keyof typeof componentMap];
       // React 19：使用 createRoot 创建根节点，渲染组件
       const root = createRoot(placeholder);
+      // @ts-ignore
       root.render(<Component {...props} />);
       // 缓存 Root 实例，便于后续卸载
       rootMap.current.set(placeholder as HTMLElement, root);
@@ -102,16 +109,12 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
   if (isLoading) return <PageSkeleton />;
 
   return (
-    <div className="flex">
+    <>
       {/* 文档内容 */}
-      <div className="md-content w-4/5" ref={mdRef}>
-        <div
-          className="w-4/5 mx-auto"
-          dangerouslySetInnerHTML={{ __html: parsedHtml }}
-        ></div>
-      </div>
-      <MdAnchor anchorHtml={tocHtml} />
-    </div>
+      <div ref={mdRef} className="md-content" dangerouslySetInnerHTML={{ __html: parsedHtml }}></div>
+      {/* 文档锚点 */}
+      {showAnchor && <MdAnchor anchorHtml={tocHtml} />}
+    </>
   );
 };
 

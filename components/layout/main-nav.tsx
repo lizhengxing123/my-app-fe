@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react"
+import * as React from "react";
+import Link from "next/link";
+import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
 
 import {
   NavigationMenu,
@@ -12,26 +12,23 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu";
 
 const components: { title: string; href: string; description: string }[] = [
   {
     title: "JavaScript",
     href: "/docs/primitives/alert-dialog",
-    description:
-      "JavaScript 必备知识，包括原型链、闭包、作用域等。",
+    description: "JavaScript 必备知识，包括原型链、闭包、作用域等。",
   },
   {
     title: "React",
     href: "/docs/primitives/hover-card",
-    description:
-      "React 框架，包括基础 API、Fiber 架构等",
+    description: "React 框架，包括基础 API、Fiber 架构等",
   },
   {
     title: "Java",
     href: "/docs/primitives/progress",
-    description:
-      "Java 必备知识，包括 JVM、并发编程等。",
+    description: "Java 必备知识，包括 JVM、并发编程等。",
   },
   {
     title: "Spring Boot",
@@ -41,19 +38,16 @@ const components: { title: string; href: string; description: string }[] = [
   {
     title: "MySQL",
     href: "/docs/primitives/tabs",
-    description:
-      "MySQL 数据库，包括 SQL 语句、索引优化等。",
+    description: "MySQL 数据库，包括 SQL 语句、索引优化等。",
   },
   {
     title: "Redis",
     href: "/docs/primitives/tooltip",
-    description:
-      "Redis 数据库，包括数据结构、过期策略等。",
+    description: "Redis 数据库，包括数据结构、过期策略等。",
   },
-]
+];
 
 export default function MainNav() {
-
   return (
     // 需要使用viewport={false}，否则会导致导航菜单不能对齐
     <NavigationMenu viewport={false}>
@@ -88,7 +82,8 @@ export default function MainNav() {
                   <Link href="/chart">
                     <div className="font-medium">基础图表</div>
                     <div className="text-muted-foreground">
-                      使用 Echarts 实现的各种精美图表，包括折线图、柱状图、饼图、散点图等。
+                      使用 Echarts
+                      实现的各种精美图表，包括折线图、柱状图、饼图、散点图等。
                     </div>
                   </Link>
                 </NavigationMenuLink>
@@ -96,7 +91,8 @@ export default function MainNav() {
                   <Link href="/chart">
                     <div className="font-medium">地图</div>
                     <div className="text-muted-foreground">
-                      使用 Echarts 实现的地图图表，包括地图下钻、地图区域图表展示等。
+                      使用 Echarts
+                      实现的地图图表，包括地图下钻、地图区域图表展示等。
                     </div>
                   </Link>
                 </NavigationMenuLink>
@@ -137,9 +133,14 @@ export default function MainNav() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <Link href="/write">创作</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  )
+  );
 }
 
 function ListItem({
@@ -159,5 +160,5 @@ function ListItem({
         </Link>
       </NavigationMenuLink>
     </li>
-  )
+  );
 }
