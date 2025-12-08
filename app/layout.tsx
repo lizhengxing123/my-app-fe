@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/header";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import TransitionProvider from "@/providers/transition-provider";
 
 export default function RootLayout({
   children,
@@ -18,10 +19,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="min-h-screen">
-              <Header />
-              <main className="h-screen pt-16">{children}</main>
-            </div>
+            <TransitionProvider>
+              <div className="min-h-screen">
+                <Header />
+                <main className="h-screen pt-16">{children}</main>
+              </div>
+            </TransitionProvider>
           </ThemeProvider>
         </body>
       </html>

@@ -79,7 +79,7 @@ flowchart TD
 
 echarts
 
-\`\`\`echarts
+\`\`\`js
 {
   tooltip: {
     trigger: 'axis'

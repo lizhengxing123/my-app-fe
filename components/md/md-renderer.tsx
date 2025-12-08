@@ -101,7 +101,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
 
     // 清理副作用：组件卸载时卸载所有 React 组件
     return () => {
-      rootMap.current.forEach((root) => root.unmount());
+      rootMap.current.forEach((root) => {
+        if (root) root.unmount();
+      });
       rootMap.current.clear();
     };
   }, [parsedHtml, isLoading]);
@@ -111,7 +113,12 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   return (
     <>
       {/* 文档内容 */}
-      <div ref={mdRef} id="write" className="md-content" dangerouslySetInnerHTML={{ __html: parsedHtml }}></div>
+      <div
+        ref={mdRef}
+        id="write"
+        className="md-content"
+        dangerouslySetInnerHTML={{ __html: parsedHtml }}
+      ></div>
       {/* 文档锚点 */}
       {showAnchor && <MdAnchor anchorHtml={tocHtml} />}
     </>

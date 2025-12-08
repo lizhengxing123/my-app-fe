@@ -1,0 +1,9 @@
+@reference "../../app/globals.css";
+
+.transition-grid {
+    @apply fixed left-0 top-0 w-full h-full pointer-events-none z-50;
+}
+
+.transition-block {
+    @apply absolute bg-foreground opacity-0;
+}
