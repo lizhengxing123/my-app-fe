@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react";
 
 import {
   NavigationMenu,
@@ -13,6 +12,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+
+import { getMenuTree } from "@/services/docMenuService";
+import { DocMenu } from "@/types/DocMenu";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -46,98 +48,68 @@ const components: { title: string; href: string; description: string }[] = [
     description: "Redis 数据库，包括数据结构、过期策略等。",
   },
 ];
+// 首页
+const home: DocMenu = {
+  id: "home",
+  name: "首页",
+  href: "/",
+  description: "",
+  level: 1,
+  docId: 0,
+  sortNum: 0,
+  children: [],
+};
 
 export default function MainNav() {
+  const [menus, setMenus] = React.useState<DocMenu[]>([]);
+
+  const getNavMenus = async () => {
+    const res = await getMenuTree(1, 2);
+    if (res.success) {
+      return res.data;
+    }
+    return [];
+  };
+
+  React.useEffect(() => {
+    getNavMenus().then((res) => {
+      setMenus([home, ...res]);
+    });
+  }, []);
+
   return (
     // 需要使用viewport={false}，否则会导致导航菜单不能对齐
     <NavigationMenu viewport={false}>
       <NavigationMenuList className="flex-wrap gap-4">
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/">首页</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>文档</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-              {components.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
-                >
-                  {component.description}
-                </ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem className="hidden md:block">
-          <NavigationMenuTrigger>图表</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[300px] gap-4">
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="/chart">
-                    <div className="font-medium">基础图表</div>
-                    <div className="text-muted-foreground">
-                      使用 Echarts
-                      实现的各种精美图表，包括折线图、柱状图、饼图、散点图等。
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link href="/chart">
-                    <div className="font-medium">地图</div>
-                    <div className="text-muted-foreground">
-                      使用 Echarts
-                      实现的地图图表，包括地图下钻、地图区域图表展示等。
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link href="/chart">
-                    <div className="font-medium">其他图表</div>
-                    <div className="text-muted-foreground">
-                      其他图表，包括大屏表格、数据旋转等。
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem className="hidden md:block">
-          <NavigationMenuTrigger>动画</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[300px] gap-4">
-              <li>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="font-medium">Gasp</div>
-                    <div className="text-muted-foreground">
-                      使用 Gasp 实现的各种炫酷动画特效。
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-                <NavigationMenuLink asChild>
-                  <Link href="#">
-                    <div className="font-medium">CSS 动画</div>
-                    <div className="text-muted-foreground">
-                      使用 CSS 实现的各种动画特效，包括旋转、缩放、淡入淡出等。
-                    </div>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/write">创作</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
+        {menus.map((menu) => (
+          <NavigationMenuItem key={menu.id}>
+            {menu.children.length > 0 ? (
+              <>
+                <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className={menu.children.length >= 4 ? "grid gap-2 sm:w-[400px] md:w-[500px] md:grid-cols-2 lg:w-[600px]" : "grid w-[300px] gap-4"}>
+                    {menu.children.map((component) => (
+                      <ListItem
+                        key={component.id}
+                        title={component.name}
+                        href={component.href}
+                      >
+                        {component.description}
+                      </ListItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </>
+            ) : (
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href={menu.href}>{menu.name}</Link>
+              </NavigationMenuLink>
+            )}
+          </NavigationMenuItem>
+        ))}
       </NavigationMenuList>
     </NavigationMenu>
   );

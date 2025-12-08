@@ -1,6 +1,5 @@
 // services/documentService.ts
 import request from "@/lib/axiosInstance";
-import { Result } from "@/types/Result";
 import { TechDocument } from "@/types/TechDocument";
 
 const baseUrl = "/api/tech-documents";
