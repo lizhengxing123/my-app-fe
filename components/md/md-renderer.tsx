@@ -111,7 +111,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
   return (
     <>
       {/* 文档内容 */}
-      <div ref={mdRef} className="md-content" dangerouslySetInnerHTML={{ __html: parsedHtml }}></div>
+      <div ref={mdRef} id="write" className="md-content" dangerouslySetInnerHTML={{ __html: parsedHtml }}></div>
       {/* 文档锚点 */}
       {showAnchor && <MdAnchor anchorHtml={tocHtml} />}
     </>
