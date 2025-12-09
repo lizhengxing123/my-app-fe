@@ -16,43 +16,12 @@ import {
 import { getMenuTree } from "@/services/docMenuService";
 import { DocMenu } from "@/types/DocMenu";
 
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "JavaScript",
-    href: "/docs/primitives/alert-dialog",
-    description: "JavaScript 必备知识，包括原型链、闭包、作用域等。",
-  },
-  {
-    title: "React",
-    href: "/docs/primitives/hover-card",
-    description: "React 框架，包括基础 API、Fiber 架构等",
-  },
-  {
-    title: "Java",
-    href: "/docs/primitives/progress",
-    description: "Java 必备知识，包括 JVM、并发编程等。",
-  },
-  {
-    title: "Spring Boot",
-    href: "/docs/primitives/scroll-area",
-    description: "Spring Boot 框架，包括自动配置、起步依赖等。",
-  },
-  {
-    title: "MySQL",
-    href: "/docs/primitives/tabs",
-    description: "MySQL 数据库，包括 SQL 语句、索引优化等。",
-  },
-  {
-    title: "Redis",
-    href: "/docs/primitives/tooltip",
-    description: "Redis 数据库，包括数据结构、过期策略等。",
-  },
-];
 // 首页
 const home: DocMenu = {
   id: "home",
   name: "首页",
   href: "/",
+  icon: "",
   description: "",
   level: 1,
   docId: 0,
@@ -64,7 +33,7 @@ export default function MainNav() {
   const [menus, setMenus] = React.useState<DocMenu[]>([]);
 
   const getNavMenus = async () => {
-    const res = await getMenuTree(1, 2);
+    const res = await getMenuTree(1, 2, "");
     if (res.success) {
       return res.data;
     }
@@ -92,7 +61,7 @@ export default function MainNav() {
                       <ListItem
                         key={component.id}
                         title={component.name}
-                        href={component.href}
+                        href={component.href + "?categoryId=" + menu.id}
                       >
                         {component.description}
                       </ListItem>

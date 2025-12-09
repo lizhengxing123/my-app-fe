@@ -55,3 +55,9 @@ export const chartMenus = {
     },
   ],
 };
+
+export const chartMenuIconMap = {
+  "SquareChartGantt": SquareChartGantt,
+  "ChartColumn": ChartColumn,
+  "ChartLine": ChartLine,
+}

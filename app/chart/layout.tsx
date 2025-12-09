@@ -17,22 +17,57 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar";
 import { LayoutDashboard } from "lucide-react";
-import { chartMenus as menus } from "@/assets/sidebar-menus/chart-menus";
-import { usePathname } from "next/navigation"; // 导入usePathname钩子
+import { chartMenuIconMap } from "@/assets/sidebar-menus/chart-menus";
+import { usePathname, useSearchParams } from "next/navigation"; // 导入usePathname钩子
+import { useEffect, useState } from "react";
+import { DocMenu } from "@/types/DocMenu";
+import { getMenuTree } from "@/services/docMenuService";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname(); // 获取当前路径
+  const searchParams = useSearchParams();
+
+  const [menus, setMenus] = useState<DocMenu[]>([]);
+
+  const getNavMenus = async () => {
+    const res = await getMenuTree(
+      2,
+      4,
+      searchParams.get("categoryId") || undefined
+    );
+    if (res.success) {
+      // 处理图标
+      res.data.forEach((item) => {
+        if (item.children.length > 0) {
+          item.children.forEach((i) => {
+            // @ts-ignore
+            i.icon = chartMenuIconMap[i.icon];
+          });
+        }
+      });
+      console.log(res.data);
+      return res.data;
+    }
+    return [];
+  };
+
   const firstMenu = {
     title: "所有图表",
     herf: "/chart",
   };
-  
+
+  useEffect(() => {
+    getNavMenus().then((res) => {
+      setMenus([...res]);
+    });
+  }, []);
+
   // 判断路径是否匹配的辅助函数
   const isPathActive = (path: string) => {
     // 完全匹配或子路径匹配（例如：/chart 匹配 /chart 和 /chart/subpath）
-    return pathname === path
+    return pathname === path;
   };
-  
+
   return (
     <div className="flex w-full h-full">
       <div className="w-72 h-full fixed top-16">
@@ -47,7 +82,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <SidebarContent className="bg-background">
               <SidebarMenu className="pl-2 pt-4">
                 <SidebarMenuItem>
-                  <SidebarMenuButton isActive={isPathActive(firstMenu.herf)} asChild>
+                  <SidebarMenuButton
+                    isActive={isPathActive(firstMenu.herf)}
+                    asChild
+                  >
                     <a href={firstMenu.herf} className="py-0">
                       <LayoutDashboard />
                       <span>{firstMenu.title}</span>
@@ -55,43 +93,48 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
-              {Object.entries(menus).map(([group, items]) => (
-                <SidebarGroup key={group}>
-                  <SidebarGroupLabel>{group}</SidebarGroupLabel>
-                  <SidebarGroupContent>
-                    <SidebarMenu>
-                      {items.map((item) => (
-                        <SidebarMenuItem key={item.herf}>
-                          <SidebarMenuButton isActive={isPathActive(item.herf)} asChild>
-                            <a href={item.herf}>
-                              <item.icon />
-                              <span>{item.title}</span>
-                            </a>
-                          </SidebarMenuButton>
-                          {item.items && (
-                            <SidebarMenuBadge>
-                              <Badge>{item.items.length}</Badge>
-                            </SidebarMenuBadge>
-                          )}
-                          {item.items && (
-                            <SidebarMenuSub>
-                              {item.items.map((subItem) => (
-                                <SidebarMenuSubItem key={subItem.herf}>
-                                  <SidebarMenuSubButton asChild>
-                                    <a href={subItem.herf}>
-                                      <span>{subItem.title}</span>
-                                    </a>
-                                  </SidebarMenuSubButton>
-                                </SidebarMenuSubItem>
-                              ))}
-                            </SidebarMenuSub>
-                          )}
-                        </SidebarMenuItem>
-                      ))}
-                    </SidebarMenu>
-                  </SidebarGroupContent>
-                </SidebarGroup>
-              ))}
+              {menus.length > 0 &&
+                menus.map((menu) => (
+                  <SidebarGroup key={menu.id}>
+                    <SidebarGroupLabel>{menu.name}</SidebarGroupLabel>
+                    <SidebarGroupContent>
+                      <SidebarMenu>
+                        {menu.children.map((item) => (
+                          <SidebarMenuItem key={item.id}>
+                            <SidebarMenuButton
+                              isActive={isPathActive(item.href)}
+                              asChild
+                            >
+                              <a href={item.href}>
+                                {/* @ts-ignore */}
+                                <item.icon />
+                                <span>{item.name}</span>
+                              </a>
+                            </SidebarMenuButton>
+                            {item.children.length > 0 && (
+                              <SidebarMenuBadge>
+                                <Badge>{item.children.length}</Badge>
+                              </SidebarMenuBadge>
+                            )}
+                            {item.children.length > 0 && (
+                              <SidebarMenuSub>
+                                {item.children.map((subItem) => (
+                                  <SidebarMenuSubItem key={subItem.id}>
+                                    <SidebarMenuSubButton asChild>
+                                      <a href={subItem.href}>
+                                        <span>{subItem.name}</span>
+                                      </a>
+                                    </SidebarMenuSubButton>
+                                  </SidebarMenuSubItem>
+                                ))}
+                              </SidebarMenuSub>
+                            )}
+                          </SidebarMenuItem>
+                        ))}
+                      </SidebarMenu>
+                    </SidebarGroupContent>
+                  </SidebarGroup>
+                ))}
             </SidebarContent>
           </Sidebar>
         </SidebarProvider>
