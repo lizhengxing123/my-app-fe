@@ -156,13 +156,13 @@ note、abstract、info、tip、success、question、warning、failure、danger�
             ]}
             footers={[]}
           />
-          <div className="w-1/2 h-full pl-4 relative border-r">
+          <div className="w-1/2 h-full pl-4 border-r h-[80vh] overflow-auto">
             <MarkdownRenderer
               className="w-full"
               content={text}
               showAnchor={false}
             />
-            <div className="absolute bottom-0 right-0 w-full py-3 pr-6 border-t flex align-center justify-end space-x-4">
+            <div className="fixed bottom-0 right-0 w-1/2 py-3 pr-6 border-t flex align-center justify-end space-x-4 bg-background">
               <Button variant="outline">
                 <Save />
                 保存文章
