@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { BookOpenCheck, Save } from "lucide-react";
 import { useTheme } from "next-themes";
 import WritePageSkeleton from "@/components/skeleton/write-skeleton";
+import RelatedMenu from "@/components/write/related-menu";
 
 export default () => {
   const [text, setText] = useState(
@@ -117,6 +118,8 @@ note、abstract、info、tip、success、question、warning、failure、danger�
   const [clientTheme, setClientTheme] = useState("light");
   const [isMounted, setIsMounted] = useState(false);
 
+  const [open, setOpen] = useState(false);
+
   // 只在客户端执行主题相关逻辑
   useEffect(() => {
     setIsMounted(true);
@@ -167,7 +170,7 @@ note、abstract、info、tip、success、question、warning、failure、danger�
                 <Save />
                 保存文章
               </Button>
-              <Button>
+              <Button onClick={() => setOpen(true)} className="cursor-pointer">
                 <BookOpenCheck />
                 发布文章
               </Button>
@@ -177,6 +180,7 @@ note、abstract、info、tip、success、question、warning、failure、danger�
       ) : (
         <WritePageSkeleton />
       )}
+      <RelatedMenu open={open} onClose={() => setOpen(false)} />
     </div>
   );
 };
