@@ -61,8 +61,10 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
     if (!mdRef.current || isLoading) return;
 
     // 清空之前的 Root 实例（避免重复渲染）
-    rootMap.current.forEach((root) => root.unmount());
-    rootMap.current.clear();
+    setTimeout(() => {
+      rootMap.current.forEach((root) => root.unmount());
+      rootMap.current.clear();
+    }, 0);
 
     const placeholders = mdRef.current.querySelectorAll(
       "[data-md-component]"
@@ -101,10 +103,11 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
 
     // 清理副作用：组件卸载时卸载所有 React 组件
     return () => {
-      rootMap.current.forEach((root) => {
-        if (root) root.unmount();
-      });
-      rootMap.current.clear();
+      // 使用 setTimeout 将卸载操作推迟到下一个事件循环，避免与 React 当前渲染过程冲突
+      setTimeout(() => {
+        rootMap.current.forEach((root) => root.unmount());
+        rootMap.current.clear();
+      }, 0);
     };
   }, [parsedHtml, isLoading]);
 
