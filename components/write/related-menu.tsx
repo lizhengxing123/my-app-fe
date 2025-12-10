@@ -34,10 +34,18 @@ export default function RelatedMenu({
   open,
   onClose,
   publishDoc,
+  loadDoc,
+  selectedMenu,
+  setSelectedMenu,
+  btnType = "load"
 }: {
   open: boolean;
   onClose: () => void;
-  publishDoc: (menuId: string) => Promise<Result<boolean>>;
+  publishDoc?: () => void;
+  loadDoc?: () => void;
+  selectedMenu: DocMenu | null;
+  setSelectedMenu: (menu: DocMenu | null) => void;
+  btnType: "load" | "publish"
 }) {
   // 获取所有菜单
   const getNavMenus = async () => {
@@ -97,22 +105,13 @@ export default function RelatedMenu({
    * 能被选择的菜单相关
    */
   const [selectMenus, setSelectMenus] = useState<DocMenu[]>([]);
-  const [selectedMenu, setSelectedMenu] = useState<DocMenu | null>(null);
 
-  const handleMenuClick = (menu: DocMenu) => {
-    setSelectedMenu(menu);
-  };
-
-  // 发布文章
-  const handlePublichDoc = async () => {
-    if (!selectedMenu || !selectedMenu.id) {
-      toast.warning("没有关联的菜单！");
-      return;
-    }
-    const res = await publishDoc(selectedMenu.id);
-    if(res.success) {
-      toast.success(res.msg)
-      onClose()
+  // 处理按钮点击
+  const handleBtnClick = () => {
+    if (btnType === "publish") {
+      publishDoc!();
+    } else {
+      loadDoc!();
     }
   };
 
@@ -171,14 +170,14 @@ export default function RelatedMenu({
                   <GroupMenu
                     menu={menu}
                     isSelected={menu.id === selectedMenu?.id}
-                    onClick={handleMenuClick}
+                    onClick={setSelectedMenu}
                   />
                   {menu.children.map((child) => (
                     <ItemMenu
                       key={child.id}
                       menu={child}
                       isSelected={child.id === selectedMenu?.id}
-                      onClick={handleMenuClick}
+                      onClick={setSelectedMenu}
                     />
                   ))}
                 </div>
@@ -190,14 +189,14 @@ export default function RelatedMenu({
           <span className="text-sm text-foreground/80">
             {selectedMenu
               ? "已选择关联菜单：" + selectedMenu.name
-              : "请选择关联菜单之后再发布"}
+              : "请选择关联菜单之后再" + (btnType === "publish" ? "发布" : "加载")}
           </span>
           <div className="flex space-x-4">
             <DialogClose asChild>
               <Button variant="outline">取消</Button>
             </DialogClose>
-            <Button type="submit" onClick={handlePublichDoc}>
-              发布
+            <Button type="submit" onClick={handleBtnClick}>
+              {btnType === "publish" ? "发布" : "加载"}
             </Button>
           </div>
         </DialogFooter>

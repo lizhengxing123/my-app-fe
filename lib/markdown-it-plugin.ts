@@ -1,6 +1,7 @@
 import MarkdownIt from "markdown-it";
 import markdownItAnchor from "markdown-it-anchor";
 import markdownItTocDoneRight from "markdown-it-toc-done-right";
+import markdownItContainer from "markdown-it-container";
 
 // 自定义插件：解析 【【【组件名】】】 语法
 // 用来渲染项目中的自定义组件
@@ -178,5 +179,5 @@ export const createMarkdownIt = () => {
       permalinkSymbol: "§",
       permalinkBefore: true,
     })
-    // .use(markdownItTocDoneRight);
+    .use(markdownItContainer, "tip");
 };

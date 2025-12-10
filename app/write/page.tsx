@@ -9,127 +9,85 @@ import { BookOpenCheck, Save } from "lucide-react";
 import { useTheme } from "next-themes";
 import WritePageSkeleton from "@/components/skeleton/write-skeleton";
 import RelatedMenu from "@/components/write/related-menu";
-import { addDocumentAndRelateMenu } from "@/services/techDocumentService";
+import {
+  addDocumentAndRelateMenu,
+  getDocumentById,
+} from "@/services/techDocumentService";
 import { toast } from "sonner";
+import { DocMenu } from "@/types/DocMenu";
+import { TechDocument } from "@/types/TechDocument";
 
 export default () => {
-  const [text, setText] = useState(
-    `
-# md-editor
-
-## 😲 md-editor-rt
-
-Markdown 编辑器，React 版本，使用 jsx 和 typescript 语法开发，支持切换主题、prettier 美化文本等。
-
-### 🤖 基本演示
-
-**加粗**，<u>下划线</u>，_斜体_，~~删除线~~，上标^26^，下标~1~，\`inline code\`，[超链接](https://github.com/imzbf)
-
-> 引用：《I Have a Dream》
-
-1. So even though we face the difficulties of today and tomorrow, I still have a dream.
-2. It is a dream deeply rooted in the American dream.
-3. I have a dream that one day this nation will rise up.
-
-- [ ] 周五
-- [ ] 周六
-- [x] 周天
-
-![图片](https://imzbf.github.io/md-editor-v3/imgs/mark_emoji.gif)
-
-## 🤗 代码演示
-
-\`\`\`js
-import { defineComponent, ref } from 'vue';
-import { MdEditor } from 'md-editor-rt';
-import 'md-editor-rt/lib/style.css';
-
-export default defineComponent({
-  name: 'MdEditor',
-  setup() {
-    const text = ref('');
-    return () => <MdEditor modelValue={text.value} onChange={(v: string) => (text.value = v)} />;
-  },
-});
-\`\`\`
-
-## 🖨 文本演示
-
-依照普朗克长度这项单位，目前可观测的宇宙的直径估计值（直径约 930 亿光年，即 8.8 × 10^26^ 米）即为 5.4 × 10^61^倍普朗克长度。而可观测宇宙体积则为 8.4 × 10^184^立方普朗克长度（普朗克体积）。
-
-## 📈 表格演示
-
-| 表头 1 |  表头 2  | 表头 3 |
-| :----- | :------: | -----: |
-| 左对齐 | 中间对齐 | 右对齐 |
-
-## 📏 公式
-
-行内：$x+y^{2x}$
-
-$$
-\sqrt[3]{x}
-$$
-
-## 🧬 图表
-
-mermaid
-
-\`\`\`mermaid
-flowchart TD
-  Start --> Stop
-\`\`\`
-
-echarts
-
-\`\`\`js
-{
-  tooltip: {
-    trigger: 'axis'
-  },
-  xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  },
-  yAxis: {
-    type: 'value'
-  },
-  series: [
-    {
-      data: [150, 230, 224, 218, 135, 147, 260],
-      type: 'line'
-    }
-  ]
-}
-\`\`\`
-
-## 🪄 提示
-
-!!! note 支持的类型
-
-note、abstract、info、tip、success、question、warning、failure、danger、bug、example、quote、hint、caution、error、attention
-
-!!!
-
-## ☘️ 占个坑@！
-
-没了
-`
-  );
+  const DEFAULT_TITLE = "# 请输入标题";
+  const [text, setText] = useState(DEFAULT_TITLE);
   const { theme = "light" } = useTheme();
   const [clientTheme, setClientTheme] = useState("light");
   const [isMounted, setIsMounted] = useState(false);
 
-  const [open, setOpen] = useState(false);
+  /**
+   * 发布文章相关
+   */
+  // 选中的菜单
+  const [selectedPublishMenu, setSelectedPublishMenu] =
+    useState<DocMenu | null>(null);
+  // 弹框开关
+  const [publishOpen, setPublishOpen] = useState(false);
 
-  // 发布文章
-  const publishDoc = async (menuId: string) => {
+  /**
+   * 发布文章 -- 一个菜单关联一篇文章
+   * 1、如果已加载文章，发布时直接发布
+   * 3、如果未加载文章，选择之后再发布
+   */
+  const publishDoc = async () => {
+    if (!loadedDoc && !selectedPublishMenu) {
+      toast.warning("发布文章需要关联菜单！");
+      return;
+    }
     const res = await addDocumentAndRelateMenu({
-      title: "md-editor",
+      id: loadedDoc?.id,
+      title: text.split("\n")[0].replace("# ", ""),
       content: text,
-      menuId,
+      menuId: selectedPublishMenu?.id ?? undefined,
     });
-    return res
+    if (res.success) {
+      toast.success(res.msg);
+      setPublishOpen(false);
+    }
+  };
+
+  // 处理发布点击事件
+  const handlePublishClick = () => {
+    if (loadedDoc) {
+      publishDoc();
+    } else {
+      setPublishOpen(true);
+    }
+  };
+
+  /**
+   * 文章加载相关
+   */
+  // 选中的菜单
+  const [selectedLoadMenu, setSelectedLoadMenu] = useState<DocMenu | null>(
+    null
+  );
+  // 弹框开关
+  const [loadOpen, setLoadOpen] = useState(false);
+  // 已加载的文章信息
+  const [loadedDoc, setLoadedDoc] = useState<TechDocument | null>(null);
+
+  // 加载文章
+  const loadDoc = async () => {
+    if (!selectedLoadMenu || !selectedLoadMenu.id) {
+      toast.warning("请选择文章关联的菜单！");
+      return;
+    }
+    const res = await getDocumentById(selectedLoadMenu.docId);
+    if (res.success) {
+      setLoadedDoc(res.data);
+      setText(res.data.content || DEFAULT_TITLE);
+      setLoadOpen(false);
+    }
   };
 
   // 只在客户端执行主题相关逻辑
@@ -177,22 +135,48 @@ note、abstract、info、tip、success、question、warning、failure、danger�
               content={text}
               showAnchor={false}
             />
-            <div className="fixed bottom-0 right-0 w-1/2 py-3 pr-6 border-t flex align-center justify-end space-x-4 bg-background">
-              <Button variant="outline">
-                <Save />
-                保存文章
-              </Button>
-              <Button onClick={() => setOpen(true)} className="cursor-pointer">
-                <BookOpenCheck />
-                发布文章
-              </Button>
+            <div className="fixed bottom-0 right-0 w-1/2 py-3 pr-6 border-t flex items-center justify-between space-x-4 bg-background">
+              <span className="text-sm text-foreground/80 pl-3">
+                {loadedDoc && selectedLoadMenu
+                  ? "文章已加载，关联菜单：" + selectedLoadMenu.name
+                  : ""}
+              </span>
+              <div className="flex space-x-4">
+                <Button
+                  variant="outline"
+                  onClick={() => setLoadOpen(true)}
+                  className="cursor-pointer"
+                >
+                  <Save />
+                  加载文章
+                </Button>
+                <Button onClick={handlePublishClick} className="cursor-pointer">
+                  <BookOpenCheck />
+                  发布文章
+                </Button>
+              </div>
             </div>
           </div>
         </>
       ) : (
         <WritePageSkeleton />
       )}
-      <RelatedMenu open={open} onClose={() => setOpen(false)} publishDoc={publishDoc} />
+      <RelatedMenu
+        open={publishOpen}
+        onClose={() => setPublishOpen(false)}
+        publishDoc={publishDoc}
+        selectedMenu={selectedPublishMenu}
+        setSelectedMenu={setSelectedPublishMenu}
+        btnType="publish"
+      />
+      <RelatedMenu
+        open={loadOpen}
+        onClose={() => setLoadOpen(false)}
+        loadDoc={loadDoc}
+        selectedMenu={selectedLoadMenu}
+        setSelectedMenu={setSelectedLoadMenu}
+        btnType="load"
+      />
     </div>
   );
 };
