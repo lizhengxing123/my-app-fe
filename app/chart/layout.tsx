@@ -22,19 +22,21 @@ import { usePathname, useSearchParams } from "next/navigation"; // 导入usePath
 import { useEffect, useState } from "react";
 import { DocMenu } from "@/types/DocMenu";
 import { getMenuTree } from "@/services/docMenuService";
+import { toast } from "sonner";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname(); // 获取当前路径
   const searchParams = useSearchParams();
+  const categoryId = searchParams.get("categoryId") || "";
 
   const [menus, setMenus] = useState<DocMenu[]>([]);
 
   const getNavMenus = async () => {
-    const res = await getMenuTree(
-      2,
-      4,
-      searchParams.get("categoryId") || undefined
-    );
+    if (!categoryId) {
+      toast.warning("没有分类ID，无法获取菜单！");
+      return [];
+    }
+    const res = await getMenuTree(2, 4, categoryId);
     if (res.success) {
       // 处理图标
       res.data.forEach((item) => {
@@ -53,7 +55,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const firstMenu = {
     title: "所有图表",
-    herf: "/chart",
+    href: "/chart",
   };
 
   useEffect(() => {
@@ -83,10 +85,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <SidebarMenu className="pl-2 pt-4">
                 <SidebarMenuItem>
                   <SidebarMenuButton
-                    isActive={isPathActive(firstMenu.herf)}
+                    isActive={isPathActive(firstMenu.href)}
                     asChild
                   >
-                    <a href={firstMenu.herf} className="py-0">
+                    <a href={firstMenu.href} className="py-0">
                       <LayoutDashboard />
                       <span>{firstMenu.title}</span>
                     </a>
@@ -105,7 +107,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                               isActive={isPathActive(item.href)}
                               asChild
                             >
-                              <a href={item.href}>
+                              <a
+                                href={
+                                  item.href +
+                                  `?categoryId=${categoryId}&docId=${item.docId}`
+                                }
+                              >
                                 {/* @ts-ignore */}
                                 <item.icon />
                                 <span>{item.name}</span>
@@ -121,7 +128,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                 {item.children.map((subItem) => (
                                   <SidebarMenuSubItem key={subItem.id}>
                                     <SidebarMenuSubButton asChild>
-                                      <a href={subItem.href}>
+                                      <a
+                                        href={
+                                          subItem.href +
+                                          `?categoryId=${categoryId}&docId=${subItem.docId}`
+                                        }
+                                      >
                                         <span>{subItem.name}</span>
                                       </a>
                                     </SidebarMenuSubButton>

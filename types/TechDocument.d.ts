@@ -4,4 +4,5 @@ export interface TechDocument {
   content: string;
   createTime: string;
   updateTime: string;
+  menuId: string
 }

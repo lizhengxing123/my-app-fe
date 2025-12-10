@@ -9,6 +9,8 @@ import { BookOpenCheck, Save } from "lucide-react";
 import { useTheme } from "next-themes";
 import WritePageSkeleton from "@/components/skeleton/write-skeleton";
 import RelatedMenu from "@/components/write/related-menu";
+import { addDocumentAndRelateMenu } from "@/services/techDocumentService";
+import { toast } from "sonner";
 
 export default () => {
   const [text, setText] = useState(
@@ -120,6 +122,16 @@ note、abstract、info、tip、success、question、warning、failure、danger�
 
   const [open, setOpen] = useState(false);
 
+  // 发布文章
+  const publishDoc = async (menuId: string) => {
+    const res = await addDocumentAndRelateMenu({
+      title: "md-editor",
+      content: text,
+      menuId,
+    });
+    return res
+  };
+
   // 只在客户端执行主题相关逻辑
   useEffect(() => {
     setIsMounted(true);
@@ -180,7 +192,7 @@ note、abstract、info、tip、success、question、warning、failure、danger�
       ) : (
         <WritePageSkeleton />
       )}
-      <RelatedMenu open={open} onClose={() => setOpen(false)} />
+      <RelatedMenu open={open} onClose={() => setOpen(false)} publishDoc={publishDoc} />
     </div>
   );
 };

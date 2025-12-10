@@ -11,3 +11,12 @@ export const getDocumentById = async (id: string) => {
     url: `${baseUrl}/${id}`,
   });
 };
+
+// 发布文章
+export const addDocumentAndRelateMenu = async (data: Partial<TechDocument>) => {
+  return request<boolean>({
+    method: "POSt",
+    data,
+    url: `${baseUrl}/with-menu`,
+  });
+};

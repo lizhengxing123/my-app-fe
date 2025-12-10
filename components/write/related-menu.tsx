@@ -27,13 +27,17 @@ import { useEffect, useState } from "react";
 import { getMenuTree } from "@/services/docMenuService";
 import { DocMenu } from "@/types/DocMenu";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { Result } from "@/types/Result";
 
 export default function RelatedMenu({
   open,
   onClose,
+  publishDoc,
 }: {
   open: boolean;
   onClose: () => void;
+  publishDoc: (menuId: string) => Promise<Result<boolean>>;
 }) {
   // 获取所有菜单
   const getNavMenus = async () => {
@@ -55,6 +59,9 @@ export default function RelatedMenu({
     const sidebarMenus = tabs.find((tab) => tab.id === value);
     if (sidebarMenus) {
       setSidebarMenus([...sidebarMenus.children]);
+      setActiveSidebarMenu(sidebarMenus.children[0].id);
+      setSelectMenus([...sidebarMenus.children[0].children]);
+      setSelectedMenu(null);
     }
   };
 
@@ -96,9 +103,22 @@ export default function RelatedMenu({
     setSelectedMenu(menu);
   };
 
+  // 发布文章
+  const handlePublichDoc = async () => {
+    if (!selectedMenu || !selectedMenu.id) {
+      toast.warning("没有关联的菜单！");
+      return;
+    }
+    const res = await publishDoc(selectedMenu.id);
+    if(res.success) {
+      toast.success(res.msg)
+      onClose()
+    }
+  };
+
   useEffect(() => {
     getNavMenus().then((res) => {
-      setTabs([...res]);
+      setTabs([...res.filter((tab) => tab.children.length > 0)]);
       setActiveTab(res[0].id);
 
       setSidebarMenus([...res[0].children]);
@@ -176,7 +196,9 @@ export default function RelatedMenu({
             <DialogClose asChild>
               <Button variant="outline">取消</Button>
             </DialogClose>
-            <Button type="submit">发布</Button>
+            <Button type="submit" onClick={handlePublichDoc}>
+              发布
+            </Button>
           </div>
         </DialogFooter>
       </DialogContent>
