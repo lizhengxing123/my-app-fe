@@ -81,7 +81,7 @@
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
   /* 自定义颜色-代码块盒背景 */
-  --code-block-bg: oklch(0.985 0 0);
+  --code-block-bg: oklch(0.98 0 106);
   /* 自定义颜色-代码行高亮背景 */
   --code-highlight-bg: oklch(94.912% 0.00011 271.152);
 }

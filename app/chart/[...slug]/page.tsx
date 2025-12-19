@@ -45,9 +45,9 @@ export default function MarkdownPage({
     fetchData(); // 组件挂载时请求
   }, []);
   return (
-    <div className="w-4/5 h-full p-4 ml-1/10">
+    <div className="w-4/5 h-full p-4">
       {/* MarkdownRenderer 需标记为客户端组件（'use client'） */}
-      <MarkdownRenderer content={data} />
+      <MarkdownRenderer content={data} className="mx-auto" />
     </div>
   );
 }

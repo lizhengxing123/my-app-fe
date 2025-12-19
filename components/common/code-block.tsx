@@ -88,7 +88,7 @@ function CodeBlock(props: Props) {
           <CardSkeleton />
         </div>
       ) : (
-        <div className="py-2" dangerouslySetInnerHTML={{ __html: output }} />
+        <div className="py-2 overflow-auto" dangerouslySetInnerHTML={{ __html: output }} />
       )}
     </div>
   );

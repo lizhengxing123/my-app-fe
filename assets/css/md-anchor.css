@@ -9,7 +9,7 @@
 }
 
 .table-of-contents ol li a {
-    @apply inline-block border-l border-transparent text-base/8 text-gray-600 hover:border-gray-950/25 hover:text-gray-950 sm:text-sm/6 dark:text-gray-300 dark:hover:border-white/25 dark:hover:text-white pl-5 sm:pl-4;
+    @apply inline-block border-l border-transparent text-base/8 text-gray-500 hover:border-gray-950/25 hover:text-gray-950 sm:text-sm/6 dark:text-gray-300 dark:hover:border-white/25 dark:hover:text-white pl-5 sm:pl-4;
 }
 
 .table-of-contents ol li ol li a {
@@ -17,5 +17,5 @@
 }
 
 .table-of-contents ol li a.active {
-    @apply border-gray-950 font-semibold text-gray-950 dark:border-white dark:text-white;
+    @apply border-gray-950 text-gray-950 dark:border-white dark:text-white border-l-2;
 }
