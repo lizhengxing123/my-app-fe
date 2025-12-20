@@ -1,7 +1,3 @@
-// @ts-ignore
-import "./globals.css";
-import { Toaster } from "@/components/ui/sonner";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -12,7 +8,6 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <head />
         <body>
-          <Toaster position="top-center" />
           { children}
         </body>
       </html>

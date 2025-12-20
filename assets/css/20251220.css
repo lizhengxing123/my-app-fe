@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+
+@reference "../../app/globals.css";
+
+.page {
+    font-family: "DM Sans";
+    box-sizing: border-box;
+}
+.page h1 {
+    @apply text-2xl font-medium;
+}
+
+.page span {
+    @apply uppercase text-xs font-medium;
+}
+
+.page nav span {
+    @apply text-[0.8rem] p-3 rounded-md;
+    font-family: "DM Mono";
+}
+
+.page section {
+    @apply relative w-full h-svh p-8 overflow-hidden;
+}
+
+.page .about,
+.page .outro {
+    @apply bg-foreground text-background flex items-center justify-center;
+}
+
+.page .card-title {
+    @apply w-full flex justify-between;
+}
+
+.page .hero-cards .card span {
+    @apply text-[0.7rem];
+}
+
+.page .hero-cards .card#hero-card-1 {
+    @apply bg-sky-200 origin-top-right z-[2];
+}
+
+.page .hero-cards .card#hero-card-2 {
+    @apply bg-orange-200 z-[1];
+}
+
+.page .hero-cards .card#hero-card-3 {
+    @apply bg-amber-200 origin-top-left z-[0];
+}
+
+.page .cards {
+    @apply fixed top-0 left-0 w-full h-svh flex justify-center z-[-1] bg-background;
+}
+
+.page .card .card-wrapper {
+    animation: floating 2s infinite ease-in-out;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0%);
+    }
+    50% {
+        transform: translateY(-5%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+.page #card-1 .card-wrapper {
+    animation-delay: 0s;
+}
+
+.page #card-2 .card-wrapper {
+    animation-delay: 0.25s;
+}
+
+.page #card-3 .card-wrapper {
+    animation-delay: 0.5s;
+}
+
+.page .flip-card-front,
+.page .flip-card-back {
+    @apply absolute w-full h-full rounded-2xl backface-hidden overflow-hidden;
+}
+
+.page .flip-card-front {
+    @apply flex flex-col justify-between items-center;
+}
+
+.page #card-1 .flip-card-front {
+    @apply bg-sky-200;
+}
+
+.page #card-2 .flip-card-front {
+    @apply bg-orange-200;
+}
+
+.page #card-3 .flip-card-front {
+    @apply bg-amber-200;
+}
+
+.page .flip-card-back {
+    @apply relative p-4 flex flex-col justify-between gap-8 bg-background rotate-y-180;
+}
+
+.page .flip-card-back img {
+    @apply absolute top-0 left-0 w-full h-full object-cover opacity-100;
+}
+
+.page .flip-card-back .card-copy {
+    @apply w-full h-full flex flex-col gap-2;
+}
+
+.page .flip-card-back .card-copy p {
+    @apply flex-1 flex justify-center items-center text-lg font-bold rounded-md;
+}
+
+.page #card-1 {
+    transform: translateX(100%) translateY(-100%) rotate(-5deg) scale(0.25);
+    z-index: 2;
+}
+
+.page #card-2 {
+    transform: translateX(0%) translateY(-100%) rotate(0deg) scale(0.25);
+    z-index: 1;
+}
+
+.page #card-3 {
+    transform: translateX(-100%) translateY(-100%) rotate(5deg) scale(0.25);
+    z-index: 0;
+}
+
+.page .cards-container .card {
+    @apply opacity-0;
+}
