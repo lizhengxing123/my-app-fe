@@ -6,35 +6,24 @@ import { createMarkdownIt } from "@/lib/markdown-it-plugin";
 import { componentMap } from "./md-components";
 import PageSkeleton from "../skeleton/page-skeleton";
 import MdAnchor from "./md-anchor";
-import markdownItTocDoneRight from "markdown-it-toc-done-right";
 import "@/assets/css/md-content.css";
 import { cn } from "@/lib/utils";
 
 interface MarkdownRendererProps extends React.HTMLAttributes<HTMLDivElement> {
   content: string;
-  showAnchor?: boolean;
 }
 
-const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
+// 使用 memo 缓存渲染结果
+const MarkdownRenderer: React.FC<MarkdownRendererProps> = React.memo(({
   className,
   content,
-  showAnchor = true,
 }) => {
+  console.log("重新渲染了");
   const mdRef = useRef<HTMLDivElement>(null);
   const [parsedHtml, setParsedHtml] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [tocHtml, setTocHtml] = useState("");
 
   const md = createMarkdownIt();
-
-  md.use(markdownItTocDoneRight, {
-    level: 2, // 从第二级开始
-    linkClass: "md-anchor", // 自定义锚点类名
-    slugify: (str: string) => str.trim(), // 原样输出，不进行其他操作
-    callback: (tocHtml: string) => {
-      setTocHtml(tocHtml);
-    },
-  });
 
   // 缓存每个占位符的 Root 实例，用于卸载时调用 unmount()
   const rootMap = useRef<Map<HTMLElement, Root>>(new Map());
@@ -129,10 +118,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
         className={cn("md-content", className)}
         dangerouslySetInnerHTML={{ __html: parsedHtml }}
       ></div>
-      {/* 文档锚点 */}
-      {showAnchor && <MdAnchor anchorHtml={tocHtml} />}
     </>
   );
-};
+});
 
 export default MarkdownRenderer;

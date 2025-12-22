@@ -96,7 +96,7 @@ body {
   font-family: var(--base-latin-font), var(--base-chinese-font), serif;
   font-size: var(--base-font-size);
   /* A4标准宽度 */
-  max-width: 21cm;
+  /* max-width: 21cm; */
   background-color: white;
   /* column-count: 2;
     column-gap: 25px;

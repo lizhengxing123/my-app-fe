@@ -1,21 +1,61 @@
-@reference "../../app/globals.css";
 
-.table-of-contents ol {
-    @apply flex flex-col gap-2 border-l dark:border-[color-mix(in_oklab,_var(--color-gray-950),white_20%)] border-[color-mix(in_oklab,_var(--color-gray-950),white_90%)];
+.md-anchor .content {
+  position: relative;
+  padding-left: 16px;
+  font-size: 13px;
+  font-weight: 500;
 }
 
-.table-of-contents ol li {
-    @apply -ml-px flex flex-col items-start gap-2;
+.md-anchor .outline-marker {
+  position: absolute;
+  top: 32px;
+  left: -1px;
+  z-index: 0;
+  opacity: 0;
+  width: 2px;
+  border-radius: 2px;
+  height: 18px;
+  background-color: #333;
+  transition:
+    top 0.25s cubic-bezier(0, 1, 0.5, 1),
+    background-color 0.5s,
+    opacity 0.25s;
 }
 
-.table-of-contents ol li a {
-    @apply inline-block border-l border-transparent text-base/8 text-gray-500 hover:border-gray-950/25 hover:text-gray-950 sm:text-sm/6 dark:text-gray-300 dark:hover:border-white/25 dark:hover:text-white pl-5 sm:pl-4;
+.md-anchor .outline-title {
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.table-of-contents ol li ol li a {
-    @apply pl-8 sm:pl-7.5;
+.outline-item.root {
+  position: relative;
+  z-index: 1;
 }
 
-.table-of-contents ol li a.active {
-    @apply border-gray-950 text-gray-950 dark:border-white dark:text-white border-l-2;
+.outline-item.nested {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.outline-link {
+  display: block;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.5s;
+}
+
+.outline-link:hover,
+.outline-link.active {
+  color: #333;
+  transition: color 0.25s;
+}
+
+.outline-link.nested {
+  padding-left: 13px;
 }

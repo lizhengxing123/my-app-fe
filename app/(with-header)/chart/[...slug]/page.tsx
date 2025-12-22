@@ -5,6 +5,7 @@ import { getDocumentById } from "@/services/techDocumentService";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import MdAnchor from "@/components/md/md-anchor";
 
 export default function MarkdownPage({
   params,
@@ -45,9 +46,10 @@ export default function MarkdownPage({
     fetchData(); // 组件挂载时请求
   }, []);
   return (
-    <div className="w-4/5 h-full p-4">
-      {/* MarkdownRenderer 需标记为客户端组件（'use client'） */}
-      <MarkdownRenderer content={data} className="mx-auto" />
+    <div className="w-full h-full">
+      <MarkdownRenderer content={data} className="w-[calc(100%-210px)] px-12 border-box" />
+      {/* 文档锚点 */}
+      <MdAnchor />
     </div>
   );
 }

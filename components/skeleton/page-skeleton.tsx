@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PageSkeleton() {
   return (
-    <div className="flex space-x-4 justify-center pt-4">
+    <div className="flex w-full space-x-4 justify-center pt-4">
       <div className="w-3/5 space-y-6">
         <div className="flex items-center w-full space-x-3">
           <Skeleton className="h-10 w-10 flex-none rounded-full" />

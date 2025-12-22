@@ -38,25 +38,24 @@ const cardsCopy = [
         id: "card-1",
         copy: ["四神通大真人", "鸺葵道道子", "剑仙"],
         title: "娄行真人",
-        image: LX,
+        frontImage: LX1,
+        backImage: LX,
     },
     {
         id: "card-2",
         copy: [
-            "Wireframes",
-            "Prototypes",
-            "Usability Testing",
-            "Accessibility",
-            "Responsive",
+            "三神通"
         ],
         title: "奎祈真人",
-        image: LJQ,
+        frontImage: LJQ1,
+        backImage: LJQ,
     },
     {
         id: "card-3",
-        copy: ["Code", "Deployment", "Maintenance", "Hosting", "Domain"],
+        copy: ["二神通"],
         title: "后绋真人",
-        image: LW,
+        frontImage: LW1,
+        backImage: LW,
     },
 ];
 
@@ -351,7 +350,7 @@ export default function Page() {
             </section>
             {/* 分隔背景 */}
             <section className="about">
-                <h1>太阳失辉 今不复也</h1>
+                <h1>太阳光明 今不复也</h1>
             </section>
             {/* 卡片重新进入动画 */}
             <section className="services py-32 px-8" ref={servicesSection}>
@@ -373,12 +372,12 @@ export default function Page() {
                                     <Card
                                         extraClassName="flip-card-front"
                                         title={card.title}
-                                        image={card.image}
+                                        image={card.frontImage}
                                     />
                                     <Card
                                         extraClassName="flip-card-back"
                                         title={card.title}
-                                        image={card.image}
+                                        image={card.backImage}
                                         copy={card.copy}
                                     />
                                 </div>
