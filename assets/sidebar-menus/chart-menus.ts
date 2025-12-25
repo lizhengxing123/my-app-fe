@@ -1,4 +1,4 @@
-import { SquareChartGantt, ChartColumn, ChartLine } from "lucide-react";
+import { SquareChartGantt, ChartColumn, ChartLine, Diamond, Columns3 } from "lucide-react";
 
 export const chartMenus = {
   基础图表: [
@@ -60,4 +60,5 @@ export const chartMenuIconMap = {
   "SquareChartGantt": SquareChartGantt,
   "ChartColumn": ChartColumn,
   "ChartLine": ChartLine,
+  "Columns3": Columns3
 }

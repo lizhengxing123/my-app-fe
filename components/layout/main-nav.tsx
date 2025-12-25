@@ -24,7 +24,7 @@ const home: DocMenu = {
   icon: "",
   description: "",
   level: 1,
-  docId: 0,
+  docId: "0",
   sortNum: 0,
   children: [],
 };
@@ -61,7 +61,7 @@ export default function MainNav() {
                       <ListItem
                         key={component.id}
                         title={component.name}
-                        href={component.href + "?categoryId=" + menu.id}
+                        href={menu.href + "?categoryId=" + menu.id}
                       >
                         {component.description}
                       </ListItem>

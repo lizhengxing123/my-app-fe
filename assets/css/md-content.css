@@ -84,6 +84,12 @@
   /* 默认值为 auto */
   /* 更改为 page 启用强制分页 */
   --page-break-before-h2: auto;
+  /* 自定义容器 */
+  --tip-bg-color: oklch(0.93 0.03 256);
+}
+
+.dark {
+  --tip-bg-color: rgba(31, 58, 139, 0.45);
 }
 
 body {
@@ -96,8 +102,10 @@ body {
   font-family: var(--base-latin-font), var(--base-chinese-font), serif;
   font-size: var(--base-font-size);
   /* A4标准宽度 */
-  /* max-width: 21cm; */
-  background-color: white;
+  max-width: 21cm;
+  margin: 0 auto;
+  padding: 20px 0;
+  /* background-color: white; */
   /* column-count: 2;
     column-gap: 25px;
     column-width: 8cm; 
@@ -152,8 +160,9 @@ h6.md-focus:before {
 }
 
 #write {
-  counter-reset: heading-h2 heading-h3 heading-h4 heading-h5 heading-h6;
+  counter-reset: chapter;
 }
+
 #write h1,
 #write h2,
 #write h3,
@@ -169,17 +178,22 @@ h6.md-focus:before {
   column-span: all;
   font-size: var(--title-font-size);
   margin-bottom: 1rem;
+  counter-reset: section; /* 进入新章节，重置小节计数器 */
+  counter-increment: chapter; /* 章节+1 */
 }
 #write h2 {
   font-family: var(--heading-latin-font), var(--h2-chinese-font), serif;
   font-size: var(--h2-font-size);
   margin: 1.5rem 0 1rem;
+  counter-reset: subsection; /* 进入新小节，重置子小节计数器 */
+  counter-increment: section; /* 小节+1 */
 }
 #write h3 {
   font-family: var(--heading-latin-font), var(--h3-chinese-font), serif;
   font-size: var(--h3-font-size);
   line-height: var(--h3-font-size);
   margin: 1.5rem 0 1rem;
+  counter-increment: subsection; /* 子小节+1 */
 }
 #write h4 {
   font-family: var(--heading-latin-font), var(--h4-chinese-font), serif;
@@ -197,48 +211,13 @@ h6.md-focus:before {
   /* 没有写错，为了避免行距太小才这么写 */
   line-height: var(--h5-font-size);
 }
-#write h1 {
-  counter-reset: heading-h2 heading-h3 heading-h4 heading-h5 heading-h6;
-}
-#write h2 {
-  counter-reset: heading-h3 heading-h4 heading-h5 heading-h6;
-}
-#write h3 {
-  counter-reset: heading-h4 heading-h5 heading-h6;
-}
-#write h4 {
-  counter-reset: heading-h5 heading-h6;
-}
-#write h5 {
-  counter-reset: heading-h6;
-}
-#write h2:before, h2.md-focus.md-heading:before {
-  content: counter(heading-h2);
-  counter-increment: heading-h2;
+#write h2:before {
+  content: counter(section);
   margin-right: 1.2em;
 }
 
-#write h3:before, h3.md-focus.md-heading:before {
-  content: counter(heading-h2) "." counter(heading-h3);
-  counter-increment: heading-h3;
-  margin-right: 1.2em;
-}
-
-#write h4:before, h4.md-focus.md-heading:before {
-  content: counter(heading-h2) "." counter(heading-h3) "." counter(heading-h4);
-  counter-increment: heading-h4;
-  margin-right: 1.2em;
-}
-
-#write h5:before, h5.md-focus.md-heading:before {
-  content: counter(heading-h2) "." counter(heading-h3) "." counter(heading-h4) "." counter(heading-h5);
-  counter-increment: heading-h5;
-  margin-right: 1.2em;
-}
-
-#write h6:before, h6.md-focus.md-heading:before {
-  content: counter(heading-h2) "." counter(heading-h3) "." counter(heading-h4) "." counter(heading-h5) "." counter(heading-h6);
-  counter-increment: heading-h6;
+#write h3:before {
+  content: counter(section) "." counter(subsection) " ";
   margin-right: 1.2em;
 }
 
@@ -386,7 +365,7 @@ h6.md-focus:before {
   border-radius: 6px;
   padding: 0.5em 0 0.7em 1em;
   margin: 1em 0;
-  background-color: oklch(0.96 0.02 272);
+  background-color: var(--tip-bg-color);
 }
 
 #write .tip::before {

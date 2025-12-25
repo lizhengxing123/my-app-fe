@@ -37,7 +37,7 @@ export default function DocsPage() {
   }, []);
 
   return (
-    <div className="md-anchor border-box fixed top-20 right-0 w-[210px] h-full">
+    <div className="md-anchor border-box fixed top-20 right-0 w-[200px] h-full">
       <nav ref={navRef}>
         <div className="content border-l">
           <div

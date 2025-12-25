@@ -1,6 +1,8 @@
 import { Header } from "@/components/layout/header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import TransitionProvider from "@/providers/transition-provider";
+import "../globals.css";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -12,6 +14,7 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <head />
         <body>
+          <Toaster />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

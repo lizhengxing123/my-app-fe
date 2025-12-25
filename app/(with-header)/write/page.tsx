@@ -82,6 +82,10 @@ export default () => {
       toast.warning("请选择文章关联的菜单！");
       return;
     }
+    if(!selectedLoadMenu.docId) {
+      toast.warning("当前菜单还未发布文章，请先发布！");
+      return;
+    }
     const res = await getDocumentById(selectedLoadMenu.docId);
     if (res.success) {
       setLoadedDoc(res.data);
@@ -133,7 +137,6 @@ export default () => {
             <MarkdownRenderer
               className="w-full"
               content={text}
-              showAnchor={false}
             />
             <div className="fixed bottom-0 right-0 w-1/2 py-3 pr-6 border-t flex items-center justify-between space-x-4 bg-background">
               <span className="text-sm text-foreground/80 pl-3">

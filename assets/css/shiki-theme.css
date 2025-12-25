@@ -34,21 +34,21 @@ html.dark .shiki {
 }
 
 /* 新增的行 */
-.shiki.has-highlighted .line.diff.add {
+.shiki .line.diff.add {
   @apply bg-chart-2/10 relative;
 }
 
-.shiki.has-highlighted .line.diff.add::after {
+.shiki .line.diff.add::after {
   content: "+";
   @apply text-chart-2 absolute left-12 top-0;
 }
 
 /* 移除的行 */
-.shiki.has-highlighted .line.diff.remove {
+.shiki .line.diff.remove {
   @apply bg-destructive/10 relative;
 }
 
-.shiki.has-highlighted .line.diff.remove::after {
+.shiki .line.diff.remove::after {
   content: "-";
   @apply text-destructive absolute left-12 top-0;
 }

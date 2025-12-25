@@ -5,7 +5,6 @@ import { createRoot, Root } from "react-dom/client"; // React 19 导入 createRo
 import { createMarkdownIt } from "@/lib/markdown-it-plugin";
 import { componentMap } from "./md-components";
 import PageSkeleton from "../skeleton/page-skeleton";
-import MdAnchor from "./md-anchor";
 import "@/assets/css/md-content.css";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +17,6 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = React.memo(({
   className,
   content,
 }) => {
-  console.log("重新渲染了");
   const mdRef = useRef<HTMLDivElement>(null);
   const [parsedHtml, setParsedHtml] = useState("");
   const [isLoading, setIsLoading] = useState(true);

@@ -1,12 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
-
 @reference "../../app/globals.css";
 
-.page {
-    font-family: "DM Sans";
-    box-sizing: border-box;
-}
 .page h1 {
     @apply text-2xl font-medium;
 }
@@ -17,7 +10,6 @@
 
 .page nav span {
     @apply text-[0.8rem] p-3 rounded-md;
-    font-family: "DM Mono";
 }
 
 .page section {
