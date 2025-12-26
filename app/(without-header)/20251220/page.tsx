@@ -36,21 +36,18 @@ const cards = [
 const cardsCopy = [
   {
     id: "card-1",
-    copy: ["四神通大真人", "鸺葵道道子", "剑仙"],
     title: "娄行真人",
     frontImage: LX1,
     backImage: LX,
   },
   {
     id: "card-2",
-    copy: ["三神通"],
     title: "奎祈真人",
     frontImage: LJQ1,
     backImage: LJQ,
   },
   {
     id: "card-3",
-    copy: ["二神通"],
     title: "后绋真人",
     frontImage: LW1,
     backImage: LW,
@@ -78,7 +75,6 @@ export default function Page() {
       scrub: 1,
       onUpdate: (self) => {
         const progress = self.progress;
-        console.log(progress);
 
         const heroCardsContainerOpacity = gsap.utils.interpolate(
           1,
@@ -241,7 +237,7 @@ export default function Page() {
             } else if (cardProgress < 0.6) {
               const normalizedProgress = (cardProgress - 0.4) / 0.2;
               scale = gsap.utils.interpolate(
-                0.8,
+                0.75,
                 1,
                 smoothStep(normalizedProgress)
               );
@@ -332,7 +328,7 @@ export default function Page() {
       </section>
       {/* 卡片重新进入动画 */}
       <section className="services py-32 px-8" ref={servicesSection}>
-        <div className="services-header relative w-full text-center translate-y-[400%] will-change-transform">
+        <div className="services-header relative w-full text-center will-change-transform">
           <h1>大鸺葵观</h1>
         </div>
       </section>

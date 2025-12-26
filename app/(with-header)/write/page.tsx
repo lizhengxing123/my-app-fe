@@ -5,7 +5,7 @@ import { MdEditor } from "md-editor-rt";
 import "md-editor-rt/lib/style.css";
 import MarkdownRenderer from "@/components/md/md-renderer";
 import { Button } from "@/components/ui/button";
-import { BookOpenCheck, Save } from "lucide-react";
+import { BookOpenCheck, Save, ScanEye } from "lucide-react";
 import { useTheme } from "next-themes";
 import WritePageSkeleton from "@/components/skeleton/write-skeleton";
 import RelatedMenu from "@/components/write/related-menu";
@@ -19,7 +19,10 @@ import { TechDocument } from "@/types/TechDocument";
 
 export default () => {
   const DEFAULT_TITLE = "# 请输入标题";
+  // 输入的文章内容
   const [text, setText] = useState(DEFAULT_TITLE);
+  // 预览的 md 内容
+  const [preview, setPreview] = useState(DEFAULT_TITLE);
   const { theme = "light" } = useTheme();
   const [clientTheme, setClientTheme] = useState("light");
   const [isMounted, setIsMounted] = useState(false);
@@ -90,6 +93,7 @@ export default () => {
     if (res.success) {
       setLoadedDoc(res.data);
       setText(res.data.content || DEFAULT_TITLE);
+      setPreview(res.data.content || DEFAULT_TITLE);
       setLoadOpen(false);
     }
   };
@@ -136,8 +140,13 @@ export default () => {
           <div className="w-1/2 h-full pl-4 border-r h-[80vh] overflow-auto">
             <MarkdownRenderer
               className="w-full"
-              content={text}
+              content={preview}
             />
+            <div className="fixed top-1/2 left-1/2 transform --translate-y-1/2 -translate-y-1/2">
+              <Button onClick={() => setPreview(text)} className="cursor-pointer">
+                <ScanEye />
+              </Button>
+            </div>
             <div className="fixed bottom-0 right-0 w-1/2 py-3 pr-6 border-t flex items-center justify-between space-x-4 bg-background">
               <span className="text-sm text-foreground/80 pl-3">
                 {loadedDoc && selectedLoadMenu
