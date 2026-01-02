@@ -1,0 +1,101 @@
+@reference "../../app/globals.css";
+
+.page {
+    @apply text-foreground;
+}
+
+h1,
+h2 {
+    @apply leading-[1.1] font-medium;
+}
+
+h1 {
+    @apply text-[4rem] tracking-[-0.1rem];
+}
+
+h2 {
+    @apply text-[2.5rem] tracking-[-0.075rem];
+}
+
+p {
+    @apply text-[1.125rem] font-medium;
+}
+
+img {
+    @apply w-full h-full object-cover;
+}
+
+.hero,
+.outro {
+    @apply relative w-full h-svh p-8 flex items-center justify-center bg-foreground;
+}
+
+.hero h1,
+.outro h1 {
+    @apply w-[60%] text-center text-background;
+}
+
+.spotlight {
+    @apply relative w-full h-full p-8 flex flex-col gap-40;
+}
+
+.spotlight .row {
+    @apply flex justify-center gap-8;
+}
+
+.spotlight .row .col {
+    @apply flex-1 flex flex-col justify-center;
+}
+
+.spotlight .row:first-child .img {
+    @apply w-1/2;
+}
+
+.spotlight .card {
+    @apply w-3/4 mx-auto p-8 bg-muted rounded-2xl flex flex-col gap-4;
+}
+
+.spotlight .svg-path {
+    @apply absolute top-[20svh] left-[50%] translate-x-[-50%] w-[90%] h-full z-[-1];
+}
+
+@media (max-width: 1000px) {
+    h1,
+    h2 {
+        @apply tracking-[0];
+    }
+
+    h1 {
+        @apply text-[2rem];
+    }
+
+    h2 {
+        @apply text-[1.5rem];
+    }
+
+    .hero h1,
+    .outro h1 {
+        @apply w-full;
+    }
+
+    .spotlight {
+        @apply gap-20;
+    }
+
+    .spotlight .row {
+        @apply flex-col;
+    }
+
+    .spotlight .row:first-child .img,
+    .spotlight .row:last-child .img {
+        @apply w-full;
+    }
+
+    .spotlight .card {
+        @apply w-full;
+    }
+
+    .spotlight .svg-path {
+        @apply top-[10svh] w-[275%];
+    }
+}

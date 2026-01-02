@@ -310,14 +310,14 @@ export default function Page() {
       </nav>
       {/* 卡片 */}
       <section className="hero bg-muted text-foreground">
-        <div className="hero-cards absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35%] flex justify-center gap-4">
+        <div className="hero-cards absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35%] max-md:w-full flex justify-center gap-4">
           {cards.map((card) => (
             <Card
               key={card.id}
               id={card.id}
               title={card.title}
               image={card.image}
-              extraClassName="hero-card relative aspect-[5/7] p-3 rounded-lg flex flex-col justify-between"
+              extraClassName="hero-card relative aspect-[5/7] p-3 flex flex-col justify-between"
             />
           ))}
         </div>
@@ -334,7 +334,7 @@ export default function Page() {
       </section>
       {/* 卡片容器 */}
       <section className="cards">
-        <div className="cards-container w-[60%] h-full flex justify-center items-center gap-16">
+        <div className="cards-container w-[60%] max-md:w-full h-full flex justify-center items-center gap-16 max-md:gap-4">
           {cardsCopy.map((card) => (
             <div
               className="card relative flex-1 aspect-[5/7] perspective-[1000px]"
@@ -383,7 +383,7 @@ function Card({
       <Image
         src={image}
         alt={title}
-        className="w-full h-full object-cover rounded-lg"
+        className="w-full h-full object-cover"
       />
     </div>
   );
