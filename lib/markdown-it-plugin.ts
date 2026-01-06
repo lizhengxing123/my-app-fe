@@ -1,6 +1,5 @@
 import MarkdownIt from "markdown-it";
 import markdownItAnchor from "markdown-it-anchor";
-import markdownItTocDoneRight from "markdown-it-toc-done-right";
 import markdownItContainer from "markdown-it-container";
 
 // 自定义插件：解析 【【【组件名】】】 语法
@@ -164,6 +163,26 @@ const codeBlockPlugin = (md: MarkdownIt) => {
   };
 };
 
+// 将所有链接添加 target="_blank" 属性的插件
+const blankATagPlugin = (md: MarkdownIt) => {
+  // 记住原始的链接渲染器
+  const defaultLinkRenderer =
+    md.renderer.rules.link_open ||
+    function (tokens, idx, options, env, self) {
+      return self.renderToken(tokens, idx, options);
+    };
+
+  // 重写链接渲染器
+  md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+    // 添加 target="_blank" 属性
+    tokens[idx].attrSet("target", "_blank");
+
+    // 调用原始渲染器
+    return defaultLinkRenderer(tokens, idx, options, env, self);
+  };
+}
+
+
 // 初始化 markdown-it 实例，加载自定义插件
 export const createMarkdownIt = () => {
   return MarkdownIt({
@@ -173,6 +192,7 @@ export const createMarkdownIt = () => {
   })
     .use(componentPlugin)
     .use(codeBlockPlugin) // 注册代码块插件
+    .use(blankATagPlugin) // 注册链接插件
     .use(markdownItAnchor, {
       slugify: (str: string) => str,
       permalink: true,
