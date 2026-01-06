@@ -1,0 +1,101 @@
+@reference "../../app/globals.css";
+
+.page {
+  @apply bg-foreground text-background;
+}
+
+.hero-bg img {
+  @apply w-full h-full object-cover;
+}
+
+h1 {
+  @apply text-[2rem] font-medium;
+  font-family: 'LK_Ternima';
+}
+
+a,
+p {
+  @apply text-[0.85rem];
+}
+
+.placeholder-counter {
+  @apply fixed top-[50svh] left-[2rem] translate-y-[-50%] scale-[0.25] origin-bottom-left will-change-transform z-[2];
+}
+
+.placeholder-counter h1 {
+  font-size: clamp(2.5rem, 25vw, 25rem);
+}
+
+nav {
+  @apply fixed w-full p-8 flex justify-between z-[2];
+}
+
+.nav-links {
+  @apply flex gap-8;
+}
+
+.hero {
+  @apply relative w-full h-svh overflow-hidden;
+}
+
+.hero-bg {
+  @apply absolute top-0 left-0 w-full h-full;
+  clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+  will-change: clip-path;
+}
+
+.hero-bg img {
+  @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] scale-[2] will-change-transform;
+}
+
+.hero-title {
+  @apply absolute bottom-16 w-full p-8;
+}
+
+.hero-title h1 {
+  font-size: clamp(5rem, 18.5vw, 20rem);
+}
+
+.hero-footer {
+  @apply absolute bottom-8 w-full p-8 flex justify-between;
+}
+
+.progress-bar {
+  @apply absolute left-8 bottom-24 w-[calc(100%-4rem)] h-[1.5px] bg-background/30 origin-left scale-x-0 will-change-transform overflow-hidden;
+}
+.progress-bar .progress {
+  @apply absolute w-full h-full bg-background origin-left scale-x-0 will-change-transform;
+}
+
+.word,
+.char,
+.digit {
+  @apply relative will-change-transform;
+}
+
+.placeholder-counter h1 .digit {
+    @apply translate-x-[0%];
+}
+
+.hero-title h1 .char {
+  @apply translate-x-[100%];
+}
+
+nav a .word,
+.hero-footer p .word {
+  @apply translate-y-[100%];
+}
+
+@media (max-width: 1000px) {
+  .nav-links {
+    @apply flex-col items-end gap-2;
+  }
+
+  .hero-title {
+    @apply absolute bottom-[unset] top-[50svh] translate-y-[-50%] p-0 text-center;
+  }
+
+  .hero-title h1 {
+    @apply text-[4rem];
+  }
+}
