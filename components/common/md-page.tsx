@@ -13,6 +13,7 @@ interface MarkdownPageProps {
 
 export default function MarkdownPage({ className }: MarkdownPageProps) {
   const [data, setData] = useState<string>("");
+  const [updateTime, setUpdateTime] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const searchParams = useSearchParams();
@@ -31,6 +32,7 @@ export default function MarkdownPage({ className }: MarkdownPageProps) {
       const res = await getDocumentById(docId);
       if (res.success) {
         setData(res.data.content);
+        setUpdateTime(res.data.updateTime);
       }
     } catch (err) {
       setError("请求失败，请重试");
@@ -47,6 +49,9 @@ useEffect(() => {
     <div className="w-full h-full">
       <div className="w-[calc(100%-200px)]">
         <MarkdownRenderer content={data} className={className} />
+        <p className="text-sm text-foreground/60 pt-24 pb-12 pr-4 text-right">
+          最后更新时间：{ updateTime }
+        </p>
       </div>
       {/* 文档锚点 */}
       <MdAnchor />

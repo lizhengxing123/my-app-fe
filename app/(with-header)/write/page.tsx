@@ -142,7 +142,7 @@ export default () => {
               className="w-full"
               content={preview}
             />
-            <div className="fixed top-1/2 left-1/2 transform --translate-y-1/2 -translate-y-1/2">
+            <div className="fixed top-[90px] left-1/2 transform -translate-y-1/2">
               <Button onClick={() => setPreview(text)} className="cursor-pointer">
                 <ScanEye />
               </Button>

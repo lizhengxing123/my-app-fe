@@ -115,6 +115,7 @@ body {
 #write p {
   text-align: left;
   line-height: var(--base-line-height);
+  margin: 4px 0;
 }
 #write a {
   color: var(--link-color-light);
