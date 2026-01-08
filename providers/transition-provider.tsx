@@ -10,9 +10,6 @@ export default function TransitionProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { stage, isReady } = useTransitionState();
-  console.log("stage isReady", stage, isReady);
-
   const gridRef = useRef<HTMLDivElement>(null);
   const blocksRef = useRef<HTMLDivElement[]>([]);
 

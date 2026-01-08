@@ -91,9 +91,10 @@ export default () => {
     }
     const res = await getDocumentById(selectedLoadMenu.docId);
     if (res.success) {
+      const content = res.data.content || DEFAULT_TITLE;
       setLoadedDoc(res.data);
-      setText(res.data.content || DEFAULT_TITLE);
-      setPreview(res.data.content || DEFAULT_TITLE);
+      setText(content);
+      setPreview(content);
       setLoadOpen(false);
     }
   };
@@ -139,7 +140,7 @@ export default () => {
           />
           <div className="w-1/2 h-full pl-4 border-r h-[80vh] overflow-auto">
             <MarkdownRenderer
-              className="w-full"
+              className="w-full pb-12"
               content={preview}
             />
             <div className="fixed top-[90px] left-1/2 transform -translate-y-1/2">

@@ -27,8 +27,6 @@ import { useEffect, useState } from "react";
 import { getMenuTree } from "@/services/docMenuService";
 import { DocMenu } from "@/types/DocMenu";
 import { cn } from "@/lib/utils";
-import { toast } from "sonner";
-import { Result } from "@/types/Result";
 
 export default function RelatedMenu({
   open,

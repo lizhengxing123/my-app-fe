@@ -13,7 +13,7 @@ import "@/assets/css/20260106.css";
 
 export default function Page() {
   const counterContainerRef = useRef<HTMLDivElement>(null);
-  const CounterRef = useRef<HTMLHeadingElement>(null);
+  const counterRef = useRef<HTMLHeadingElement>(null);
 
   const init = () => {
     gsap.registerPlugin(SplitText, CustomEase);
@@ -32,9 +32,9 @@ export default function Page() {
       });
     };
 
-    const titleSplit = splitText(".hero-title h1", "chars", "char");
-    const navSplit = splitText("nav a", "words", "word");
-    const footerSplit = splitText(".hero-footer p", "words", "word");
+    splitText(".hero-title h1", "chars", "char");
+    splitText("nav a", "words", "word");
+    splitText(".hero-footer p", "words", "word");
 
     const counter = { value: 0 };
 
@@ -45,10 +45,10 @@ export default function Page() {
       duration: 3,
       ease: "power3.out",
       onUpdate: () => {
-        CounterRef.current!.textContent = counter.value.toFixed(0);
+        counterRef.current!.textContent = counter.value.toFixed(0);
       },
       onComplete: () => {
-        const counterSplit = splitText(CounterRef.current!, "chars", "digit");
+        const counterSplit = splitText(counterRef.current!, "chars", "digit");
         gsap.to(counterSplit.chars, {
           translateX: "-100%",
           duration: 0.75,
@@ -162,7 +162,7 @@ export default function Page() {
         ease: "power4.out",
         stagger: 0.075,
       },
-      7.5
+      "<"
     );
   };
 
@@ -173,7 +173,7 @@ export default function Page() {
   return (
     <main className="page">
       <div className="placeholder-counter" ref={counterContainerRef}>
-        <h1 ref={CounterRef}>0</h1>
+        <h1 ref={counterRef}>0</h1>
       </div>
 
       <nav>

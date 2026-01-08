@@ -194,6 +194,7 @@ export const createMarkdownIt = () => {
     .use(codeBlockPlugin) // 注册代码块插件
     .use(blankATagPlugin) // 注册链接插件
     .use(markdownItAnchor, {
+      level: [2, 3],
       slugify: (str: string) => str,
       permalink: true,
       permalinkSymbol: "§",
