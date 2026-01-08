@@ -1,4 +1,4 @@
-import { SquareChartGantt, ChartColumn, ChartLine, Columns3, LineSquiggle, SquareStop } from "lucide-react";
+import { SquareChartGantt, ChartColumn, ChartLine, Columns3, LineSquiggle, SquareStop, SquareEqual } from "lucide-react";
 
 
 export const chartMenuIconMap = {
@@ -8,4 +8,5 @@ export const chartMenuIconMap = {
   "Columns3": Columns3,
   "LineSquiggle": LineSquiggle,
   "SquareStop": SquareStop,
+  "SquareEqual": SquareEqual,
 }

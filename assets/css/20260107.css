@@ -1,0 +1,132 @@
+@reference "../../app/globals.css";
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+h1 {
+  @apply uppercase text-[6rem] font-[600] leading-none;
+}
+
+p {
+  @apply uppercase text-[13px] font-[500];
+}
+
+.placeholder,
+.tags-overlay,
+.split-overlay {
+  @apply fixed w-full h-svh;
+}
+
+.placeholder,
+.split-overlay {
+  @apply bg-foreground text-background;
+}
+
+.placeholder,
+.tags-overlay {
+  @apply z-[2];
+}
+
+.split-overlay {
+  @apply z-[1];
+}
+
+.intro-title {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center;
+}
+
+.outro-title {
+  @apply absolute top-1/2 left-[calc(50%+10rem)] -translate-x-1/2 -translate-y-1/2;
+}
+
+.tag {
+  @apply absolute w-max text-background/50 overflow-hidden;
+}
+
+.tag-1 {
+  @apply top-[15%] left-[15%];
+}
+
+.tag-2 {
+  @apply bottom-[15%] left-[25%];
+}
+
+.tag-3 {
+  @apply bottom-[30%] right-[15%];
+}
+
+.main-container {
+  @apply relative w-full h-full min-h-svh flex flex-col justify-between z-[2];
+  clip-path: polygon(0 48%, 0 48%, 0 52%, 0 52%);
+}
+
+.main-container .hero-img {
+  @apply absolute w-full h-full;
+}
+
+nav,
+footer {
+  @apply relative w-full p-8 flex justify-between items-center text-background z-[2];
+}
+
+#logo {
+  @apply text-[20px] font-[600];
+}
+
+.card {
+  @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background text-foreground p-8 flex justify-between items-center w-[70%] h-[80%];
+  clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+}
+
+.card h1 {
+  @apply text-5xl w-full text-center text-foreground;
+}
+
+.intro-title .char,
+.outro-title .char,
+.card .char {
+  @apply relative inline-block overflow-hidden;
+}
+
+.intro-title .char,
+.outro-title .char {
+  @apply mt-[0.7rem];
+}
+
+.card .char span {
+  @apply relative inline-block translate-y-full will-change-transform;
+}
+
+.intro-title .char span,
+.outro-title .char span,
+.tag .word {
+  @apply relative inline-block -translate-y-full will-change-transform;
+}
+
+.intro-title .first-char {
+  @apply origin-top-left;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    @apply text-[2.5rem];
+  }
+
+  .outro-title {
+    @apply left-[calc(50%+4rem)];
+  }
+
+  .card {
+    @apply w-3/4;
+  }
+
+  .card h1 {
+    @apply text-[2.5rem];
+  }
+
+  .intro-title .char,
+  .outro-title .char {
+    @apply mt-[0.5rem];
+  }
+}
