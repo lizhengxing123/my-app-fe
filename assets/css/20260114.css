@@ -1,0 +1,194 @@
+@reference "../../app/globals.css";
+
+::-webkit-scrollbar {
+  @apply hidden;
+}
+
+.page {
+  @apply bg-foreground text-background;
+}
+
+img,
+svg {
+  @apply w-full h-full object-cover;
+}
+
+h1,
+h2 {
+  @apply font-normal leading-[1.1];
+}
+
+h1 {
+  font-size: clamp(3rem, 4vw, 5rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 2.25vw, 3rem);
+}
+
+p {
+  @apply font-normal leading-[1.4] text-[1.125rem];
+}
+
+section {
+  @apply relative w-full h-svh bg-foreground overflow-hidden;
+}
+
+.outro {
+  @apply flex items-center justify-center;
+}
+
+.hero-img {
+  @apply absolute bottom-0 w-full h-[200svh] will-change-transform;
+  --overlay-opacity: 0.35;
+}
+
+.hero-img::after {
+  @apply absolute left-0 top-0 w-full h-full bg-foreground opacity-(--overlay-opacity);
+  content: "";
+  will-change: opacity;
+}
+
+.hero-img img {
+  will-change: filter;
+}
+
+.hero-mask {
+  @apply fixed left-0 top-0 w-full h-svh bg-foreground will-change-transform pointer-events-none;
+  mask: linear-gradient(var(--color-background), var(--color-background)),
+    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 1030 701'%3E%3Cpath fill='currentcolor' d='M347 0v21h60V0h43v21h44v21h121V21h31V0h117v21h59V0h107v21h59v62h21v42h21v36h-21v38h-21v96h21v14h21v46h-21v21h21v38h-21v50h21v79h-21v74h21v24h-21v20H886v-20h-41v20h-40v-20h-21v20h-42v20h-41v20H559v-20h-23v-20h-50v-20h-41v20H330v-20h-21v20h-52v20h-24v20h-47v-20h-21v20h-21v-20h-21v-20H40v-41H20v-62h20v-46H20v-58h20v-20H20v-20H0V240h20v-53H0v-62h20V63h20V42h41v21h83V42h21V21h85V0z'/%3E%3C/svg%3E")
+      center/50% no-repeat;
+  mask-composite: subtract;
+}
+
+.hero-grid-overlay {
+  @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[55%] text-background;
+  will-change: opacity;
+}
+
+.hero-grid-overlay svg {
+  @apply opacity-25;
+}
+
+.marker {
+  @apply absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-4;
+  will-change: opacity;
+}
+
+.marker-1 {
+  @apply top-[50svh] left-[50vw];
+}
+
+.marker-2 {
+  @apply top-[35svh] left-[60vw];
+}
+
+.marker-label {
+  @apply text-[0.7rem] font-medium px-2 py-1 rounded-sm uppercase;
+}
+
+.marker-icon {
+  @apply relative w-2 h-2 rounded-4xl;
+}
+
+.marker-icon::after {
+  @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full;
+  content: "";
+  animation: my-pulse 1.5s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+}
+
+.marker-2 .marker-icon::after {
+  @apply w-20 h-20;
+}
+
+@keyframes my-pulse {
+  0% {
+    transform: scale(0.25);
+    opacity: 1;
+  }
+  80%,
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.marker-1 .marker-icon,
+.marker-1 .marker-icon::after,
+.marker-1 .marker-label {
+  @apply bg-amber-500 text-background;
+}
+
+.marker-2 .marker-icon,
+.marker-2 .marker-icon::after,
+.marker-2 .marker-label {
+  @apply bg-amber-300 text-foreground;
+}
+
+.hero-content {
+  @apply absolute left-0 top-0 w-full h-[400svh] flex flex-col will-change-transform;
+}
+
+.hero-content-block {
+  @apply w-full h-svh p-16 flex;
+}
+
+.hero-content-block:nth-child(1) {
+  @apply items-end;
+}
+
+.hero-content-block:nth-child(2),
+.hero-content-block:nth-child(4) {
+  @apply justify-end items-center;
+}
+
+.hero-content-block:nth-child(3) {
+  @apply items-center;
+}
+
+.hero-content-copy {
+  @apply w-[35%] flex flex-col gap-1;
+}
+
+.hero-scroll-progress-bar {
+  @apply absolute right-8 top-1/2 -translate-y-1/2 w-[0.1rem] h-40 bg-amber-300/20;
+  --scroll-progress: 0;
+}
+
+.hero-scroll-progress-bar::after {
+  @apply absolute left-0 top-0 w-full h-full bg-amber-300 origin-top scale-y-(--scroll-progress) will-change-transform;
+  content: "";
+}
+
+@media (max-width: 800px) {
+  .hero-mask {
+    mask: linear-gradient(var(--color-background), var(--color-background)),
+      url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 1030 701'%3E%3Cpath fill='currentcolor' d='M347 0v21h60V0h43v21h44v21h121V21h31V0h117v21h59V0h107v21h59v62h21v42h21v36h-21v38h-21v96h21v14h21v46h-21v21h21v38h-21v50h21v79h-21v74h21v24h-21v20H886v-20h-41v20h-40v-20h-21v20h-42v20h-41v20H559v-20h-23v-20h-50v-20h-41v20H330v-20h-21v20h-52v20h-24v20h-47v-20h-21v20h-21v-20h-21v-20H40v-41H20v-62h20v-46H20v-58h20v-20H20v-20H0V240h20v-53H0v-62h20V63h20V42h41v21h83V42h21V21h85V0z'/%3E%3C/svg%3E")
+        center/75% no-repeat;
+    mask-composite: subtract;
+  }
+
+  .hero-grid-overlay {
+    @apply w-full;
+  }
+
+  .marker-1 {
+    @apply top-[52.5svh] left-[50vw];
+  }
+
+  .marker-2 {
+    @apply top-[45svh] left-[70vw];
+  }
+
+  .hero-content-block {
+    @apply p-3;
+  }
+
+  .hero-content-copy {
+    @apply w-3/4;
+  }
+
+  .hero-scroll-progress-bar {
+    @apply right-4;
+  }
+}
