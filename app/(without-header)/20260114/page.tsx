@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect, use } from "react";
+import { useRef } from "react";
 
 import { ReactLenis } from "lenis/react";
 import gsap from "gsap";

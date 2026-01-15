@@ -1,0 +1,64 @@
+@reference "../../app/globals.css";
+
+::-webkit-scrollbar {
+  @apply hidden;
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+h1 {
+  @apply font-normal leading-[1.1];
+  font-size: clamp(3rem, 4vw, 5rem);
+}
+
+nav {
+    @apply fixed left-0 top-0 w-full p-6 z-2;
+}
+
+nav a {
+    @apply uppercase text-2xl font-bold  py-1 px-2 bg-foreground text-background rounded-[0.5rem];
+}
+
+section {
+    @apply relative w-full h-svh p-6 flex items-center justify-center overflow-hidden box-border;
+}
+
+.hero {
+    @apply bg-gray-50;
+}
+
+.about {
+    @apply bg-gray-100;
+}
+
+.about h1 {
+    @apply w-1/2 text-center;
+}
+
+.lottie-container {
+    @apply fixed top-0 left-0 w-full p-6 flex justify-end items-end;
+}
+
+.lottie-container .lottie {
+    @apply w-40 h-40 translate-x-8 will-change-transform z-1;
+}
+
+.lottie-container .hero-img {
+    @apply w-[65%] aspect-16/9 rounded-xl origin-top-right will-change-transform overflow-hidden;
+}
+
+@media (max-width: 1000px) {
+    .about h1 {
+        @apply w-full;
+    }
+
+    .lottie-container .lottie {
+        @apply w-16 h-16 translate-x-4; 
+    }
+
+    .lottie-container .hero-img {
+        @apply w-full;
+    }
+}
