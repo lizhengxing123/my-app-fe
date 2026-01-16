@@ -27,11 +27,11 @@ export default function Page() {
   useGSAP(
     () => {
       const heroImg = heroImgRef.current!;
-      const heroImgElement = heroImgElementRef.current;
-      const heroMask = heroMaskRef.current;
-      const heroGridOverlay = heroGridOverlayRef.current;
-      const mark1 = mark1Ref.current;
-      const mark2 = mark2Ref.current;
+      const heroImgElement = heroImgElementRef.current!;
+      const heroMask = heroMaskRef.current!;
+      const heroGridOverlay = heroGridOverlayRef.current!;
+      const mark1 = mark1Ref.current!;
+      const mark2 = mark2Ref.current!;
       const heroContent = heroContentRef.current!;
       const progressBar = progressBarRef.current!;
 
