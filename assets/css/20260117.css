@@ -1,0 +1,78 @@
+@reference "../../app/globals.css";
+
+.page {
+    @apply bg-foreground text-background overflow-x-hidden;
+}
+
+img {
+    @apply w-full h-full object-cover;
+}
+
+h1 {
+    @apply uppercase text-8xl font-bold tracking-[-0.2rem] leading-[0.8];
+}
+
+p {
+    @apply text-xl font-medium leading-[0.8];
+}
+
+section {
+    @apply relative w-full h-svh bg-[#111117] text-center overflow-hidden;
+}
+
+.hero-img-container,
+.hero-img-container img,
+.fade-overlay {
+    @apply absolute top-0 left-0 w-full h-full;
+}
+
+.hero-img-logo img {
+    @apply absolute top-[20%] left-1/2 -translate-x-1/2 w-[250px] h-auto object-contain;
+}
+
+.hero-img-copy {
+    @apply absolute bottom-[20%] left-1/2 -translate-x-1/2 will-change-[opacity];
+}
+
+.hero-img-copy p {
+    @apply text-[0.65rem];
+}
+
+.fade-overlay {
+    @apply bg-background will-change-[opacity];
+}
+
+.overlay {
+    @apply absolute top-0 left-0 w-full h-[200%] origin-[center_15%] z-1;
+}
+
+.logo-container {
+    @apply fixed top-[25%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[150px] z-2;
+}
+
+.overlay-copy {
+    @apply absolute bottom-[25%] left-1/2 -translate-x-1/2 z-2;
+}
+
+.overlay-copy h1 {
+    @apply bg-clip-text text-transparent origin-[center_0%];
+    -webkit-text-fill-color: transparent;
+}
+
+.outro {
+    @apply flex items-center justify-center;
+}
+
+@media (max-width: 900px) {
+    h1 {
+        @apply text-[2.5rem] tracking-normal;
+    }
+
+    p {
+        @apply text-[1rem];
+    }
+
+    .overlay-copy {
+        @apply w-full;
+    }
+}
