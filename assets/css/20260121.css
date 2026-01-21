@@ -1,0 +1,68 @@
+@reference "../../app/globals.css";
+
+img {
+    @apply w-full h-full object-cover;
+}
+
+h1,h2 {
+    @apply uppercase font-medium leading-[0.9];
+}
+
+h1 {
+    font-size: clamp(4rem, 7.5vw, 10rem);
+}
+
+h2 {
+    font-size: clamp(2.5rem, 4.5vw, 5rem);
+}
+
+p {
+    @apply text-[1.125rem] font-normal;
+}
+
+.hero {
+    @apply relative h-[200vh] w-full text-amber-300 overflow-hidden;
+}
+
+.hero-img {
+    @apply absolute top-0 left-0 h-full w-full;
+}
+
+.hero-header {
+    @apply absolute left-0 top-0 w-full h-svh flex flex-col items-center justify-center gap-2;
+}
+
+.hero-header p {
+    @apply w-3/4 text-center;
+}
+
+.hero-canvas {
+    @apply absolute bottom-0 left-0 h-full w-full pointer-events-none;
+}
+
+.hero-content {
+    @apply absolute left-0 bottom-0 w-full h-[125svh] flex items-center justify-center text-center;
+}
+
+.hero-content h2 {
+    @apply w-3/4 text-foreground;
+}
+
+.hero-content h2 .word {
+    @apply opacity-0;
+}
+
+.about {
+    @apply relative h-svh w-full flex items-center justify-center bg-foreground text-background text-center;
+}
+
+.about p {
+    @apply w-2/5;
+}
+
+@media (max-width: 1000px) {
+    .hero-content h2,
+    .about p {
+        @apply w-[calc(100%-4rem)];
+    }
+}
