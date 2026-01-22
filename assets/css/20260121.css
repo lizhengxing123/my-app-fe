@@ -21,7 +21,7 @@ p {
 }
 
 .hero {
-    @apply relative h-[200vh] w-full text-amber-300 overflow-hidden;
+    @apply relative h-[175vh] w-full text-amber-300 overflow-hidden;
 }
 
 .hero-img {

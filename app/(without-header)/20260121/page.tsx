@@ -24,7 +24,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 const CONFIG = {
   color: "#ebf5df",
   spread: 0.5,
-  speed: 2,
+  speed: 1.5,
 };
 
 const hexToRgb = (hex: string) => {
@@ -47,30 +47,38 @@ export default function Page() {
   useLenis(() => ScrollTrigger.update());
 
   const scrollProgressRef = useRef<number>(0);
+
   useLenis(({ scroll }) => {
     const heroHeight = heroRef.current?.offsetHeight || 0;
     const windowHeight = window.innerHeight;
-    const maxScroll = heroHeight - windowHeight;
+    const maxScroll = Math.max(heroHeight - windowHeight, 1); // ✅ 修复除以0
     scrollProgressRef.current = Math.min(
       (scroll / maxScroll) * CONFIG.speed,
       1.1
     );
   });
 
+  // ✅ 用于存储 animation ID，避免组件卸载后继续渲染
+  const animationIdRef = useRef<number | null>(null);
+  // ✅ 用于存储 renderer，方便卸载时 dispose
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+
   const init = () => {
     const heroCanvas = heroCanvasRef.current;
     const hero = heroRef.current;
-    const heroH2 = heroH2Ref.current;
 
-    if (!heroCanvas || !hero || !heroH2) return; // 提前退出
+    if (!heroCanvas || !hero) return;
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
     const renderer = new THREE.WebGLRenderer({
       canvas: heroCanvas,
       alpha: true,
       antialias: false,
     });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    rendererRef.current = renderer; // ✅ 保存 renderer 引用
 
     const rgb = hexToRgb(CONFIG.color);
     const geometry = new THREE.PlaneGeometry(2, 2);
@@ -91,33 +99,50 @@ export default function Page() {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    function animation() {
+    const resize = () => {
+      const width = hero.offsetWidth;
+      const height = hero.offsetHeight;
+      renderer.setSize(width, height);
+      material.uniforms.uResolution.value.set(width, height);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    const animation = () => {
       material.uniforms.uProgress.value = scrollProgressRef.current;
       renderer.render(scene, camera);
-      requestAnimationFrame(animation);
-    }
+      animationIdRef.current = requestAnimationFrame(animation);
+    };
 
     animation();
 
-    function resize() {
-      const width = hero!.offsetWidth;
-      const height = hero!.offsetHeight;
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      material.uniforms.uResolution.value.set(
-        hero!.offsetWidth,
-        hero!.offsetHeight
-      );
-    }
-    resize();
-    window.addEventListener("resize", () => {
-      resize();
-    });
+    // ✅ 组件卸载时清理
+    return () => {
+      window.removeEventListener("resize", resize);
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+    };
   };
+
+  // ✅ 处理初始化与清理
+  useEffect(() => {
+    const cleanup = init();
+    return () => {
+      if (cleanup) cleanup();
+    };
+  }, []);
 
   useGSAP(
     () => {
-      const split = new SplitText(heroH2Ref.current!, {
+      const heroH2 = heroH2Ref.current;
+      if (!heroH2) return;
+
+      const split = new SplitText(heroH2, {
         type: "words",
         wordClass: "word",
       });
@@ -125,7 +150,7 @@ export default function Page() {
 
       gsap.set(words, { opacity: 0 });
 
-      ScrollTrigger.create({
+      const trigger = ScrollTrigger.create({
         trigger: ".hero-content",
         start: "top 25%",
         end: "bottom 100%",
@@ -141,8 +166,7 @@ export default function Page() {
             if (progress >= nextWordProgress) {
               opacity = 1;
             } else if (progress >= wordProgress) {
-              opacity =
-                (progress - wordProgress) / (nextWordProgress - wordProgress);
+              opacity = (progress - wordProgress) / (nextWordProgress - wordProgress);
             }
 
             gsap.to(word, {
@@ -153,13 +177,15 @@ export default function Page() {
           });
         },
       });
+
+      // ✅ 清理 ScrollTrigger
+      return () => {
+        trigger.kill();
+        split.revert();
+      };
     },
     { scope: containerRef }
   );
-
-  useEffect(() => {
-    init();
-  }, []);
 
   return (
     <>
