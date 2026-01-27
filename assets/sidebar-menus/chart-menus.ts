@@ -9,7 +9,8 @@ import {
   Dice4,
   GalleryHorizontalEnd,
   SquareDashedKanban,
-  GalleryThumbnails
+  GalleryThumbnails,
+  Container
 } from "lucide-react";
 
 export const chartMenuIconMap = {
@@ -24,4 +25,5 @@ export const chartMenuIconMap = {
   GalleryHorizontalEnd: GalleryHorizontalEnd,
   SquareDashedKanban: SquareDashedKanban,
   GalleryThumbnails: GalleryThumbnails,
+  Container: Container,
 };
