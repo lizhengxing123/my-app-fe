@@ -1,0 +1,66 @@
+@reference "../../app/globals.css";
+
+img {
+    @apply w-full h-full object-cover;
+}
+
+h1 {
+    @apply uppercase font-normal leading-none;
+    font-size: clamp(3rem, 5vw, 7rem);
+}
+
+p {
+    @apply text-[1.5rem] font-medium leading-[1.25];
+}
+
+section {
+    @apply relative h-svh w-full p-8 overflow-hidden;
+}
+
+.intro, .outro {
+    @apply flex items-center justify-center;
+}
+
+.spotlight {
+    @apply border-y;
+}
+
+.project-desc {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-px bg-border z-[-1];
+}
+
+.project-desc p {
+    @apply text-[#333] text-lg font-normal;
+}
+
+.project-desc p span:first-child {
+    @apply absolute top-1 right-[70%];
+}
+
+.project-desc p span:last-child {
+    @apply absolute top-1 left-[70%];
+}
+
+.project-images {
+    @apply absolute top-0 left-1/2 -translate-x-1/2 w-[35%] py-[50svh] flex flex-col gap-2 z-[-1];
+}
+
+.project-img {
+    @apply w-full aspect-16/9 opacity-50 overflow-hidden;
+    transition: all 0.3s ease;
+}
+
+.project-names {
+    @apply absolute right-8 bottom-8 flex flex-col items-end;
+}
+
+.project-names p {
+    @apply text-[#999];
+    transition: color 0.3s ease;
+}
+
+.project-index h1,
+.project-images,
+.project-names p {
+    @apply will-change-transform;
+}
