@@ -30,7 +30,11 @@ interface SidebarLayoutProps {
   allItemsTitle: string; // 所有项的标题，如 "所有动画" 或 "所有图表"
 }
 
-export default function SidebarLayout({ children, basePath, allItemsTitle }: SidebarLayoutProps) {
+export default function SidebarLayout({
+  children,
+  basePath,
+  allItemsTitle,
+}: SidebarLayoutProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId") || "";
@@ -111,27 +115,35 @@ export default function SidebarLayout({ children, basePath, allItemsTitle }: Sid
                               isActive={isPathActive(item.href)}
                               asChild
                             >
-                              <a
-                                href={
-                                  item.href +
-                                  `?categoryId=${categoryId}&docId=${item.docId}`
-                                }
-                              >
-                                {/* @ts-ignore */}
-                                <item.icon />
-                                <span>{item.name}</span>
-                              </a>
+                              {item.docId ? (
+                                <a
+                                  href={
+                                    item.href +
+                                    `?categoryId=${categoryId}&docId=${item.docId}`
+                                  }
+                                >
+                                  {/* @ts-ignore */}
+                                  <item.icon />
+                                  <span>{item.name}</span>
+                                </a>
+                              ) : (
+                                <span>
+                                  {/* @ts-ignore */}
+                                  <item.icon />
+                                  {item.name}
+                                </span>
+                              )}
                             </SidebarMenuButton>
                             {item.children.length > 0 && (
                               <SidebarMenuBadge>
-                                <Badge>{item.children.length}</Badge>
+                                <Badge variant="secondary">{item.children.length}</Badge>
                               </SidebarMenuBadge>
                             )}
                             {item.children.length > 0 && (
                               <SidebarMenuSub>
                                 {item.children.map((subItem) => (
                                   <SidebarMenuSubItem key={subItem.id}>
-                                    <SidebarMenuSubButton asChild>
+                                    <SidebarMenuSubButton asChild isActive={isPathActive(subItem.href)}>
                                       <a
                                         href={
                                           subItem.href +
