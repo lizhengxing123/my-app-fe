@@ -1,0 +1,106 @@
+@reference "../../app/globals.css";
+
+h1 {
+    @apply text-[3.5rem] font-medium leading-[1.2] tracking-[-0.05rem];
+}
+
+p {
+    @apply font-medium leading-[1.25] text-[1.125rem] mb-[1em];
+}
+
+span {
+    @apply text-foreground block uppercase font-medium text-[0.75rem];
+}
+
+img {
+    @apply w-full h-full object-cover;
+}
+
+nav {
+    @apply absolute left-0 top-0 w-full flex py-[1.5em] px-[2em];
+}
+
+nav .col:nth-child(1) {
+    @apply flex;
+}
+
+nav .col:nth-child(2) {
+    @apply text-right;
+}
+
+nav span {
+    @apply text-gray-400 mix-blend-difference;
+}
+
+.col,
+.sub-col {
+    @apply flex-1;
+}
+
+section {
+    @apply relative w-full h-svh p-[2em];
+}
+
+.hero,
+.about-img {
+    @apply flex items-center justify-center;
+}
+
+.hero-img {
+    @apply absolute left-0 top-0 w-full h-full z-[-1] overflow-hidden;
+}
+
+.hero .header {
+    @apply w-[50%] text-center;
+}
+
+.hero .header h1 {
+    @apply text-gray-400;
+}
+
+.about-img {
+    @apply h-max py-[8em] px-[2em];
+}
+
+.about-img img {
+    @apply w-[20%] aspect-4/5;
+}
+
+.about,
+.philosophy {
+    @apply flex flex-col justify-between;
+}
+
+.philosophy {
+    @apply bg-gray-800;
+}
+
+.philosophy h1,
+.philosophy span {
+    @apply text-white;
+}
+
+.about h1,
+.philosophy h1 {
+    @apply indent-[25%];
+}
+
+.story {
+    @apply flex h-max gap-[1em] mb-[8em];
+}
+
+footer {
+    @apply flex items-end justify-between gap-[1em] pt-[6em] px-[2em] pb-[1.5em];
+}
+
+footer .col {
+    @apply flex justify-end;
+}
+
+footer .sub-col {
+    @apply flex items-end;
+}
+
+.line {
+    @apply translate-y-full will-change-transform;
+}
