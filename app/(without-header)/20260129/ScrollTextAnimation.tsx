@@ -22,7 +22,7 @@ interface Props {
     delay?: number;
 }
 
-export default function Copy({
+export default function ScrollTextAnimation({
     children,
     animationOnScroll = true,
     delay = 0,

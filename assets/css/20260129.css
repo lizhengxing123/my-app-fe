@@ -58,12 +58,17 @@ section {
     @apply text-gray-400;
 }
 
-.about-img {
-    @apply h-max py-[8em] px-[2em];
+.about-desc {
+    @apply py-[8em] px-[2em] flex items-center justify-center gap-[10%];
 }
 
-.about-img img {
+.about-desc img {
     @apply w-[20%] aspect-4/5;
+}
+
+.about-desc h1,
+.about-desc p {
+    @apply w-[30%];
 }
 
 .about,
@@ -103,4 +108,17 @@ footer .sub-col {
 
 .line {
     @apply translate-y-full will-change-transform;
+}
+
+/* BlockTextReveal 需要的样式 */
+.block-line-wrapper {
+    @apply block w-max relative;
+}
+
+.block-line {
+    @apply relative block;
+}
+
+.block-revealer {
+    @apply absolute top-0 left-0 w-[101%] h-[101%] pointer-events-none will-change-transform z-1;
 }

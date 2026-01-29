@@ -2,13 +2,14 @@
 
 import { ReactLenis } from "lenis/react";
 
-import Copy from "./Copy";
+import ScrollTextAnimation from "./ScrollTextAnimation";
+import BlockTextReveal from "./BlockTextReveal";
 
 import Image from "next/image";
 import heroImg from "@/assets/20260129/hero.jpg";
 import aboutImg from "@/assets/20260129/about.jpg";
 
-import "@/assets/css/20250129.css";
+import "@/assets/css/20260129.css";
 
 export default function Page() {
     return (
@@ -17,7 +18,9 @@ export default function Page() {
                 <nav>
                     <div className="col">
                         <div className="sub-col">
-                            <span>Zheng</span>
+                            <BlockTextReveal blockColor="#ff0">
+                                <span>Zheng</span>
+                            </BlockTextReveal>
                         </div>
                         <div className="sub-col">
                             <span>Xing</span>
@@ -36,49 +39,62 @@ export default function Page() {
                         <Image src={heroImg} alt="hero" />
                     </div>
                     <div className="header">
-                        <Copy delay={0.5}>
+                        <ScrollTextAnimation delay={0.5}>
                             <h1>
                                 Lorem ipsum dolor sit amet consectetur,
                                 adipisicing elit.
                             </h1>
-                        </Copy>
+                        </ScrollTextAnimation>
                     </div>
                 </section>
 
                 <section className="about">
-                    <Copy>
+                    <BlockTextReveal>
                         <span>
                             Lorem ipsum dolor sit amet consectetur adipisicing.
                         </span>
-                    </Copy>
+                    </BlockTextReveal>
 
                     <div className="header">
-                        <Copy>
+                        <ScrollTextAnimation>
                             <h1>
                                 Lorem ipsum dolor sit amet consectetur
                                 adipisicing elit. Dolorum quos consequatur
                                 veritatis voluptatem, dolore in blanditiis quas
                                 consectetur possimus animi?
                             </h1>
-                        </Copy>
+                        </ScrollTextAnimation>
                     </div>
                 </section>
 
-                <section className="about-img">
+                <section className="about-desc">
+                    <BlockTextReveal blockColor="#ff0">
+                        <h1>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque, est.
+                        </h1>
+                    </BlockTextReveal>
+                    
+                    
                     <Image src={aboutImg} alt="about" />
+
+                    <BlockTextReveal blockColor="#f0f">
+                        <p>
+                            Lorem, ipsum dolor.
+                        </p>
+                    </BlockTextReveal>
                 </section>
 
                 <section className="story">
                     <div className="col">
-                        <Copy>
+                        <ScrollTextAnimation>
                             <h1>
                                 Lorem ipsum dolor
                                 <br /> sit amet.
                             </h1>
-                        </Copy>
+                        </ScrollTextAnimation>
                     </div>
                     <div className="col">
-                        <Copy>
+                        <ScrollTextAnimation>
                             <p>
                                 Lorem ipsum dolor sit, amet consectetur
                                 adipisicing elit. Perferendis, sapiente quae
@@ -104,17 +120,17 @@ export default function Page() {
                                 quasi vero quibusdam rerum dolores autem,
                                 veritatis neque?
                             </p>
-                        </Copy>
+                        </ScrollTextAnimation>
                     </div>
                 </section>
 
                 <section className="philosophy">
-                    <Copy>
+                    <ScrollTextAnimation>
                         <span>Lorem, ipsum dolor.</span>
-                    </Copy>
+                    </ScrollTextAnimation>
 
                     <div className="header">
-                        <Copy>
+                        <ScrollTextAnimation>
                             <h1>
                                 Lorem, ipsum dolor sit amet consectetur
                                 adipisicing elit. Vero voluptate voluptatem, a
@@ -122,7 +138,7 @@ export default function Page() {
                                 nemo aperiam quae eius! Cum adipisci
                                 necessitatibus ipsum doloremque aliquam dolores.
                             </h1>
-                        </Copy>
+                        </ScrollTextAnimation>
                     </div>
                 </section>
 
@@ -132,13 +148,13 @@ export default function Page() {
                             <span>Lorem ipsum dolor.</span>
                         </div>
                         <div className="sub-col">
-                            <Copy>
+                            <ScrollTextAnimation>
                                 <h1>LinkedIn</h1>
                                 <h1>ChainLink</h1>
                                 <h1>Twitter</h1>
                                 <h1>Dify</h1>
                                 <h1>Email</h1>
-                            </Copy>
+                            </ScrollTextAnimation>
                         </div>
                     </div>
                     <div className="col">
