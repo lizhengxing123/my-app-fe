@@ -12,6 +12,8 @@ import {
   GalleryThumbnails,
   Container,
   Grid2X2,
+  GalleryVerticalEnd,
+  TextInitial,
 } from "lucide-react";
 
 export const chartMenuIconMap = {
@@ -28,4 +30,6 @@ export const chartMenuIconMap = {
   GalleryThumbnails: GalleryThumbnails,
   Container: Container,
   Grid2X2: Grid2X2,
+  GalleryVerticalEnd: GalleryVerticalEnd,
+  TextInitial: TextInitial,
 };

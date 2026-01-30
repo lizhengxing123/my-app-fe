@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useActiveAnchor, getHeaders, OutlineItem } from "@/hooks/use-outline";
+import ScrollProgressRing from "@/components/md/ScrollProgressRing";
 import { cn } from "@/lib/utils";
 import "@/assets/css/md-anchor.css";
 
@@ -18,7 +19,7 @@ export default function DocsPage() {
   };
 
   // pass isAsideEnabled true/false or function
-  useActiveAnchor(navRef, markerRef, {
+  const { scrollProgress } = useActiveAnchor(navRef, markerRef, {
     isAsideEnabled: true,
     getScrollOffset,
     headerSelectorContainer: ".md-content",
@@ -40,16 +41,17 @@ export default function DocsPage() {
     <div className="md-anchor border-box fixed top-20 right-0 w-[200px] h-full">
       <nav ref={navRef}>
         <div className="content border-l">
-          <div
-            className="outline-marker"
-            ref={markerRef}
-          />
+          <div className="outline-marker" ref={markerRef} />
 
           <div className="outline-title">{title}</div>
 
           <NavItem headers={headers} root={true} />
         </div>
       </nav>
+      {/* 滚动到顶部按钮 */}
+      {headers.length > 0 && (
+        <ScrollProgressRing scrollProgress={scrollProgress} />
+      )}
     </div>
   );
 }
@@ -62,17 +64,19 @@ function NavItem({
   root?: boolean;
 }) {
   return (
-    <ul className={cn("outline-item", root ? "root" : "nested")}>
-      {headers.map((header) => (
-        <li key={header.link}>
-          <a className="outline-link" href={header.link}>
-            {header.title}
-          </a>
-          {header.children && header.children.length > 0 && (
-            <NavItem headers={header.children} />
-          )}
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className={cn("outline-item", root ? "root" : "nested")}>
+        {headers.map((header) => (
+          <li key={header.link}>
+            <a className="outline-link" href={header.link}>
+              {header.title}
+            </a>
+            {header.children && header.children.length > 0 && (
+              <NavItem headers={header.children} />
+            )}
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

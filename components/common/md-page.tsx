@@ -1,5 +1,4 @@
 "use client";
-
 import MarkdownRenderer from "@/components/md/md-renderer";
 import { getDocumentById } from "@/services/techDocumentService";
 import { useSearchParams } from "next/navigation";
@@ -41,8 +40,7 @@ export default function MarkdownPage({ className }: MarkdownPageProps) {
       setLoading(false);
     }
   };
-
-useEffect(() => {
+  useEffect(() => {
     fetchData(); // 组件挂载时请求
   }, []);
   return (
@@ -50,7 +48,7 @@ useEffect(() => {
       <div className="w-[calc(100%-200px)]">
         <MarkdownRenderer content={data} className={className} />
         <p className="text-sm text-foreground/60 pt-24 pb-12 pr-4 text-right">
-          最后更新时间：{ updateTime }
+          最后更新时间：{updateTime}
         </p>
       </div>
       {/* 文档锚点 */}

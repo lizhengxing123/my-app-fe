@@ -1,21 +1,11 @@
+@reference "../../app/globals.css";
 
 .md-anchor .content {
-  position: relative;
-  padding-left: 16px;
-  font-size: 13px;
-  font-weight: 500;
+  @apply relative pl-4 text-[13px] font-medium;
 }
 
 .md-anchor .outline-marker {
-  position: absolute;
-  top: 32px;
-  left: -1px;
-  z-index: 0;
-  opacity: 0;
-  width: 2px;
-  border-radius: 2px;
-  height: 18px;
-  background-color: #333;
+  @apply absolute top-8 -left-px w-[2px] z-0 opacity-0 w-0.5 rounded-md h-[18px] bg-foreground/90;
   transition:
     top 0.25s cubic-bezier(0, 1, 0.5, 1),
     background-color 0.5s,
@@ -23,39 +13,28 @@
 }
 
 .md-anchor .outline-title {
-  line-height: 32px;
-  font-size: 14px;
-  font-weight: 600;
+  @apply leading-8 text-[14px] font-semibold text-foreground/95;
 }
 
 .outline-item.root {
-  position: relative;
-  z-index: 1;
+  @apply relative z-1;
 }
 
 .outline-item.nested {
-  padding-right: 16px;
-  padding-left: 16px;
+  @apply px-4;
 }
 
 .outline-link {
-  display: block;
-  line-height: 32px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #666;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @apply block leading-8 text-[14px] font-normal text-foreground/60 whitespace-nowrap text-ellipsis;
   transition: color 0.5s;
 }
 
 .outline-link:hover,
 .outline-link.active {
-  color: #333;
+  @apply text-foreground/90;
   transition: color 0.25s;
 }
 
 .outline-link.nested {
-  padding-left: 13px;
+  @apply pl-[13px];
 }

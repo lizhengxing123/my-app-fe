@@ -12,7 +12,8 @@
   --base-chinese-font: "家族宋", "宋体-简", "华文宋体";
   --base-font-size: 1.02em;
   /* 引言字体 */
-  --quote-latin-font: "Latin Modern Roman", "Latin Modern Roman 10", Times, "Times New Roman";
+  --quote-latin-font:
+    "Latin Modern Roman", "Latin Modern Roman 10", Times, "Times New Roman";
   --quote-chinese-font: "华文仿宋", "STFangsong";
   /* em单位为一个正文字符（--base-font-size）大小，
   例如，如果您设置 --base-font-size 为 9.5pt，那么 1.05em = 1.05*9.5pt ≈ 10pt。下面的标题字体等设置也遵循该规则。
@@ -22,7 +23,8 @@
   /* 代码字体（代码中的中文会调用 ui-font） */
   /* "Courier New" 从 Windows 3.1 起成为 Windows 官方提供的字体 */
   /* "Consolas" 从 Windows Vista 起成为 Windows 官方提供的字体 */
-  --code-font: "Latin Modern Mono", "Latin Modern Mono 10", "Consolas", "Courier New";
+  --code-font:
+    "Latin Modern Mono", "Latin Modern Mono 10", "Consolas", "Courier New";
   /* 侧边栏字体 */
   --ui-font: "阿里巴巴普惠体 2.0", "微软雅黑";
   /* source mode 字体 */
@@ -61,7 +63,7 @@
   --h4-font-size: 1.15em;
   /* h5字体 */
   --h5-chinese-font: var(--heading-chinese-fangsong-font);
-  --h5-font-size: 1.10em;
+  --h5-font-size: 1.1em;
   /* h6字体 */
   --h6-chinese-font: var(--heading-chinese-fangsong-font);
   --h6-font-size: 1.05em;
@@ -78,7 +80,7 @@
   --toc-show-title: none;
   /* == 颜色设置 == */
   /* 超链接颜色 */
-  --link-color-light: #2E67D3;
+  --link-color-light: #2e67d3;
   --link-color-dark: #8bb1f9;
   /* == 二级标题强制分页 == */
   /* 默认值为 auto */
@@ -90,6 +92,7 @@
 
 .dark {
   --tip-bg-color: rgba(31, 58, 139, 0.45);
+  --blockquote-bg-color: rgba(255, 255, 255, 0.45);
 }
 
 body {
@@ -293,7 +296,8 @@ h6.md-focus:before {
   border-top: 1.2pt solid;
   /* 三线表第二条线宽度 */
   border-bottom: 1.2pt solid;
-  font-family: var(--table-font), var(--base-latin-font), var(--base-chinese-font), serif;
+  font-family:
+    var(--table-font), var(--base-latin-font), var(--base-chinese-font), serif;
   /* font-size: var(--base-font-size); */
   text-align: center;
   break-inside: avoid-page;
@@ -316,17 +320,26 @@ h6.md-focus:before {
   /* 表格标题（首行）样式 */
   /* 三线表表头的线 */
   border-bottom: 0.5pt solid;
-  font-family: var(--table-title-font), var(--heading-latin-font), var(--heading-chinese-font), serif !important;
+  font-family:
+    var(--table-title-font), var(--heading-latin-font),
+    var(--heading-chinese-font), serif !important;
   /* font-size: var(--base-font-size); */
   font-weight: var(--strong-weight);
 }
 
 #write blockquote {
   font-style: normal;
-  font-family: var(--quote-latin-font), var(--quote-chinese-font), var(--base-latin-font), var(--base-chinese-font), -apple-system, serif;
+  font-family:
+    var(--quote-latin-font),
+    var(--quote-chinese-font),
+    var(--base-latin-font),
+    var(--base-chinese-font),
+    -apple-system,
+    serif;
   font-size: var(--quote-font-size);
   /* 左侧边框  */
-  border-left: calc(var(--blockquote-border-enabled) * 4px) solid var(--blockquote-border-color);
+  border-left: calc(var(--blockquote-border-enabled) * 4px) solid
+    var(--blockquote-border-color);
   /* 文字离左边框的距离 */
   padding: 0.5em 2em 0.5em 1em;
   /* 左边框离页面边的距离 */
@@ -346,7 +359,12 @@ h6.md-focus:before {
   font-family: var(--code-font), var(--ui-font), monospace;
 }
 
-#write h1 code, #write h2 code, #write h3 code, #write h4 code, #write h5 code, #write h6 code,
+#write h1 code,
+#write h2 code,
+#write h3 code,
+#write h4 code,
+#write h5 code,
+#write h6 code,
 #write p code,
 #write li code {
   color: rgb(60, 112, 198);
