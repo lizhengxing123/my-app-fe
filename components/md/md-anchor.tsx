@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useActiveAnchor, getHeaders, OutlineItem } from "@/hooks/use-outline";
-import ScrollProgressRing from "@/components/md/ScrollProgressRing";
+import ScrollProgressRing from "@/components/md/scroll-progress-ring";
 import { cn } from "@/lib/utils";
 import "@/assets/css/md-anchor.css";
 
@@ -38,7 +38,7 @@ export default function DocsPage() {
   }, []);
 
   return (
-    <div className="md-anchor border-box fixed top-20 right-0 w-[200px] h-full">
+    <div className="md-anchor border-box fixed top-20 right-0 w-[210px] h-full">
       <nav ref={navRef}>
         <div className="content border-l">
           <div className="outline-marker" ref={markerRef} />

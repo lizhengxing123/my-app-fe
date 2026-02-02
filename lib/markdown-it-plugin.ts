@@ -1,6 +1,7 @@
 import MarkdownIt from "markdown-it";
 import markdownItAnchor from "markdown-it-anchor";
 import markdownItContainer from "markdown-it-container";
+import { Token } from "markdown-it/index.js";
 
 // 自定义插件：解析 【【【组件名】】】 语法
 // 用来渲染项目中的自定义组件
@@ -76,7 +77,7 @@ const codeBlockPlugin = (md: MarkdownIt) => {
     code: string,
     highlightLines: Set<number>,
     addedLines: Set<number>,
-    deletedLines: Set<number>
+    deletedLines: Set<number>,
   ): string => {
     return code
       .split("\n")
@@ -113,7 +114,7 @@ const codeBlockPlugin = (md: MarkdownIt) => {
     // 匹配更复杂的格式，包括语言、title和行标记
     // 匹配格式：language title="xxx" {1,3-5} +{1,3-5} -{1,3-5}
     const match = info.match(
-      /^([^\s]+)(?:\s+title="([^"]+)")?(?:\s+(\{[^\}]+\}))?(?:\s+(\+\{[^\}]+\}))?(?:\s+(-\{[^\}]+\}))?/
+      /^([^\s]+)(?:\s+title="([^"]+)")?(?:\s+(\{[^\}]+\}))?(?:\s+(\+\{[^\}]+\}))?(?:\s+(-\{[^\}]+\}))?/,
     );
 
     if (match) {
@@ -149,7 +150,7 @@ const codeBlockPlugin = (md: MarkdownIt) => {
       code,
       highlightLines,
       addedLines,
-      deletedLines
+      deletedLines,
     );
 
     // 生成带数据属性的占位符，后续React会替换这个div
@@ -180,8 +181,7 @@ const blankATagPlugin = (md: MarkdownIt) => {
     // 调用原始渲染器
     return defaultLinkRenderer(tokens, idx, options, env, self);
   };
-}
-
+};
 
 // 初始化 markdown-it 实例，加载自定义插件
 export const createMarkdownIt = () => {
@@ -200,5 +200,23 @@ export const createMarkdownIt = () => {
       permalinkSymbol: "§",
       permalinkBefore: true,
     })
-    .use(markdownItContainer, "tip");
+    .use(markdownItContainer, "tip")
+    .use(markdownItContainer, "CustomComponent", {
+      // validate: function (params: string) {
+      //   return params.trim().match(/^CustomComponent\s+(.*)$/);
+      // },
+
+      render: function (tokens: Token[], idx: number) {
+        if (tokens[idx].nesting === 1) {
+          const m = tokens[idx].info.trim(); // CustomComponent comp="BlockTextReveal"
+          // 获取自定义组件名称
+          const comp = m.match(/comp="([^"]+)"/)?.[1];
+          // 开始标签 - 渲染容器开始
+          return `<div data-md-component="RenderComponent" data-props-comp="${comp}" class="md-component-placeholder">`;
+        } else {
+          // 结束标签 - 渲染容器结束
+          return `</div>`;
+        }
+      },
+    });
 };

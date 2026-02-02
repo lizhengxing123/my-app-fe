@@ -1,8 +1,10 @@
 import CodeBlock from "@/components/common/code-block";
+import RenderComponent from "@/components/renderComps/index";
 
 // 组件映射表：key 是 MD 中写的组件名，value 是 React 组件
 export const componentMap = {
   CodeBlock: CodeBlock,
+  RenderComponent: RenderComponent,
 };
 
 // 导出组件类型（TS 可选）

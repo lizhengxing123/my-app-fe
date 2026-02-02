@@ -5,7 +5,7 @@ import { ChevronUp } from "lucide-react";
 
 // 圆环基础配置（仅保留非颜色配置，颜色由Tailwind主题控制）
 const RING_CONFIG = {
-  radius: 30, // 圆环半径（px）
+  radius: 24, // 圆环半径（px）
   strokeWidth: 4, // 描边宽度（px）
   position: "bottom-4 right-0 -translate-x-4", // 定位（Tailwind类）
   zIndex: "z-50", // 层级
