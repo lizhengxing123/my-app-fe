@@ -3,9 +3,9 @@ import { createElement, ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Code, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { ComponentType } from "react";
 
 import BlockTextRevealComp from "./animations/BlockTextRevealComp";
+import ScrollTextComp from "./animations/ScrollTextComp";
 
 // 定义compsMap的类型，确保值是React组件
 interface CompsMap {
@@ -13,7 +13,8 @@ interface CompsMap {
 }
 
 const compsMap: CompsMap = {
-  BlockTextRevealComp: BlockTextRevealComp,
+  BlockTextRevealComp,
+  ScrollTextComp,
 };
 
 export default function RenderComponent({
