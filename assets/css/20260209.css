@@ -1,0 +1,88 @@
+@reference "../../app/globals.css";
+
+img {
+    @apply w-full h-full object-cover;
+}
+
+a, p {
+    @apply text-[0.85rem] uppercase font-medium leading-[1.25];
+}
+
+nav {
+    @apply fixed w-full p-8 flex justify-between;
+}
+
+.nav-items {
+    @apply flex flex-col items-end;
+}
+
+.hero {
+    @apply relative w-full h-svh overflow-hidden;
+}
+
+.hero-overlay {
+    @apply absolute top-0 left-0 w-full h-svh bg-foreground z-0;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    will-change: clip-path;
+}
+
+.counter {
+    @apply absolute right-8 bottom-8 text-[2rem] text-background;
+}
+
+.counter h1 {
+    @apply font-medium text-[4rem];
+}
+
+.overlay-text-container {
+    @apply absolute top-8 left-8 h-8 overflow-hidden;
+}
+
+.overlay-text-container .overlay-text {
+    @apply flex flex-col translate-y-8 will-change-transform;
+}
+
+.overlay-text-container .overlay-text p {
+    @apply text-background h-8 flex items-center;
+}
+
+.hero-images {
+    @apply absolute top-1/2 left-0 -translate-y-1/2 w-full px-8 py-0 flex justify-center items-center gap-[10vw];
+    will-change: gap;
+}
+
+.hero-images .img-container {
+    @apply w-[10vw] aspect-5/7 translate-y-1/2 scale-[0.5] opacity-0;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    will-change: clip-path, transform, opacity;
+}
+
+.hero-header {
+    @apply absolute bottom-8 w-full z-[-1];
+}
+
+.hero-header h1 {
+    @apply text-[15vw] font-medium text-center uppercase leading-[0.85];
+}
+
+.hero-header h1 .word {
+    @apply translate-y-full will-change-transform;
+}
+
+@media (max-width: 1000px) {
+    nav {
+        @apply p-4;
+    }
+
+    .counter {
+        @apply right-4 bottom-4;
+    }
+
+    .hero-images {
+        @apply px-2 py-0 gap-[2.5vw];
+    }
+
+    .hero-images .img-container {
+        @apply w-[20vw];
+    }
+}
