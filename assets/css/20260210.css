@@ -1,0 +1,183 @@
+@reference "../../app/globals.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+.page {
+  font-family: "Inter", sans-serif;
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+h1 {
+  @apply text-[7.5rem] font-medium leading-none tracking-[-0.2rem];
+}
+
+p {
+  @apply text-[0.95rem] font-medium;
+}
+
+a {
+  @apply text-background text-[1.5rem] font-medium;
+}
+
+.page-container {
+  @apply relative translate-y-0 bg-foreground text-background;
+}
+
+section {
+  @apply relative w-full h-svh p-8 flex items-center justify-center;
+}
+
+section h1 {
+  @apply w-3/4 text-center;
+}
+
+section img {
+  @apply opacity-50;
+}
+
+nav {
+  @apply fixed top-0 left-0 w-full h-svh pointer-events-none overflow-hidden z-2;
+}
+
+.menu-bar {
+  @apply fixed left-0 top-0 w-full p-8 flex items-center justify-between pointer-events-auto text-secondary/60 z-2;
+}
+
+.menu-logo {
+  @apply w-8 h-8;
+}
+
+.menu-toggle-btn {
+  @apply flex items-center gap-4 cursor-pointer;
+}
+
+.menu-toggle-label {
+  @apply overflow-hidden;
+}
+
+.menu-toggle-label p {
+  @apply relative translate-y-0 will-change-transform;
+}
+
+.menu-hamburger-icon {
+  @apply relative w-12 h-12 flex flex-col items-center justify-center border border-white/10 rounded-full;
+}
+
+.menu-hamburger-icon span {
+  @apply absolute w-[15px] h-[1.25px] bg-background origin-center will-change-transform;
+  transition: transform 0.75s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.menu-hamburger-icon span:nth-child(1) {
+  transform: translateY(-3px);
+}
+
+.menu-hamburger-icon span:nth-child(2) {
+  transform: translateY(3px);
+}
+
+.menu-hamburger-icon.active span:nth-child(1) {
+  transform: translateY(0) rotate(45deg) scaleX(1.05);
+}
+
+.menu-hamburger-icon.active span:nth-child(2) {
+  transform: translateY(0) rotate(-45deg) scaleX(1.05);
+}
+
+.menu-overlay,
+.menu-overlay-content {
+  @apply fixed left-0 top-0 w-full h-svh text-background overflow-hidden z-1;
+}
+
+.menu-overlay {
+  @apply bg-foreground;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  will-change: clip-path;
+}
+
+.menu-overlay-content {
+  @apply flex -translate-y-1/2 will-change-transform pointer-events-auto;
+}
+
+.menu-media-wrapper {
+  @apply flex-2 opacity-0 will-change-[opacity];
+}
+
+.menu-media-wrapper img {
+  @apply opacity-[0.25];
+}
+
+.menu-content-wrapper {
+  @apply flex-3 relative flex;
+}
+
+.menu-content-main {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+.menu-footer {
+  @apply my-0 mx-auto;
+}
+
+.menu-content-main,
+.menu-footer {
+  @apply w-3/4 p-8 flex items-end gap-8;
+}
+
+.menu-col {
+  @apply flex flex-col gap-2;
+}
+
+.menu-col:nth-child(1) {
+  @apply flex-3;
+}
+
+.menu-col:nth-child(2) {
+  @apply flex-2;
+}
+
+.menu-link a {
+  @apply text-[3.5rem] font-medium leading-[1.3];
+}
+
+.menu-tag a,
+.menu-footer p {
+  @apply text-secondary/60;
+}
+
+.line {
+  @apply relative will-change-transform;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    @apply text-[3rem] tracking-[-0.05rem];
+  }
+
+  section h1 {
+    @apply w-full;
+  }
+
+  .menu-media-wrapper {
+    @apply hidden;
+  }
+
+  .menu-content-main,
+  .menu-footer {
+    @apply w-full;
+  }
+
+  .menu-content-main {
+    @apply top-1/2 flex-col items-start gap-20;
+  }
+
+  .menu-link a {
+    @apply text-[3rem];
+  }
+
+  .menu-tag a {
+    @apply text-[1.25rem];
+  }
+}

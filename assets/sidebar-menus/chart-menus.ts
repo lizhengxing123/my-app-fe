@@ -14,7 +14,8 @@ import {
   Grid2X2,
   GalleryVerticalEnd,
   TextInitial,
-  Scroll
+  Scroll,
+  Dock
 } from "lucide-react";
 
 export const chartMenuIconMap = {
@@ -34,4 +35,5 @@ export const chartMenuIconMap = {
   GalleryVerticalEnd: GalleryVerticalEnd,
   TextInitial: TextInitial,
   Scroll: Scroll,
+  Dock: Dock,
 };
