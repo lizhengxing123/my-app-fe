@@ -1,0 +1,77 @@
+@reference "../../app/globals.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+.page {
+  @apply bg-foreground;
+  font-family: "Manrope", sans-serif;
+}
+
+h1 {
+  @apply text-[8rem] font-medium leading-[0.9] tracking-[-0.25rem] uppercase;
+}
+
+a,
+p {
+  @apply text-background block text-[0.9rem] font-semibold leading-[0.9] select-none uppercase;
+}
+
+nav {
+  @apply fixed top-0 left-0 w-full p-4 flex justify-between items-start z-2;
+}
+
+.logo,
+.toggler {
+  @apply p-4 cursor-pointer;
+}
+
+.logo {
+  @apply w-8;
+}
+
+.menu-overlay {
+  @apply fixed top-0 left-0 w-full h-svh bg-foreground text-background flex justify-end z-1 pointer-events-none will-change-[opacity] opacity-0;
+}
+
+canvas {
+    @apply absolute left-0 top-0 w-full h-svh;
+}
+
+.menu-links {
+    @apply relative w-[45%] h-full flex flex-col justify-center;
+}
+
+.menu-item a {
+    @apply text-ring text-[4rem] leading-none;
+    background: linear-gradient(var(--color-background), var(--color-background)) left no-repeat, var(--color-ring);
+    background-size: 0% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero {
+    @apply relative w-full h-svh p-8 flex items-center justify-center bg-amber-600;
+}
+
+.hero h1 {
+    @apply w-3/4 text-center text-background;
+}
+
+@media (max-width: 1000px) {
+
+    h1 {
+        @apply text-[3rem];
+    }
+    .hero h1 {
+        @apply w-full;
+    }
+
+    .menu-links {
+        @apply w-full p-8;
+    }
+
+    .menu-item a {
+        @apply text-[2.5rem];
+    }
+}
