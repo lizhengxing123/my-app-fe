@@ -1,0 +1,184 @@
+@reference "../../app/globals.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+.page {
+  @apply overflow-x-hidden;
+  font-family: "Inter", sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+h1 {
+  @apply text-background text-[7rem] font-normal tracking-[-0.2rem] leading-none;
+}
+
+a,
+p {
+  @apply relative text-[1rem] text-background font-light select-none;
+}
+
+nav {
+  @apply fixed top-0 left-0 w-full p-10 flex items-center justify-between z-2;
+}
+
+.logo a {
+  @apply font-semibold;
+}
+
+.menu-toggle {
+  @apply relative w-12 h-6 cursor-pointer will-change-transform;
+}
+
+.menu-toggle p {
+  @apply absolute origin-top-left;
+  will-change: transform, opacity;
+}
+
+.menu-overlay {
+  @apply fixed top-0 left-0 w-full h-svh bg-foreground z-1;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  will-change: clip-path;
+}
+
+.menu-content {
+  @apply relative w-full h-full flex justify-center items-center origin-bottom-left;
+  will-change: transform, opacity;
+}
+
+.menu-items,
+.menu-footer {
+  @apply w-full p-10 flex gap-10;
+}
+
+.col-lg {
+  @apply flex-3;
+}
+
+.col-sm {
+  @apply flex-2;
+}
+
+.menu-items .col-lg {
+  @apply flex justify-center items-center;
+}
+
+.menu-preview-img {
+  @apply relative w-[45%] h-full overflow-hidden;
+}
+
+.menu-preview-img img {
+  @apply absolute;
+  will-change: transform, opacity;
+}
+
+.menu-items .col-sm {
+  @apply flex flex-col gap-10 py-10;
+}
+
+.menu-links,
+.menu-socials {
+  @apply flex flex-col gap-2;
+}
+
+.link,
+.social {
+  @apply pb-[6px];
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.link a,
+.social a {
+  @apply inline-block will-change-transform;
+  transition: color 0.5s;
+}
+
+.link a {
+  @apply text-[3.5rem] tracking-[-0.02rem];
+}
+
+.social a {
+  @apply text-[#8f8f8f];
+}
+
+.social a:hover {
+  @apply text-background;
+}
+
+.menu-footer {
+  @apply absolute bottom-0;
+}
+
+.menu-footer .col-sm {
+  @apply flex justify-between;
+}
+
+.link a::after,
+.social a::after,
+.menu-footer a::after {
+  @apply absolute top-[102.5%] left-0 w-full h-[2px] bg-background;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.6, 0, 0.4, 1);
+}
+
+.link a:hover::after,
+.social a:hover::after,
+.menu-footer a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.page-container {
+  @apply relative w-full h-svh origin-top-right will-change-transform;
+}
+
+.hero {
+  @apply relative w-full h-svh flex items-end overflow-hidden;
+}
+
+.hero-img {
+  @apply absolute top-0 left-0 w-full h-svh z-[-1];
+}
+
+.hero h1 {
+  @apply w-4/5;
+}
+
+.menu-toggle p#menu-close {
+  @apply opacity-0;
+  transform: translateX(-5px) translateY(10px) rotate(5deg);
+}
+
+.link a,
+.social a {
+  @apply opacity-25 translate-y-[120%];
+}
+
+.menu-content {
+  @apply opacity-25;
+  transform: translateX(-100px) translateY(-100px) scale(1.5) rotate(-15deg);
+}
+
+@media (max-width: 900px) {
+  .hero h1 {
+    @apply w-full text-[4rem] tracking-normal;
+  }
+
+  .menu-items .col-lg {
+    @apply hidden;
+  }
+
+  .link a::after,
+  .social a::after,
+  .menu-footer a::after {
+    @apply hidden;
+  }
+}
