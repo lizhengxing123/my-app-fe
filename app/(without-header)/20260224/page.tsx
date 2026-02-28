@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback, memo, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 
 // 导入图片
 import img1 from "@/assets/20260224/1.jpg";
@@ -86,14 +86,13 @@ const MenuItem = memo(
     onHover: (id: string) => void;
   }) => {
     return (
-      <div className="link" style={{ willChange: "transform, opacity" }}>
+      <div className="link">
         <a
           href={item.href}
           onMouseOver={() => onHover(item.id)}
           style={{
             transform: "translateY(120%)",
             opacity: 0,
-            willChange: "transform, opacity",
           }}
         >
           {item.label}
@@ -106,13 +105,12 @@ const MenuItem = memo(
 // 拆分：社交链接组件
 const SocialItem = memo(({ item }: { item: (typeof socialItems)[0] }) => {
   return (
-    <div className="social" style={{ willChange: "transform, opacity" }}>
+    <div className="social">
       <a
         href={item.href}
         style={{
           transform: "translateY(120%)",
           opacity: 0,
-          willChange: "transform, opacity",
         }}
       >
         {item.label}
@@ -430,7 +428,6 @@ export default function Page() {
       <div
         className="page-container"
         ref={pageContainerRef}
-        style={{ willChange: "transform, opacity, rotation" }}
       >
         <section className="hero">
           <div className="hero-img">

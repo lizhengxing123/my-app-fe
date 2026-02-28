@@ -1,0 +1,68 @@
+@reference "../../app/globals.css";
+
+img {
+  @apply w-full h-full object-contain;
+}
+
+h1 {
+  @apply text-[3rem] font-extrabold leading-none;
+}
+
+p {
+  @apply text-[0.9rem];
+}
+
+section {
+  @apply relative w-full h-svh overflow-hidden;
+}
+
+.intro,
+.outro {
+  @apply flex items-center justify-center;
+}
+
+.sticky-cards {
+  @apply bg-gray-200 perspective-[850px];
+}
+
+.sticky-cards .card {
+  @apply absolute top-1/2 left-1/2 w-[65%] h-[60%] flex items-center justify-center gap-4 p-10 rounded-2xl text-background origin-bottom will-change-transform;
+}
+
+.card .col {
+  @apply flex-1 h-full;
+}
+
+.card .col:nth-child(1) {
+  @apply flex flex-col justify-between p-2;
+}
+
+.card .col:nth-child(2) {
+  @apply rounded-[0.75rem] overflow-hidden;
+}
+
+.card#card-1 {
+  @apply bg-blue-800 z-5;
+}
+
+.card#card-2 {
+  @apply bg-orange-800 z-4;
+}
+
+.card#card-3 {
+  @apply bg-red-800 z-3;
+}
+
+.card#card-4 {
+  @apply bg-gray-800 z-2;
+}
+
+@media (max-width: 1000px) {
+  .sticky-cards .card {
+    @apply w-[calc(100%-4rem)] h-3/4 flex-col;
+  }
+
+  .card .col {
+    @apply w-full;
+  }
+}
