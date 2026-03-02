@@ -15,7 +15,8 @@ import {
   GalleryVerticalEnd,
   TextInitial,
   Scroll,
-  Dock
+  Dock,
+  SwitchCamera
 } from "lucide-react";
 
 export const chartMenuIconMap = {
@@ -36,4 +37,5 @@ export const chartMenuIconMap = {
   TextInitial: TextInitial,
   Scroll: Scroll,
   Dock: Dock,
+  SwitchCamera: SwitchCamera,
 };

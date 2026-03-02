@@ -1,11 +1,10 @@
-// components/TransitionLogoProvider.tsx
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
+import { TransitionRouter } from "next-transition-router";
 import Logo from "./Logo";
 import "@/assets/css/transition-logo.css";
-import { TransitionRouter } from "next-transition-router";
 
 export default function TransitionLogoProvider({
   children,
@@ -59,13 +58,13 @@ export default function TransitionLogoProvider({
   }, []);
 
   // 页面覆盖动画（核心修复：提前重置path状态）
-  const cover = useCallback((onComplete: () => void) => {
+  const cover = useCallback((fn: () => void) => {
     if (isTransitioning.current) return;
     isTransitioning.current = true;
 
     const path = logoRef.current?.querySelector("path");
     if (!path || !blocksRef.current.length || !pathLengthRef.current) {
-      onComplete();
+      fn();
       isTransitioning.current = false;
       return;
     }
@@ -80,7 +79,7 @@ export default function TransitionLogoProvider({
 
     const t1 = gsap.timeline({
       onComplete: () => {
-        onComplete();
+        fn();
       },
       onReverseComplete: () => {
         isTransitioning.current = false;
@@ -110,7 +109,7 @@ export default function TransitionLogoProvider({
   }, []);
 
   // 页面揭示动画
-  const reveal = useCallback(() => {
+  const reveal = useCallback((fn: () => void) => {
     if (!blocksRef.current.length) return;
 
     gsap.set(blocksRef.current, { scaleX: 1, transformOrigin: "right" });
@@ -121,6 +120,7 @@ export default function TransitionLogoProvider({
       transformOrigin: "right",
       ease: "power2.out",
       onComplete: () => {
+        fn();
         isTransitioning.current = false;
       },
     });
@@ -132,7 +132,7 @@ export default function TransitionLogoProvider({
     const handleResize = () => initBlocks();
     window.addEventListener("resize", handleResize);
 
-    reveal();
+    reveal(() => {});
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -145,7 +145,15 @@ export default function TransitionLogoProvider({
 
   return (
     <>
-      <TransitionRouter auto leave={cover} enter={reveal}>
+      <TransitionRouter
+        auto
+        leave={(next) => {
+          cover(() => next());
+        }}
+        enter={(next) => {
+          reveal(() => next());
+        }}
+      >
         <div ref={transitionOverlayRef} className="transition-overlay"></div>
         <div ref={logoOverlayRef} className="logo-overlay">
           <div className="logo-container">
