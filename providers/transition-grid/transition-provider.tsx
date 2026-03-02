@@ -5,7 +5,7 @@ import { TransitionRouter, useTransitionState } from "next-transition-router";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-export default function TransitionProvider({
+export default function TransitionGridProvider({
   children,
 }: Readonly<{
   children: React.ReactNode;

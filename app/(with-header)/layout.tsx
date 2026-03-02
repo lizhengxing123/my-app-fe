@@ -1,8 +1,10 @@
 import { Header } from "@/components/layout/header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import TransitionProvider from "@/providers/transition-provider";
+// import TransitionProvider from "@/providers/transition-grid/transition-provider";
+import TransitionProvider from "@/providers/transition-logo/transition-provider";
 import "../globals.css";
 import { Toaster } from "sonner";
+
 
 export default function RootLayout({
   children,

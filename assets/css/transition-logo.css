@@ -1,0 +1,31 @@
+@reference "../../app/globals.css";
+
+.transition-overlay {
+  @apply fixed left-0 top-0 w-full h-screen flex pointer-events-none z-50;
+}
+
+.block {
+  @apply flex-1 bg-foreground scale-x-0 origin-left will-change-transform;
+  /* 优化：硬件加速 */
+  transform: translateZ(0);
+}
+
+.logo-overlay {
+  @apply fixed left-0 top-0 w-full h-screen flex items-center justify-center z-50 bg-foreground pointer-events-none opacity-0;
+  /* 优化：硬件加速 */
+  transform: translateZ(0);
+  will-change: opacity;
+}
+
+.logo-container {
+  @apply w-[200px] h-[200px] flex items-center justify-center p-[20px];
+  /* 优化：防止Logo缩放模糊 */
+  transform: scale(1);
+  backface-visibility: hidden;
+}
+
+/* 优化：Logo路径动画平滑度 */
+.logo-container svg path {
+  will-change: stroke-dashoffset, fill;
+  transition: none; /* 交由GSAP控制 */
+}
