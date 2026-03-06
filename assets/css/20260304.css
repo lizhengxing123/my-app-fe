@@ -1,0 +1,65 @@
+@reference "../../app/globals.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+.page {
+  font-family: "Inter", sans-serif;
+}
+
+.page-container {
+  @apply fixed w-full h-svh overflow-hidden;
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+p {
+  @apply text-[0.85rem] font-semibold tracking-[-0.0125rem];
+}
+
+.project {
+  @apply absolute w-full h-svh will-change-transform overflow-hidden;
+}
+
+.minimap {
+  @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[75%] h-[calc(250px+3rem)] bg-background p-6 overflow-hidden;
+}
+
+.minimap-wrapper {
+  @apply relative w-full h-full;
+}
+
+.minimap-img-preview {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35%] h-full overflow-hidden;
+}
+
+.minimap-img-item {
+  @apply absolute w-full h-full will-change-transform overflow-hidden;
+}
+
+.minimap-img-item img,
+.project img {
+  @apply relative scale-150 will-change-transform;
+}
+
+.minimap-info-list {
+  @apply relative w-full h-full overflow-hidden;
+}
+
+.minimap-item-info {
+  @apply absolute w-full h-[250px] flex flex-col justify-between will-change-transform;
+}
+
+.minimap-item-info-row {
+  @apply w-full flex justify-between p-2;
+}
+
+@media (max-width: 1000px) {
+  .minimap-img-preview {
+    @apply left-[unset] right-0 translate-x-0 -translate-y-1/2;
+  }
+
+  .minimap-item-info-row {
+    @apply flex-col;
+  }
+}
