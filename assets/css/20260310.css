@@ -1,0 +1,95 @@
+@reference "../../app/globals.css";
+
+.page {
+  @apply font-mono bg-foreground text-background;
+}
+
+::-webkit-scrollbar {
+  @apply hidden;
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+nav {
+  @apply fixed top-0 left-0 w-[45%] p-8 flex justify-between;
+}
+
+nav p {
+  @apply text-[0.8rem] uppercase leading-none;
+}
+
+.hero {
+  @apply relative w-full h-svh overflow-hidden;
+};
+
+.about-copy {
+  @apply absolute left-0 top-1/2 -translate-y-1/2 w-full p-8 flex gap-16;
+}
+
+.copy-block {
+  @apply flex-1;
+}
+
+.copy-block p {
+  @apply text-[1.75rem] font-[450] tracking-[-0.025rem] leading-[1.2];
+}
+
+.copy-block p .word {
+  @apply will-change-transform;
+}
+
+.scroll-indicator {
+  @apply absolute top-8 right-8 w-40 h-[0.1rem] bg-white/20;
+}
+
+.scroll-indicator::after {
+  @apply absolute top-0 left-0 w-full h-full bg-background origin-left will-change-transform;
+  content: "";
+  transform: scaleX(var(--progress, 0));
+}
+
+.marquee {
+  @apply absolute left-0 bottom-8 w-full h-[7.5rem] flex items-center overflow-hidden;
+}
+
+.marquee-track {
+  @apply flex gap-3 will-change-transform;
+}
+
+.marquee-item {
+  @apply flex flex-col items-center overflow-hidden;
+}
+
+.marquee-item .img-wrapper {
+  @apply w-40 h-24 rounded-md overflow-hidden cursor-pointer;
+}
+
+/* 图片初始黑白 */
+.marquee-img {
+  @apply grayscale-100 transition-[filter] duration-300 ease-in-out;
+}
+
+/* 悬浮彩色过渡 */
+.marquee-item:hover .marquee-img {
+  @apply grayscale-0;
+}
+
+.img-name .word-mask {
+  @apply will-change-transform;
+}
+
+@media (max-width: 1000px) {
+  nav {
+    @apply flex-col-reverse;
+  }
+
+  .about-copy {
+    @apply flex-col top-80;
+  }
+
+  .copy-block p {
+    @apply text-[1.25rem];
+  }
+}

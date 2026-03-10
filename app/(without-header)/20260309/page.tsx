@@ -146,7 +146,6 @@ export default function Page() {
     const firstSlide = slides[0];
 
     frontSlideIndex.current = (frontSlideIndex.current + 1) % slideData.length;
-    console.log(frontSlideIndex.current);
 
     const newBackIndex =
       (frontSlideIndex.current + (slideData.length - 1)) % slideData.length;
@@ -201,12 +200,11 @@ export default function Page() {
     if (!slider) return;
 
     const slides = slider.querySelectorAll(".slide");
-    // 这个是
+    
     const lastSlide = slides[slides.length - 1];
 
     frontSlideIndex.current =
       (frontSlideIndex.current - 1 + slideData.length) % slideData.length;
-    console.log(frontSlideIndex.current);
     const prevSlideData = slideData[frontSlideIndex.current];
 
     const newSlide = genSlideItem({ slide: prevSlideData });
