@@ -1,0 +1,91 @@
+@reference "../../app/globals.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+.page {
+  @apply font-mono;
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+a,
+p {
+  @apply inline-block text-[0.8rem] font-normal uppercase tracking-[-0.0125rem] leading-none;
+}
+
+nav {
+  @apply fixed top-0 left-0 w-full p-6 flex gap-6 z-2;
+}
+
+.nav-logo,
+.nav-cat {
+  @apply flex-1 flex;
+}
+
+.nav-cat {
+  @apply justify-end;
+}
+
+.nav-links {
+  @apply flex-2 flex justify-center gap-1;
+}
+
+nav a {
+  @apply h-max text-background bg-black/90 border border-black/85 rounded-md p-2;
+}
+
+.nav-logo a {
+  @apply font-semibold text-black/95 bg-red-600 border-0;
+}
+
+footer {
+  @apply fixed bottom-0 left-0 w-full p-6 text-background flex justify-between z-2;
+}
+
+.page-container {
+  @apply relative w-full h-svh bg-black/95 overflow-hidden;
+}
+
+.slider {
+  @apply absolute w-full h-svh overflow-hidden;
+  perspective: 250px;
+  perspective-origin: 50% 100%;
+}
+
+.slide {
+  @apply absolute top-[45%] left-1/2 w-1/2 h-[400px] rounded-md flex items-center justify-center overflow-hidden;
+  transform: translate3d(-50%, -50%, 0px);
+  will-change: transform, opacity;
+}
+
+.slide-image {
+  @apply absolute top-0 left-0 w-full h-full object-cover;
+}
+
+.slide-title {
+  @apply text-background text-[4rem] font-[450] tracking-[-0.15rem];
+  font-family: "Inter", sans-serif;
+}
+
+.slide-title .word {
+  @apply will-change-transform;
+}
+
+@media (max-width: 1000px) {
+  .nav-links {
+    @apply hidden;
+  }
+
+  footer p:nth-child(2) {
+    @apply text-right;
+  }
+
+  .slide {
+    @apply w-[70%];
+  }
+
+  .slide-title {
+    @apply text-[2rem] tracking-normal;
+  }
+}
