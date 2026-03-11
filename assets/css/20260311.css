@@ -1,0 +1,123 @@
+@reference "../../app/globals.css";
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+a,
+p {
+  @apply inline-block text-[0.8rem] uppercase leading-none font-medium tracking-[-0.0125rem] font-mono text-gray-700;
+}
+
+nav {
+  @apply fixed top-0 left-0 w-full p-8 flex gap-8 will-change-transform z-1;
+}
+
+.nav-logo,
+.nav-cat {
+  @apply flex-1 flex;
+}
+
+.nav-cat {
+  @apply justify-end;
+}
+
+.nav-links {
+  @apply flex-2 flex justify-center gap-4;
+}
+
+nav a {
+  @apply h-max text-gray-700 bg-gray-100 px-2 py-1;
+}
+
+.nav-logo a {
+  @apply text-background bg-gray-700;
+}
+
+.hero {
+  @apply relative w-full h-svh overflow-hidden will-change-transform;
+}
+
+.hero-img {
+  @apply absolute top-0 left-0 w-full h-full will-change-transform;
+}
+
+.hero-content {
+  @apply absolute bottom-[5rem] left-1/2 -translate-x-1/2 flex flex-col will-change-transform;
+}
+
+.product-name,
+.product-link {
+  @apply flex-1 w-full flex justify-center items-center px-10 py-3;
+}
+
+.product-name {
+  @apply bg-background;
+}
+
+.product-link {
+  @apply bg-gray-700;
+}
+
+.product-link a {
+  @apply text-background;
+}
+
+.preloader {
+  @apply fixed top-0 left-0 w-full h-svh flex items-center p-8 bg-foreground text-background overflow-hidden z-2;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  will-change: clip-path;
+}
+
+.preloader p {
+  @apply text-background;
+}
+
+.preloader-revealer {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-0 w-full aspect-square bg-gray-700 will-change-transform z-2;
+}
+
+.preloader-copy,
+.preloader-copy-col,
+.preloader-counter {
+  @apply flex-1 flex;
+}
+
+.preloader-counter {
+  @apply justify-end;
+}
+
+.preloader-copy p {
+  @apply w-3/4;
+}
+
+.line {
+  @apply translate-y-full will-change-transform;
+}
+
+@media (max-width: 1000px) {
+  nav .nav-links {
+    @apply hidden;
+  }
+
+  .preloader,
+  .preloader-copy {
+    @apply flex-col;
+  }
+
+  .preloader-revealer {
+    @apply w-[300%];
+  }
+
+  .preloader-copy-col {
+    @apply items-center;
+  }
+
+  .preloader-copy p {
+    @apply w-full;
+  }
+
+  .preloader-counter {
+    @apply items-center;
+  }
+}
