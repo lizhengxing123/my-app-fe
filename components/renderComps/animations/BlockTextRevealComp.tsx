@@ -7,7 +7,6 @@ export default function BlockTextRevealComp({
 }: {
   isPreview: boolean;
 }) {
-    console.log(isPreview);
   return (
     <>
       {isPreview ? (

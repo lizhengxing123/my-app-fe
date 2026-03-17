@@ -133,6 +133,14 @@
   font-display: swap; /* 优化加载体验 */
 }
 
+@font-face {
+  font-family: 'DeFonteDemiGras';
+  src: url('@/assets/fonts/DeFonteDemiGras.ttf') format('truetype'); /* 对应字体文件路径 */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* 优化加载体验 */
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

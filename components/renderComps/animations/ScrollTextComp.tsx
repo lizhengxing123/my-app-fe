@@ -3,7 +3,6 @@ import ScrollText from "@/app/(without-header)/20260129/ScrollTextAnimation";
 import CodeBlock from "@/components/common/code-block";
 
 export default function ScrollTextComp({ isPreview }: { isPreview: boolean }) {
-  console.log(isPreview);
   return (
     <>
       {isPreview ? (

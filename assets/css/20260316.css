@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Manrope:wght@200..800&display=swap');
+
+@reference "../../app/globals.css";
+
+.page {
+    @apply bg-foreground text-background;
+    font-family: 'DM Sans', sans-serif;
+}
+
+img {
+  @apply w-full h-full object-cover will-change-transform;
+}
+
+h1 {
+    @apply uppercase text-[5rem] tracking-[-0.1rem] leading-[0.85];
+    font-family: 'DeFonteDemiGras';
+}
+
+a,
+p {
+  @apply inline-block uppercase text-[0.8rem] leading-none font-[550] text-background;
+}
+
+nav,
+footer {
+  @apply fixed w-full p-8 flex justify-between items-start gap-8 z-10;
+}
+
+.nav-logo {
+  @apply w-8;
+}
+
+.nav-links {
+  @apply flex gap-3;
+}
+
+footer {
+    @apply bottom-0;
+}
+
+.carousel {
+    @apply relative w-full h-svh overflow-hidden;
+}
+
+.carousel-images,
+.carousel-images img {
+    @apply absolute top-0 left-0 w-full h-full;
+}
+
+.carousel-images img {
+    will-change: clip-path, transform;
+}
+
+.carousel-images {
+    @apply opacity-85;
+}
+
+.slide-title-container {
+    @apply absolute top-0 left-1/2 -translate-x-1/2 w-2/5 h-full flex items-center justify-center pointer-events-none z-10;
+}
+
+.slide-title-container .title {
+    @apply relative text-center;
+    filter: url('#blur-matrix') blur(0.25px);
+    -webkit-filter: url('#blur-matrix') blur(0.25px);
+}
+
+.slide-title-container .title .word {
+    @apply opacity-0;
+    filter: blur(75px);
+    -webkit-filter: blur(75px);
+    will-change: filter, opacity;
+}
+
+.slider-controls {
+    @apply absolute top-1/2 -translate-y-1/2 left-0 w-full p-8 flex justify-between;
+}
+
+.slider-btn {
+    @apply cursor-pointer p-5 flex items-center justify-center bg-transparent border border-dashed border-white/75 rounded-md transition-all duration-200 ease-in-out;
+}
+
+.slider-btn:hover {
+    @apply bg-background;
+}
+
+.slider-btn svg {
+    @apply w-6 h-6 transition-all duration-200 ease-in-out;
+}
+
+.slider-btn:hover svg {
+    @apply stroke-black;
+}
+
+@media (max-width: 900px) {
+    h1 {
+        @apply text-[3rem];
+    }
+
+    .slide-title-container {
+        @apply w-full py-0 px-8 z-10;
+    }
+
+    .slider-controls {
+        @apply top-[65%] w-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 justify-center gap-4;
+    }
+
+    .slider-btn {
+        @apply p-4;
+    }
+
+    .slider-btn svg {
+        @apply w-4 h-4;
+    }
+}
