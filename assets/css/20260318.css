@@ -1,0 +1,95 @@
+@reference "../../app/globals.css";
+
+.page {
+    @apply bg-foreground text-background;
+}
+
+img {
+    @apply w-full h-full object-cover;
+}
+
+h1 {
+    @apply text-center text-[5rem] font-medium leading-[0.9];
+}
+
+p {
+    @apply text-[1rem] font-medium leading-none;
+}
+
+section {
+    @apply  relative w-full h-svh overflow-hidden;
+}
+
+.intro, .outro {
+    @apply p-8 flex items-center justify-center;
+}
+
+.spotlight-content,
+.spotlight .header {
+    @apply absolute w-full h-full flex items-center justify-center will-change-transform;
+} 
+
+.spotlight-bg {
+    @apply absolute scale-x-[0.8] w-full h-full opacity-25
+}
+
+.spotlight-content h1 {
+    @apply w-2/5;
+}
+
+.header-content {
+    @apply w-3/5 flex flex-col items-center justify-center gap-8 -translate-y-full opacity-0;
+    will-change: transform, opacity;
+}
+
+.feature {
+    @apply absolute w-max h-max py-4 px-6 -translate-x-1/2 -translate-y-1/2;
+    will-change: left, top;
+}
+
+.feature-bg {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-secondary-foreground border-[0.125rem] border-white/10 rounded-[0.5rem];
+    will-change: width, height, border-radius, border-width;
+}
+
+.feature-content {
+    @apply relative will-change-[opacity];
+}
+
+.feature-content p {
+    @apply font-mono uppercase font-normal text-[0.85rem] leading-none;
+}
+
+.search-bar {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[3rem] h-[3rem] rounded-[25rem] bg-secondary-foreground border-[0.35rem] border-white/10 opacity-0 flex items-center;
+    will-change: transform, opacity, width, height;
+}
+
+.search-bar p {
+    @apply relative opacity-0 translate-x-8 will-change-[opacity];
+}
+
+@media (max-width: 1000px) {
+    h1 {
+        @apply text-[2.5rem];
+    }
+
+    .intro h1,
+    .outro h1,
+    .spotlight-content h1,
+    .header-content {
+        @apply w-full p-8;
+    }
+
+    .spotlight-bg {
+        @apply scale-[2];
+    }
+
+    .feature {
+        @apply p-4;
+    }
+
+    .feature-content p {
+        @apply text-[0.7rem];
+    }
+}

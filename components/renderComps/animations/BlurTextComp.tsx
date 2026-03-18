@@ -16,7 +16,7 @@ export default function BlurTextComp({ isPreview }: { isPreview: boolean }) {
       gsap.to(firstTitleWords, {
         filter: "blur(0px)",
         opacity: 1,
-        duration: 2,
+        duration: 1.5,
         ease: "power3.out",
       });
     }

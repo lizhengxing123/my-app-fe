@@ -1,5 +1,5 @@
 "use client";
-import { createElement, ReactNode, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Code, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -30,21 +30,15 @@ export default function RenderComponent({
       <div>
         <div>
           <Button
-            variant="outline"
-            className={cn(
-              "cursor-pointer mr-3",
-              isPreview ? "bg-foreground text-background" : "",
-            )}
+            variant={isPreview ? "default" : "outline"}
+            className="cursor-pointer mr-3"
             onClick={() => setIsPreview(true)}
           >
             <Eye /> 预览
           </Button>
           <Button
-            variant="outline"
-            className={cn(
-              "cursor-pointer",
-              !isPreview ? "bg-foreground text-background" : "",
-            )}
+            variant={!isPreview ? "default" : "outline"}
+            className="cursor-pointer"
             onClick={() => setIsPreview(false)}
           >
             <Code /> 代码
