@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import BlockTextRevealComp from "./animations/BlockTextRevealComp";
 import ScrollTextComp from "./animations/ScrollTextComp";
 import BlurTextComp from "./animations/BlurTextComp";
+import FlowingLightButtonComp from "./animations/FlowingLightButton";
 
 // 定义compsMap的类型，确保值是React组件
 interface CompsMap {
@@ -17,6 +18,7 @@ const compsMap: CompsMap = {
   BlockTextRevealComp,
   ScrollTextComp,
   BlurTextComp,
+  FlowingLightButtonComp
 };
 
 export default function RenderComponent({
