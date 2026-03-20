@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Manrope:wght@200..800&display=swap");
+
+@reference "../../app/globals.css";
+
+.page {
+  font-family: "Manrope", sans-serif;
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+h1 {
+  @apply uppercase text-[8rem] leading-none tracking-[-0.5rem];
+}
+
+p {
+  @apply uppercase text-[0.8rem] font-[550] text-center;
+}
+
+a {
+  @apply uppercase text-background text-[7.5rem] font-semibold leading-[0.9] block;
+  font-family: "Agdasima", sans-serif;
+}
+
+.preloader {
+  @apply fixed top-0 left-0 w-full h-svh bg-foreground overflow-hidden z-2;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  will-change: clip-path;
+}
+
+.progress-bar {
+  @apply absolute top-0 left-0 w-full h-[7px] bg-background scale-x-0 origin-left will-change-transform;
+}
+
+.preloader-images {
+  @apply absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[25rem] h-[25rem] overflow-hidden;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  will-change: clip-path;
+}
+
+.preloader-images .img {
+  @apply absolute w-full h-full overflow-hidden;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  will-change: clip-path;
+}
+
+.preloader-images .img img {
+  @apply relative scale-200 will-change-transform;
+}
+
+.preloader-copy {
+  @apply absolute bottom-[5rem] left-1/2 -translate-x-1/2  w-[30%] text-background;
+}
+
+.preloader-header {
+  @apply fixed w-full flex items-center justify-center translate-y-[60svh] origin-top will-change-transform z-2;
+}
+
+.hero {
+  @apply relative w-full h-svh p-8 flex flex-col justify-end text-center overflow-hidden;
+}
+
+.divider {
+  @apply relative w-full h-[1.5px] scale-x-0 bg-black/5 will-change-transform origin-left;
+}
+
+.preloader-header a .char,
+.preloader-copy p .line,
+.header-row h1 .line {
+  @apply relative inline-block translate-y-0 will-change-transform;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    @apply text-[2rem] tracking-normal;
+  }
+
+  .preloader-images {
+    @apply w-[10rem] h-[10rem] top-[35%];
+  }
+
+  .preloader-copy {
+    @apply w-4/5;
+  }
+
+  .preloader-header {
+    @apply translate-y-[50svh];
+  }
+
+  .preloader-header a {
+    @apply text-[4rem];
+  }
+}
