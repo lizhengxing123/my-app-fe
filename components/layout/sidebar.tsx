@@ -15,14 +15,17 @@ import {
   SidebarGroupContent,
   SidebarMenu,
   SidebarProvider,
+  SidebarRail,
+  SidebarHeader,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard } from "lucide-react";
+import { GalleryVerticalEnd, LayoutDashboard } from "lucide-react";
 import { chartMenuIconMap } from "@/assets/sidebar-menus/chart-menus";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DocMenu } from "@/types/DocMenu";
 import { getMenuTree } from "@/services/docMenuService";
 import { toast } from "sonner";
+import Logo from "./logo";
 
 interface SidebarLayoutProps {
   children: React.ReactNode;
@@ -88,7 +91,22 @@ export default function SidebarLayout({
             "--sidebar-width-mobile": "20rem",
           }}
         >
-          <Sidebar className="static">
+          <Sidebar className="static -translate-y-16">
+            <SidebarHeader>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton size="lg" asChild>
+                    <div>
+                      <Logo />
+                      <div className="flex flex-col gap-0.5 leading-none">
+                        <span className="font-medium">Documentation</span>
+                        <span className="">v1.0.0</span>
+                      </div>
+                    </div>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarHeader>
             <SidebarContent className="bg-background">
               <SidebarMenu className="pl-2 pt-4">
                 <SidebarMenuItem>
@@ -136,14 +154,19 @@ export default function SidebarLayout({
                             </SidebarMenuButton>
                             {item.children.length > 0 && (
                               <SidebarMenuBadge>
-                                <Badge variant="secondary">{item.children.length}</Badge>
+                                <Badge variant="secondary">
+                                  {item.children.length}
+                                </Badge>
                               </SidebarMenuBadge>
                             )}
                             {item.children.length > 0 && (
                               <SidebarMenuSub>
                                 {item.children.map((subItem) => (
                                   <SidebarMenuSubItem key={subItem.id}>
-                                    <SidebarMenuSubButton asChild isActive={isPathActive(subItem.href)}>
+                                    <SidebarMenuSubButton
+                                      asChild
+                                      isActive={isPathActive(subItem.href)}
+                                    >
                                       <a
                                         href={
                                           subItem.href +
@@ -164,6 +187,7 @@ export default function SidebarLayout({
                   </SidebarGroup>
                 ))}
             </SidebarContent>
+            <SidebarRail />
           </Sidebar>
         </SidebarProvider>
       </div>
