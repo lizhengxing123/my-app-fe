@@ -1,0 +1,48 @@
+@reference "../../app/globals.css";
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+h1,
+h3 {
+  @apply uppercase leading-[0.8] tracking-[-0.1rem];
+}
+
+h1 {
+  font-size: clamp(3.5rem, 10vw, 15rem);
+}
+
+h3 {
+  font-size: clamp(2.5rem, 5vw, 7.5rem);
+}
+
+section {
+  @apply relative w-full p-8 text-[#d2d2d2] overflow-hidden;
+}
+
+.hero {
+  @apply bg-[#242424] h-[150svh] text-justify;
+}
+
+.about {
+  @apply bg-[#171717] h-svh flex items-center justify-center;
+}
+
+canvas {
+  @apply absolute top-0 left-0 w-full h-full;
+}
+
+.image-name-tag {
+  @apply fixed left-8 top-1/2 -translate-y-1/2 z-20 bg-foreground text-background py-3 px-6 rounded-md text-xl font-medium pointer-events-none;
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    @apply h-[125svh];
+  }
+
+  .image-name-tag {
+    display: none;
+  }
+}
