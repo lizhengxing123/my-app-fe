@@ -20,7 +20,7 @@ export const images = [
   { src: img8.src, alt: "古镇小巷" },
   { src: img9.src, alt: "草原骏马" },
   { src: img10.src, alt: "湖泊倒影" },
-];;
+];
 
 export const vertexShader = `
     varying vec2 vUv;

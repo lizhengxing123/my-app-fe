@@ -1,0 +1,18 @@
+@reference "../../app/globals.css";
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+.slider {
+  @apply relative w-full h-svh overflow-hidden;
+}
+
+.slide {
+  @apply absolute;
+  will-change: transform, width, height;
+}
+
+#slide-title {
+  @apply absolute bottom-[25svh] left-1/2 -translate-x-1/2 font-medium;
+}
