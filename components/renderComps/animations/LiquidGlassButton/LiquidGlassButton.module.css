@@ -1,0 +1,129 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  /* 对比度滤镜 */
+  filter: contrast(3);
+}
+
+.top {
+  display: flex;
+  gap: 5rem;
+}
+
+.box {
+  --w: 100px;
+  --h: 100px;
+  --r: 9999px;
+  --tr: 25%;
+  z-index: 500;
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--r);
+  /* 双实线边框 */
+  border: 1px double rgba(51, 51, 51, 0.08);
+
+  box-shadow:
+    /*右 上和左下的白色 */
+    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.9),
+    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.9),
+    /* 白色延伸，提亮和衔接渐变 */
+    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.55),
+    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.55),
+    /* 一层黑色 */
+    inset 0 0 2px rgba(0, 0, 0, 0.8),
+    /* 外阴影 */
+    0 4px 8px rgba(0, 0, 0, 0.2);
+
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+  filter: brightness(0.9);
+}
+.box svg {
+  width: 28px;
+  /* 图标阴影 */
+  filter: drop-shadow(0 25px 3px rgba(102, 102, 102, 0.2));
+}
+
+.box span {
+  /* 文字阴影 */
+  filter: drop-shadow(0 25px 3px rgba(102, 102, 102, 0.15));
+}
+
+/* 边缘阴影 */
+.box::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--w) - 16px);
+  height: calc(var(--h) - 16px);
+  border-radius: var(--r);
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  filter: blur(8px);
+}
+
+.box::after {
+  z-index: 501;
+  content: "";
+  position: absolute;
+  width: var(--w);
+  height: var(--h);
+  border-radius: var(--r);
+  filter: blur(3px);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent var(--tr),
+    transparent calc(100% - var(--tr)),
+    rgba(255, 255, 255, 0.8) 100%
+  );
+}
+
+/* 光圈 */
+.circle-overlay {
+  position: absolute;
+  width: calc(var(--w) - 9px);
+  height: calc(var(--h) - 9px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--r);
+  filter: blur(1px);
+}
+
+.start-btn {
+  --w: 320px !important;
+  --tr: 15% !important;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.start-btn span {
+  font-size: 33px;
+  font-family: "微软雅黑", serif;
+  color: #3e3e3e;
+}
+
+.btn-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3e3e3e;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-icon svg {
+  width: 24px;
+  fill: #f5f5f5;
+}

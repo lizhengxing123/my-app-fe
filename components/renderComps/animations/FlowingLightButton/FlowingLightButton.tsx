@@ -23,7 +23,7 @@ export default function FlowingLightButton({
         <strong className={styles.description}>{children}</strong>
       </div>
       <div className={styles.glass}>
-        <div className={styles.innerGlass}></div>
+        <div className={styles['inner-glass']}></div>
       </div>
     </button>
   );
