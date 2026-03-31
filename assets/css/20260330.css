@@ -1,0 +1,115 @@
+@reference "../../app/globals.css";
+
+h1 {
+  @apply text-[3rem] font-normal tracking-[-0.1rem] leading-[1.2];
+}
+
+p {
+  @apply font-mono text-[0.85rem] font-normal;
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+nav {
+  @apply fixed top-0 left-0 w-full flex items-center justify-between p-8 z-2;
+}
+
+nav p {
+  @apply uppercase text-[0.75rem] text-background;
+}
+
+nav .logo {
+  @apply border border-white/10 rounded-md bg-black/50 px-4 py-2 overflow-hidden;
+  backdrop-filter: blur(10px);
+}
+
+section {
+  @apply relative w-full h-svh overflow-hidden;
+}
+
+.intro,
+.outro {
+  @apply p-8 content-center bg-secondary-foreground text-secondary;
+}
+
+.intro h1,
+.outro h1 {
+  @apply w-1/2 mx-auto text-center;
+}
+
+.slider-images {
+  @apply absolute w-full h-full;
+}
+
+.slider-images::after {
+  @apply content-[""] absolute top-0 left-0 w-full h-full bg-black/35;
+}
+
+.slider-images img {
+  @apply absolute w-full h-full origin-center will-change-[transform,opacity];
+}
+
+.slider-title {
+  @apply absolute top-1/2 left-8 -translate-y-1/2 w-1/2 text-background;
+}
+
+.slider-title h1 {
+  @apply absolute top-0 left-0 w-full h-full;
+}
+
+.slider-indictor {
+  @apply absolute top-1/2 right-8 -translate-y-1/2;
+}
+
+.slider-indices {
+  @apply flex flex-col gap-4 px-5 py-4;
+}
+
+.slider-indices p {
+  @apply flex items-center gap-4 text-background;
+}
+
+.index {
+  @apply relative w-5 flex justify-end will-change-[opacity] opacity-35;
+}
+
+.marker {
+  @apply relative w-3 h-px bg-background origin-right will-change-transform scale-x-0;
+}
+
+.slider-progress-bar {
+  @apply absolute top-0 right-0 w-px h-full bg-white/35;
+}
+
+.slider-progress {
+  @apply absolute top-0 left-1/2 -translate-x-1/2 scale-y-0 w-[3px] h-full bg-background origin-top will-change-transform;
+}
+
+.line {
+  @apply relative block will-change-transform;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    @apply text-[2rem] tracking-normal;
+  }
+
+  nav {
+    @apply hidden;
+  }
+
+  .intro h1,
+  .outro h1 {
+    @apply w-full;
+  }
+
+  .slider-title {
+    @apply top-[5rem] left-0 transform-none w-full p-8;
+  }
+
+  .slider-indictor {
+    @apply top-[unset] bottom-8 transform-none;
+  }
+}
