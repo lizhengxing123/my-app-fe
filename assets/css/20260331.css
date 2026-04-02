@@ -1,0 +1,140 @@
+@reference "../../app/globals.css";
+
+p {
+  @apply text-[0.85rem] font-medium leading-none;
+}
+
+.page {
+  @apply relative w-full h-screen overflow-hidden;
+}
+
+nav {
+  @apply fixed top-0 w-full flex justify-between p-8 z-2;
+}
+
+nav p {
+  @apply uppercase;
+}
+
+.product-name {
+  @apply text-gray-500;
+}
+
+.gallery {
+  @apply absolute w-full h-svh overflow-hidden;
+}
+
+.products {
+  @apply absolute w-[300px] h-[300px] top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+.products li {
+  @apply absolute w-[300px] h-[300px] flex items-center justify-center will-change-transform;
+}
+
+.products li img {
+  @apply w-[250px] h-[250px];
+}
+
+.controller {
+  @apply absolute bottom-8 left-1/2 -translate-x-1/2 w-44 h-44 select-none cursor-pointer z-10;
+}
+
+.controller-inner {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-[#343434] rounded-[50%] flex items-center justify-center cursor-pointer z-1;
+  clip-path: circle(40% at 50% 50%);
+  will-change: clip-path;
+}
+
+.close-icon {
+  @apply relative w-[20px] h-[20px];
+}
+
+.close-icon span {
+  @apply absolute top-1/2 left-1/2 w-0 h-[2px] bg-white origin-center;
+}
+
+.close-icon span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-icon span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.controller-outer {
+  @apply absolute top-0 left-0 w-full h-full bg-[#212121] rounded-[50%] z-[-1];
+  clip-path: circle(50% at 50% 50%);
+  will-change: clip-path;
+}
+
+.controller-label p {
+  @apply absolute top-4 left-1/2 -translate-x-1/2 text-white uppercase will-change-[opacity];
+}
+
+.nav-btn {
+  @apply absolute top-1/2 -translate-y-1/2 text-[1.125rem] text-white cursor-pointer will-change-[opacity];
+}
+
+.nav-btn.prev {
+  @apply left-4;
+}
+
+.nav-btn.next {
+  @apply right-4;
+}
+
+.nav-btn.disabled {
+  @apply opacity-25 pointer-events-none;
+}
+
+.product-banner {
+  @apply absolute top-0 left-0 w-full h-full z-[-1] opacity-0 will-change-[opacity];
+}
+
+.product-banner img {
+  @apply w-full h-full object-cover scale-125;
+}
+
+.product-preview {
+  @apply absolute top-[47.5%] left-1/2 -translate-x-1/2 translate-y-full w-[30%] h-3/4 py-8 px-4 rounded-[0.5rem] bg-black/30 flex flex-col gap-8 z-2;
+  backdrop-filter: blur(20px);
+}
+
+.product-preview-info {
+  @apply flex items-center gap-2;
+}
+
+.product-preview-name p {
+  @apply text-[0.95rem] font-medium;
+}
+
+.product-preview-tag {
+  @apply px-2 py-1 rounded-md bg-black text-white;
+}
+
+.product-preview-tag p {
+  @apply uppercase text-[0.75rem];
+}
+
+.product-preview-img {
+  @apply w-full aspect-square rounded-md bg-white overflow-hidden;
+}
+
+.product-preview-img img {
+  @apply w-full h-full object-cover;
+}
+
+.product-url .btn {
+  @apply bg-black flex items-center justify-center rounded-md;
+}
+
+.product-url .btn a {
+  @apply block py-4 text-white;
+}
+
+@media (max-width: 1000px) {
+  .product-preview {
+    width: calc(100% - 2rem);
+  }
+}
