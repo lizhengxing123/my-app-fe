@@ -1,0 +1,81 @@
+@reference "../../app/globals.css";
+
+.page {
+  @apply bg-[#1a1a1a];
+}
+
+svg {
+  @apply w-full h-full object-cover;
+}
+
+h1 {
+  @apply text-[4rem] font-extrabold tracking-[-0.15rem] leading-[1.125] text-center text-gray-100;
+}
+
+.intro,
+.outro,
+.about {
+  @apply relative w-full h-svh flex items-center justify-center p-8 overflow-hidden;
+}
+
+.services {
+  @apply relative w-full h-svh flex flex-col items-center justify-center overflow-hidden;
+}
+
+.services-header {
+  @apply relative w-full px-8 bg-[#1a1a1a] will-change-transform;
+}
+
+.services-header svg {
+  @apply object-contain;
+}
+
+.services-header:nth-child(1),
+.services-header:nth-child(3) {
+  @apply translate-x-full translate-y-0;
+}
+
+.services-header:nth-child(2) {
+  @apply -translate-x-full translate-y-0 z-2;
+}
+
+.services-copy {
+  @apply relative w-full h-full mt-[155svh] px-8 pt-8 pb-[25svh] text-center;
+}
+
+.animate-text {
+  @apply relative w-3/5 mx-auto text-[#4f4f4f];
+  --clip-value: 100%;
+}
+
+.animate-text::before {
+  @apply absolute top-0 left-0 text-white;
+  content: attr(data-text);
+  clip-path: inset(0 0 var(--clip-value) 0);
+  will-change: clip-path;
+}
+
+.scroll-text {
+  @apply relative w-3/5 mx-auto text-[#4f4f4f];
+}
+
+.scroll-text .line {
+  --clip-value: 100%;
+}
+
+.scroll-text .line::before {
+  @apply absolute text-white;
+  content: attr(data-text);
+  clip-path: inset(0 var(--clip-value) 0 0);
+  will-change: clip-path;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    @apply text-[2rem] tracking-[-0.05rem];
+  }
+
+  .animate-text {
+    @apply w-full;
+  }
+}
