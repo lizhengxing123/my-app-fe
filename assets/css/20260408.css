@@ -1,0 +1,99 @@
+@reference "../../app/globals.css";
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+h1 {
+  @apply text-[7rem] font-extrabold tracking-[-0.05rem] leading-[1.1];
+}
+
+p {
+  @apply text-[1.125rem] font-medium;
+}
+
+section {
+  @apply relative w-full h-svh bg-foreground text-background flex items-center justify-center;
+}
+
+.sticky-cards {
+  @apply relative w-full h-full bg-foreground;
+}
+
+.sticky-card {
+  @apply relative w-full h-svh bg-background text-foreground p-3 flex gap-12 will-change-transform;
+}
+
+.sticky-card::after {
+  @apply absolute top-0 left-0 w-full h-full bg-black/50 pointer-events-none z-2;
+  content: "";
+  opacity: var(--after-opacity, 0);
+  transition: opacity 0.1s ease;
+}
+
+.sticky-card-index {
+  @apply flex-2;
+}
+
+.sticky-card-content {
+  @apply flex-4 p-3;
+}
+
+.sticky-card-content-wrapper {
+  @apply w-3/4 flex flex-col gap-3;
+}
+
+.sticky-card-header {
+  @apply w-3/4;
+}
+
+.sticky-card-img img {
+  @apply aspect-5/3;
+}
+ 
+.sticky-card-copy {
+  @apply flex gap-3;
+}
+
+.sticky-card-copy-title {
+  @apply flex-2;
+}
+
+.sticky-card-copy-title p {
+  @apply font-semibold;
+}
+
+.sticky-card-copy-desc {
+  @apply flex-4;
+} 
+
+.sticky-card-copy-desc p {
+  @apply text-justify;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    @apply text-[2rem] tracking-normal;
+  }
+
+  p {
+    @apply text-[1rem];
+  }
+
+  .sticky-card {
+    @apply flex-col gap-0;
+  }
+
+  .sticky-card-content-wrapper {
+    @apply w-full;
+  }
+
+  .sticky-card-copy {
+    @apply flex-col gap-1;
+  }
+
+  .sticky-card-index {
+    @apply flex-1;
+  }
+}
+
