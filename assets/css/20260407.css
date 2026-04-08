@@ -1,0 +1,119 @@
+@reference "../../app/globals.css";
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+h1 {
+  @apply text-[4rem] font-medium tracking-[-0.075rem] leading-[1.125];
+}
+
+h3 {
+  @apply text-[2.25rem] font-medium tracking-[-0.025rem] leading-[1.125];
+}
+
+.page {
+  @apply relative w-fit h-full bg-background will-change-[background];
+}
+
+.hero,
+.outro {
+  @apply relative w-full h-svh p-8 text-center content-center;
+}
+
+.hero h1,
+.outro h1 {
+  @apply w-3/4 mx-auto;
+}
+
+.outro {
+  @apply bg-foreground text-background;
+}
+
+.marquee {
+  @apply relative w-full h-[50svh] overflow-hidden;
+}
+
+.marquee-wrapper {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-full rotate-[-5deg];
+}
+
+.marquee-images {
+  @apply absolute top-1/2 left-1/2 -translate-x-3/4 -translate-y-1/2 w-[200%] h-full flex justify-between items-center gap-4 will-change-transform;
+}
+
+.marquee-img {
+  @apply flex-1 w-full aspect-5/3;
+}
+
+.horizontal-scroll {
+  @apply relative w-full h-svh overflow-hidden;
+}
+
+.horizontal-scroll-wrapper {
+  @apply relative w-[300%] h-svh flex will-change-transform;
+}
+
+.horizontal-side {
+  @apply flex-1 h-full flex gap-8 p-8;
+}
+
+.horizontal-side:not(.horizontal-spacer) {
+  @apply bg-foreground text-background;
+}
+
+.horizontal-side .col:nth-child(1) {
+  @apply flex-3;
+}
+
+.horizontal-side .col:nth-child(2) {
+  @apply flex-2;
+}
+
+.horizontal-side .col {
+  @apply flex items-center justify-center;
+}
+
+.horizontal-side .col h3,
+.horizontal-side .col img {
+  @apply w-3/4;
+}
+
+.horizontal-side .col img {
+  @apply h-3/4;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    @apply text-[2.25rem] tracking-[-0.05rem];
+  }
+
+  h3 {
+    @apply text-[1.5rem];
+  }
+
+  .hero h1,
+  .outro h1 {
+    @apply w-full;
+  }
+
+  .marquee-wrapper {
+    @apply w-[300%]
+  }
+
+  .horizontal-side {
+    @apply p-16 flex-col-reverse gap-8;
+  }
+
+  .horizontal-side .col:nth-child(1) {
+    @apply items-start;
+  }
+
+  .horizontal-side .col h3 {
+    @apply w-full;
+  }
+
+  .horizontal-side .col img {
+    @apply w-full h-full;
+  }
+}
