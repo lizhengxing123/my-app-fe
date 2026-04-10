@@ -1,0 +1,35 @@
+@reference "../../app/globals.css";
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+.slider {
+  @apply fixed w-svw h-svh overflow-hidden;
+}
+
+.slide {
+  @apply absolute w-[45vw] h-svh overflow-hidden;
+}
+
+.slide-title {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-background uppercase text-[0.8rem] bg-foreground px-2 py-1 font-medium leading-none pointer-events-none z-2;
+}
+
+.thumbnail-wheel {
+  @apply fixed left-0 top-0 w-svw h-svh pointer-events-none z-1;
+}
+
+.thumbnail-item {
+  @apply absolute w-9 h-14 overflow-hidden;
+}
+
+@media (max-width: 1000px) {
+  .slide {
+    @apply w-[75vw];
+  }
+
+  .thumbnail-item {
+    @apply w-5 h-8;
+  }
+}
