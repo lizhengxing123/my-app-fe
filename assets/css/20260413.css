@@ -1,0 +1,101 @@
+@reference "../../app/globals.css";
+
+.page {
+  @apply w-full h-full overflow-x-hidden;
+}
+
+h1 {
+  @apply uppercase font-extrabold;
+  font-size: clamp(5rem, 15vw, 8rem);
+}
+
+p {
+  @apply uppercase text-[0.75rem] font-medium font-mono leading-none;
+}
+
+h1 .word,
+p .line {
+  @apply relative translate-y-full will-change-transform;
+}
+
+.preloader-backdrop {
+  @apply fixed w-full h-svh bg-background text-black/80 flex flex-col justify-between z-0;
+}
+
+.pb-row {
+  @apply w-full p-3 flex justify-between;
+}
+
+.pb-row:nth-child(2) {
+  @apply items-end;
+}
+
+#pb-logo {
+  @apply w-[2.5rem] h-[2.5rem] p-1 border border-dashed;
+}
+
+.preloader {
+  @apply fixed w-full h-svh bg-foreground text-background flex flex-col justify-between z-2;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  will-change: transform, clip-path;
+}
+
+.p-row {
+  @apply w-full p-3 flex justify-between;
+}
+
+.p-col {
+  @apply flex items-end  gap-24;
+}
+
+.preloader-btn-container {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80;
+}
+
+.pbc-svg-strokes,
+#pbc-logo,
+#pbc-label,
+#pbc-outro-label {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+#pbc-logo {
+  @apply w-16 h-16;
+}
+
+#pbc-label,
+#pbc-outro-label {
+  @apply font-[0.9rem];
+}
+
+.pbc-svg-strokes,
+.pbc-svg-strokes svg {
+  @apply w-full h-full will-change-transform;
+}
+
+.stroke-track,
+.stroke-progress {
+  @apply origin-center rotate-180;
+}
+
+.hero {
+  @apply relative w-full h-svh p-3 bg-foreground text-background flex items-center justify-center text-center scale-75 z-1 will-change-transform;
+}
+
+.hero .preloader-revealer {
+  @apply absolute top-0 left-0 w-full h-full bg-background;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  will-change: clip-path;
+}
+
+.hero h1 {
+  @apply w-[90%];
+}
+
+@media (max-width: 1000px) {
+  .pb-row .pb-col:nth-child(1),
+  .pb-row .pb-col:nth-child(2),
+  .pb-row .pb-col:nth-child(5) {
+    @apply hidden;
+  }
+}
