@@ -1,0 +1,163 @@
+@reference "../../app/globals.css";
+
+.page {
+  @apply bg-[#e3e3db];
+}
+
+img {
+  @apply w-full h-full object-cover;
+}
+
+p {
+  @apply uppercase font-[0.7rem];
+}
+
+a {
+  @apply uppercase font-[0.7rem] text-foreground;
+}
+
+.overlay {
+  @apply fixed top-0 left-0 w-full h-svh p-8 bg-foreground text-background flex gap-8 overflow-hidden;
+}
+
+.projects,
+.loader,
+.locations {
+  @apply flex-1 flex flex-col justify-center gap-4;
+}
+
+.loader {
+  @apply items-center gap-0;
+}
+
+.loader h1 {
+  @apply uppercase text-center text-[2.5rem] italic leading-[0.9] text-[#3a3a3a] font-extrabold font-sans w-full;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(0deg, #3a3a3a, #3a3a3a 50%, #fff 9);
+  background-size: 100% 200%;
+  background-position: 0% 100%;
+}
+
+.projects-header,
+.project-item,
+.locations-header,
+.location-item {
+  @apply flex gap-8 opacity-0;
+}
+
+.projects-header > *,
+.locations-header > * {
+  @apply flex-1;
+}
+
+.locations {
+  @apply items-center;
+}
+
+.locations-header,
+.location-item {
+  @apply w-1/2;
+}
+
+.project-item,
+.location-item {
+  @apply text-[#4f4f4f];
+}
+
+.img-grid {
+  @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30%] aspect-square flex flex-col gap-4 z-2;
+}
+
+.grid-row {
+  @apply w-full flex gap-4;
+}
+
+.img {
+  @apply relative flex-1 aspect-square;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+}
+
+nav {
+  @apply fixed w-svw p-4 flex gap-8;
+}
+
+nav > * {
+  @apply flex-1;
+}
+
+.links {
+  @apply flex justify-around items-center;
+}
+
+.nav-logo {
+  @apply text-center flex justify-center;
+}
+
+.nav-logo a {
+  @apply text-[1.75rem] font-extrabold italic leading-[0.9] font-sans;
+}
+
+.banner-img {
+  @apply absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 scale-0 w-[20%] aspect-4/5;
+}
+
+.intro-copy {
+  @apply absolute top-[45%] -translate-y-1/2 w-full px-32 flex justify-between items-center;
+}
+
+.title {
+  @apply absolute bottom-[10%] left-1/2 -translate-x-1/2;
+}
+
+.intro-copy h3,
+.title h1 {
+  @apply relative uppercase text-foreground font-medium italic leading-[0.9] font-sans;
+}
+
+.title h1 {
+  @apply text-[3.5rem];
+}
+
+.intro-copy h3 {
+  @apply text-[1.5rem];
+}
+
+.intro-copy h3,
+.title h1 {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.intro-copy h3 .word,
+.title h1 .word {
+  @apply inline-block relative will-change-transform mr-1;
+}
+
+@media (max-width: 900px) {
+  .loader {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  .projects,
+  .locations,
+  .intro-copy,
+  .banner-img {
+    @apply hidden;
+  }
+
+  .title {
+    @apply w-full bottom-[20%] flex justify-center;
+  }
+
+  .title h1 {
+    @apply text-[2.5rem];
+  }
+
+  .img-grid {
+    @apply w-3/4 gap-2;
+  }
+
+  .grid-row {
+    @apply w-[95%] gap-2 justify-around;
+  }
+}
